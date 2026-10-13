@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'gp-addons/**'
+      - 'cushion-guard/**'
       - '.github/workflows/gp-addons.yml'
       - '.github/scripts/AdventureLinkageCheck.java'
   workflow_dispatch:
@@ -42,3 +43,24 @@ jobs:
               || { echo "Could not download $a"; rm -f "$RUNNER_TEMP/adventure5/$a.jar"; }
           done
           java .github/scripts/AdventureLinkageCheck.java gp-addons/target/GPAddons-*.jar "$RUNNER_TEMP"/adventure5/*.jar
+
+  cushion-guard:
+    name: "Build CushionGuard"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+      - name: "Set up JDK 21"
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: maven
+          cache-dependency-path: cushion-guard/pom.xml
+      - name: "Build"
+        run: mvn --batch-mode -f cushion-guard/pom.xml package
+      - name: "Upload jar"
+        uses: actions/upload-artifact@v4
+        with:
+          name: CushionGuard
+          path: cushion-guard/target/CushionGuard-*.jar

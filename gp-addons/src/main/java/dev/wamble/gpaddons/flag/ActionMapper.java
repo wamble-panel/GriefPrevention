@@ -1,5 +1,7 @@
 package dev.wamble.gpaddons.flag;
 
+import dev.wamble.gpaddons.protect.Cushions;
+import io.papermc.paper.event.player.PrePlayerAttackEntityEvent;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.ClaimPermission;
 import org.bukkit.Material;
@@ -24,6 +26,7 @@ import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.entity.AreaEffectCloudApplyEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityPlaceEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.hanging.HangingBreakEvent;
@@ -69,10 +72,34 @@ public final class ActionMapper {
     private ActionMapper() {
     }
 
+    /** Cushions count as decorations to place and break, and as entities to use when sat on */
+    @Nullable
+    private static ClaimFlag cushion(@NotNull Event event) {
+        if (event instanceof PlayerInteractEvent click && Cushions.isItem(click.getItem())
+                || event instanceof EntityPlaceEvent place && Cushions.is(place.getEntity())) {
+            return ClaimFlag.PLACE_HANGING_ENTITY;
+        }
+        if (event instanceof PlayerInteractEntityEvent sit && Cushions.is(sit.getRightClicked())) {
+            return ClaimFlag.ENTITY_INTERACT;
+        }
+        if (event instanceof PrePlayerAttackEntityEvent attack && Cushions.is(attack.getAttacked())
+                || event instanceof EntityDamageByEntityEvent damage && Cushions.is(damage.getEntity())
+                || event instanceof HangingBreakEvent hanging && Cushions.is(hanging.getEntity())
+                || event instanceof VehicleDamageEvent vehicle && Cushions.is(vehicle.getVehicle())
+                || event instanceof VehicleDestroyEvent destroy && Cushions.is(destroy.getVehicle())) {
+            return ClaimFlag.BREAK_HANGING_ENTITY;
+        }
+        return null;
+    }
+
     @Nullable
     public static ClaimFlag map(@Nullable Event event, @NotNull Player player, @NotNull ClaimPermission required) {
         if (event == null) {
             return null;
+        }
+        final ClaimFlag cushion = cushion(event);
+        if (cushion != null) {
+            return cushion;
         }
         if (event instanceof Claim.CompatBuildBreakEvent compat) {
             return fromMaterial(compat.getMaterial(), compat.isBreak(), player);

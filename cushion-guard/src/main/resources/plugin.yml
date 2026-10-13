@@ -1,0 +1,6 @@
+name: CushionGuard
+version: '${project.version}'
+main: dev.wamble.cushionguard.CushionGuard
+api-version: '1.21'
+depend: [WorldGuard]
+description: WorldGuard protection for cushions (Minecraft 26.3), which WorldGuard doesn't cover yet
