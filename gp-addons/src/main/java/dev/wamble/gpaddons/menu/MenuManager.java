@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -93,7 +94,13 @@ public final class MenuManager implements Listener {
             return;
         }
         lastClick.put(player.getUniqueId(), now);
-        menu.click(slot, event.getClick());
+        // Opening and closing inventories isn't safe inside a click event, so buttons run on the next tick
+        final ClickType click = event.getClick();
+        plugin.getServer().getScheduler().runTask(plugin, () -> {
+            if (player.isOnline() && player.getOpenInventory().getTopInventory().getHolder() == menu) {
+                menu.click(slot, click);
+            }
+        });
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
