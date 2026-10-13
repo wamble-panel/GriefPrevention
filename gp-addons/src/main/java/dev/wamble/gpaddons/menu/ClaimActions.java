@@ -243,6 +243,23 @@ public final class ClaimActions {
         return actor.hasPermission(permission) ? "general.cannot-manage" : "general.no-permission";
     }
 
+    // ---- Subdivision trust ----
+
+    /** Whether a subdivision trusts everyone trusted in its main claim (GriefPrevention's /restrictsubclaim) */
+    public boolean inherit(@NotNull Player actor, @NotNull Claim subdivision, boolean inherit) {
+        if (subdivision.parent == null) {
+            return false;
+        }
+        if (!Gp.canEdit(actor, subdivision.parent)) {
+            messages().send(actor, "general.owner-only");
+            return false;
+        }
+        subdivision.setSubclaimRestrictions(!inherit);
+        Gp.save(subdivision);
+        messages().send(actor, inherit ? "trust.inherit-on" : "trust.inherit-off");
+        return true;
+    }
+
     // ---- Name ----
 
     /** Name a claim, or clear its name with {@code null} */

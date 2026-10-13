@@ -115,16 +115,17 @@ public final class WhitelistMenu extends PagedMenu<WhitelistMenu.Row> {
         if (moderate) {
             final List<Component> addLore = new ArrayList<>(messages().lore("menu.whitelist.add.lore"));
             addLore.addAll(messages().lore("menu.whitelist.add.click"));
-            set(bottom(CORNER), Items.item("writable_book", messages().itemName("menu.whitelist.add.name"), addLore),
-                    click -> plugin.menus().prompt(viewer, "prompt.entry", this, name -> {
-                        final OfflinePlayer target = Gp.findPlayer(name);
-                        if (target == null) {
-                            messages().send(viewer, "general.player-not-found", Messages.text("player", name));
-                        } else if (Gp.exists(claim)) {
-                            plugin.actions().addEntry(viewer, claim, target);
-                        }
-                        open();
-                    }));
+            set(bottom(CORNER), Items.item("emerald", messages().itemName("menu.whitelist.add.name"), addLore),
+                    click -> new PlayerPickerMenu(plugin, viewer, this, "entry",
+                            player -> !plugin.entry().isBanned(claim, player.getUniqueId())
+                                    && !plugin.entry().hasEntry(claim, player.getUniqueId())
+                                    && !Gp.isTrusted(claim, player),
+                            target -> {
+                                if (Gp.exists(claim)) {
+                                    plugin.actions().addEntry(viewer, claim, target);
+                                }
+                                open();
+                            }).open());
         }
     }
 

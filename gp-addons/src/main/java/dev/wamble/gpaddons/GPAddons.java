@@ -1,6 +1,7 @@
 package dev.wamble.gpaddons;
 
 import dev.wamble.gpaddons.command.Commands;
+import dev.wamble.gpaddons.command.GpCommandMenus;
 import dev.wamble.gpaddons.data.BanFromClaimImporter;
 import dev.wamble.gpaddons.data.ClaimStore;
 import dev.wamble.gpaddons.entry.EntryListener;
@@ -13,6 +14,7 @@ import dev.wamble.gpaddons.menu.Menu;
 import dev.wamble.gpaddons.menu.MenuManager;
 import dev.wamble.gpaddons.outline.OutlineListener;
 import dev.wamble.gpaddons.protect.SpongeListener;
+import dev.wamble.gpaddons.text.GpMessages;
 import dev.wamble.gpaddons.text.Messages;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -34,6 +36,7 @@ public final class GPAddons extends JavaPlugin {
     private final ClaimInfo info = new ClaimInfo(this);
     private final ClaimActions actions = new ClaimActions(this);
     private final MenuManager menus = new MenuManager(this);
+    private final GpMessages gpMessages = new GpMessages(this);
 
     @Override
     public void onEnable() {
@@ -49,12 +52,21 @@ public final class GPAddons extends JavaPlugin {
         plugins.registerEvents(new EntryListener(this), this);
         plugins.registerEvents(new SpongeListener(this), this);
         plugins.registerEvents(menus, this);
+        plugins.registerEvents(new GpCommandMenus(this), this);
         if (hasOutlineEvent()) {
             plugins.registerEvents(new OutlineListener(this), this);
         } else {
             getLogger().warning("This GriefPrevention version can't have its claim outline changed; the raised outline is off");
         }
         new Commands(this).register();
+
+        if (getConfig().getBoolean("griefprevention-messages.restyle", true)) {
+            try {
+                getLogger().info(gpMessages.restyle(false));
+            } catch (RuntimeException e) {
+                getLogger().log(Level.WARNING, "Couldn't restyle GriefPrevention's messages", e);
+            }
+        }
 
         try {
             flags.applyAllExplosions();
@@ -124,6 +136,11 @@ public final class GPAddons extends JavaPlugin {
     @NotNull
     public MenuManager menus() {
         return menus;
+    }
+
+    @NotNull
+    public GpMessages gpMessages() {
+        return gpMessages;
     }
 
 }

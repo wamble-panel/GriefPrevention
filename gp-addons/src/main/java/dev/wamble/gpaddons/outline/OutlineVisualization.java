@@ -22,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.AxisAngle4f;
 import org.joml.Vector3f;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -35,13 +36,19 @@ public final class OutlineVisualization extends BlockBoundaryVisualization {
     private final int heightOffset;
     private final boolean glow;
     private final boolean waterTransparent;
+    private final Map<String, Color> colors;
 
+    /**
+     * @param colors glow colours by boundary type name (CLAIM, ADMIN_CLAIM, SUBDIVISION, CONFLICT_ZONE),
+     *               with OTHER for the rest
+     */
     public OutlineVisualization(@NotNull Plugin plugin, @NotNull World world, @NotNull IntVector visualizeFrom,
-                                int height, int heightOffset, boolean glow) {
+                                int height, int heightOffset, boolean glow, @NotNull Map<String, Color> colors) {
         super(world, visualizeFrom, height);
         this.plugin = plugin;
         this.heightOffset = heightOffset;
         this.glow = glow;
+        this.colors = colors;
         this.waterTransparent = visualizeFrom.toBlock(world).getType() == Material.WATER;
     }
 
@@ -80,14 +87,14 @@ public final class OutlineVisualization extends BlockBoundaryVisualization {
     }
 
     @NotNull
-    private static Color glowColor(@NotNull String type) {
-        return switch (type) {
-            case "ADMIN_CLAIM" -> Color.ORANGE;
-            case "SUBDIVISION" -> Color.WHITE;
-            case "CONFLICT_ZONE" -> Color.RED;
-            case "INITIALIZE_ZONE", "NATURE_RESTORATION_ZONE" -> Color.AQUA;
-            default -> Color.YELLOW;
-        };
+    private Color glowColor(@NotNull String type) {
+        final Color color = colors.get(type);
+        if (color != null) {
+            return color;
+        }
+        return type.equals("INITIALIZE_ZONE") || type.equals("NATURE_RESTORATION_ZONE")
+                ? colors.getOrDefault("OTHER", Color.AQUA)
+                : colors.getOrDefault("CLAIM", Color.YELLOW);
     }
 
     @NotNull

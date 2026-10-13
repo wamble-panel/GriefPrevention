@@ -169,6 +169,13 @@ public final class Gp {
         return new ArrayList<>(playerData(uuid).getClaims());
     }
 
+    /** What the player's golden shovel does now: Basic, Subdivide, Admin, or a nature-restoring mode */
+    @NotNull
+    public static String shovelMode(@NotNull Player player) {
+        final Object mode = playerData(player.getUniqueId()).shovelMode;
+        return mode == null ? "Basic" : mode.toString();
+    }
+
     @NotNull
     public static List<Claim> adminClaims() {
         return data().getClaims().stream().filter(Claim::isAdminClaim).toList();

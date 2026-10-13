@@ -89,15 +89,14 @@ public final class BansMenu extends PagedMenu<Map.Entry<UUID, ClaimData.Ban>> {
         final List<Component> lore = new ArrayList<>(messages().lore("menu.bans.add.lore"));
         lore.addAll(messages().lore("menu.bans.add.click"));
         set(bottom(CORNER), Items.item("iron_bars", messages().itemName("menu.bans.add.name"), lore),
-                click -> plugin.menus().prompt(viewer, "prompt.ban", this, name -> {
-                    final OfflinePlayer target = Gp.findPlayer(name);
-                    if (target == null) {
-                        messages().send(viewer, "general.player-not-found", Messages.text("player", name));
-                    } else if (Gp.exists(claim)) {
-                        plugin.actions().ban(viewer, claim, target);
-                    }
-                    open();
-                }));
+                click -> new PlayerPickerMenu(plugin, viewer, this, "ban",
+                        player -> !Gp.isOwner(claim, player.getUniqueId()) && !plugin.entry().isBanned(claim, player.getUniqueId()),
+                        target -> {
+                            if (Gp.exists(claim)) {
+                                plugin.actions().ban(viewer, claim, target);
+                            }
+                            open();
+                        }).open());
     }
 
 }

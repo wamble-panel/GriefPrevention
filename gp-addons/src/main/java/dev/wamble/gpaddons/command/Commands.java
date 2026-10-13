@@ -306,8 +306,9 @@ public final class Commands implements TabExecutor {
     // ---- /gpaddons ----
 
     private void admin(@NotNull CommandSender sender, @NotNull String[] args) {
+        final String usage = "/gpaddons <reload|import-banfromclaim|gp-messages [force|restore]>";
         if (args.length == 0) {
-            usage(sender, "/gpaddons <reload|import-banfromclaim>");
+            usage(sender, usage);
             return;
         }
         switch (args[0].toLowerCase(Locale.ROOT)) {
@@ -317,7 +318,20 @@ public final class Commands implements TabExecutor {
             }
             case "import-banfromclaim" -> messages().send(sender, "general.imported",
                     Messages.text("summary", new BanFromClaimImporter(plugin).run()));
-            default -> usage(sender, "/gpaddons <reload|import-banfromclaim>");
+            case "gp-messages" -> {
+                final String option = args.length > 1 ? args[1].toLowerCase(Locale.ROOT) : "";
+                final String summary = switch (option) {
+                    case "restore" -> plugin.gpMessages().restore();
+                    case "force" -> plugin.gpMessages().restyle(true);
+                    default -> plugin.gpMessages().restyle(false);
+                };
+                if (!option.equals("restore") && !plugin.getConfig().getBoolean("griefprevention-messages.restyle", true)) {
+                    plugin.getConfig().set("griefprevention-messages.restyle", true);
+                    plugin.saveConfig();
+                }
+                messages().send(sender, "general.imported", Messages.text("summary", summary));
+            }
+            default -> usage(sender, usage);
         }
     }
 
@@ -328,7 +342,8 @@ public final class Commands implements TabExecutor {
                                                 @NotNull String label, @NotNull String[] args) {
         final String last = args.length == 0 ? "" : args[args.length - 1];
         final List<String> options = switch (command.getName()) {
-            case "gpaddons" -> args.length == 1 ? List.of("reload", "import-banfromclaim") : List.of();
+            case "gpaddons" -> args.length == 1 ? List.of("reload", "import-banfromclaim", "gp-messages")
+                    : args.length == 2 && args[0].equalsIgnoreCase("gp-messages") ? List.of("force", "restore") : List.of();
             case "claims" -> args.length == 1 ? claimsOptions(sender) : List.of();
             case "claimban" -> args.length == 1 ? onlineNames(sender) : List.of();
             case "claimunban" -> args.length == 1 ? bannedNames(sender) : List.of();

@@ -57,6 +57,8 @@ trust:
   cannot-grant: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ'ᴛ ɢɪᴠᴇ ᴛʀᴜꜱᴛ ɪɴ ᴛʜɪꜱ ᴄʟᴀɪᴍ.</#FF9AA2>
   too-high: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ ᴏɴʟʏ ɢɪᴠᴇ ᴛʀᴜꜱᴛ ᴜᴘ ᴛᴏ ʏᴏᴜʀ ᴏᴡɴ ʟᴇᴠᴇʟ.</#FF9AA2>
   manager-owner-only: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴏɴʟʏ ᴛʜᴇ ᴄʟᴀɪᴍ'ꜱ ᴏᴡɴᴇʀ ᴄᴀɴ ᴀᴅᴅ ᴏʀ ʀᴇᴍᴏᴠᴇ ᴍᴀɴᴀɢᴇʀꜱ.</#FF9AA2>
+  inherit-on: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴛʜɪꜱ ꜱᴜʙᴅɪᴠɪꜱɪᴏɴ ɴᴏᴡ ᴛʀᴜꜱᴛꜱ ᴇᴠᴇʀʏᴏɴᴇ ᴛʀᴜꜱᴛᴇᴅ ɪɴ ᴛʜᴇ ᴍᴀɪɴ ᴄʟᴀɪᴍ.</#FFD8BE>
+  inherit-off: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴛʜɪꜱ ꜱᴜʙᴅɪᴠɪꜱɪᴏɴ ɴᴏᴡ ᴏɴʟʏ ᴜꜱᴇꜱ ɪᴛꜱ ᴏᴡɴ ᴛʀᴜꜱᴛ.</#FFD8BE>
   banned-target: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱ ʙᴀɴɴᴇᴅ ʜᴇʀᴇ. ᴜɴʙᴀɴ ᴛʜᴇᴍ ꜰɪʀꜱᴛ.</#FF9AA2>
 levels:
   none: <#8A8A8A>ɴᴏ ᴀᴄᴄᴇꜱꜱ</#8A8A8A>
@@ -133,6 +135,21 @@ menu:
       - <#FFD8BE>right-click two opposite corners.</#FFD8BE>
     'on': <#B5EAD7>✔ ᴏɴ</#B5EAD7>
     'off': <#8A8A8A>✘ ᴏꜰꜰ</#8A8A8A>
+    tool:
+      name: <#FFB5A7>✦ </#FFB5A7><#F2F2F2>ᴄʟᴀɪᴍ ᴛᴏᴏʟ</#F2F2F2>
+      lore:
+      - <#FFD8BE>What your golden shovel does</#FFD8BE>
+      - <#FFD8BE>when you right-click land.</#FFD8BE>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴍᴏᴅᴇ  </#F2F2F2><mode>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ꜱᴡɪᴛᴄʜ</#FFD8BE>
+    modes:
+      basic: <#B5EAD7>ᴄʟᴀɪᴍɪɴɢ ʟᴀɴᴅ</#B5EAD7>
+      subdivide: <#CDB4DB>ᴍᴀᴋɪɴɢ ꜱᴜʙᴅɪᴠɪꜱɪᴏɴꜱ</#CDB4DB>
+      admin: <#FFB5A7>ᴀᴅᴍɪɴ ᴄʟᴀɪᴍꜱ</#FFB5A7>
+      other: <#A2D2FF>ʀᴇꜱᴛᴏʀɪɴɢ ɴᴀᴛᴜʀᴇ</#A2D2FF>
   claim:
     title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴄʟᴀɪᴍ</b></gradient> <#8A8A8A>| <name></#8A8A8A>
     buttons:
@@ -186,6 +203,16 @@ menu:
         click:
         - ''
         - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴠɪᴇᴡ</#FFD8BE>
+      inherit:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ɪɴʜᴇʀɪᴛ ᴛʀᴜꜱᴛ</#F2F2F2>
+        lore:
+        - <#FFD8BE>Whether players trusted in the</#FFD8BE>
+        - <#FFD8BE>main claim are trusted here too.</#FFD8BE>
+        - ''
+        - <#8A8A8A>• </#8A8A8A><#F2F2F2>ɪɴʜᴇʀɪᴛ  </#F2F2F2><state>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ꜱᴡɪᴛᴄʜ</#FFD8BE>
       main-claim:
         name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ᴍᴀɪɴ ᴄʟᴀɪᴍ</#F2F2F2>
         lore:
@@ -402,6 +429,33 @@ menu:
       lore:
       - <#FFD8BE>Make one with /subdivideclaims</#FFD8BE>
       - <#FFD8BE>and a golden shovel.</#FFD8BE>
+  picker:
+    guest:
+      title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴀᴅᴅ ᴀ ɢᴜᴇꜱᴛ</b></gradient>
+    ban:
+      title: <gradient:#FFB5A7:#FFC8DD><b>✦ ʙᴀɴ ᴀ ᴘʟᴀʏᴇʀ</b></gradient>
+    entry:
+      title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴡʜɪᴛᴇʟɪꜱᴛ ᴀ ᴘʟᴀʏᴇʀ</b></gradient>
+    transfer:
+      title: <gradient:#FFB5A7:#FFC8DD><b>✦ ɢɪᴠᴇ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ</b></gradient>
+    player:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2><player></#F2F2F2>
+      lore: []
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʜᴏᴏꜱᴇ</#FFD8BE>
+    type:
+      name: <#CDB4DB>✎ </#CDB4DB><#F2F2F2>ᴛʏᴘᴇ ᴀ ɴᴀᴍᴇ</#F2F2F2>
+      lore:
+      - <#FFD8BE>For players who aren't online.</#FFD8BE>
+      - <#FFD8BE>Type their name in chat.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛʏᴘᴇ</#FFD8BE>
+    empty:
+      name: <#8A8A8A>ɴᴏ ᴏɴᴇ ᴇʟꜱᴇ ɪꜱ ᴏɴʟɪɴᴇ</#8A8A8A>
+      lore:
+      - <#FFD8BE>Use the book to type a name.</#FFD8BE>
   confirm:
     confirm:
       name: <#B5EAD7><b>✔ ᴄᴏɴꜰɪʀᴍ</b></#B5EAD7>

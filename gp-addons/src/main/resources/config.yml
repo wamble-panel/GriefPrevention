@@ -8,11 +8,30 @@
 # If anything goes wrong drawing it, GriefPrevention shows its normal outline instead.
 outline:
   enabled: true
-  # blocks: the usual glowstone and gold blocks, raised off the ground
-  # glow:   glowing see-through blocks, like HuskClaims' highlighter
-  style: blocks
-  # How many blocks above the ground to show the outline (0 = replace the ground block, like GriefPrevention)
-  height-offset: 1
+  # glow:   glowing blocks you can see through walls, like HuskClaims' highlighter
+  # blocks: GriefPrevention's glowstone and gold blocks, raised off the ground
+  style: glow
+  # How many blocks above the ground to draw each style (0 = on the ground itself)
+  height-offset:
+    glow: 0
+    blocks: 1
+  # Glow colours for each kind of outline (hex)
+  glow-colors:
+    claim: '#FFC8DD'
+    admin-claim: '#FFB5A7'
+    subdivision: '#CDB4DB'
+    conflict: '#FF9AA2'
+    other: '#A2D2FF'
+
+menus:
+  # Open the menus for GriefPrevention's /claimslist, /trustlist, /abandonclaim, and /trust with no name
+  replace-griefprevention-commands: true
+
+griefprevention-messages:
+  # Restyle GriefPrevention's own messages (plugins/GriefPreventionData/messages.yml) in the same colours.
+  # The original file is kept as messages.yml.before-gpaddons. Messages you've changed yourself are left alone;
+  # run /gpaddons gp-messages force to restyle those too, or /gpaddons gp-messages restore to undo.
+  restyle: true
 
 protection:
   # Stop sponges outside a claim soaking up water inside it

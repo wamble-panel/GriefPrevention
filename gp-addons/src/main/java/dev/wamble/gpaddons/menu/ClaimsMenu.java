@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,35 @@ public final class ClaimsMenu extends PagedMenu<Claim> {
         }
         return messages().get("menu.claims.title", Messages.text("owner", ownerName()),
                 Messages.text("page", page), Messages.text("pages", Integer.toString(pages)));
+    }
+
+    /** Switch the golden shovel between claiming, subdividing and (for admins) admin claims */
+    private void tool() {
+        final String mode = Gp.shovelMode(viewer);
+        final String key = switch (mode) {
+            case "Basic" -> "basic";
+            case "Subdivide" -> "subdivide";
+            case "Admin" -> "admin";
+            default -> "other";
+        };
+        final boolean admin = viewer.hasPermission("griefprevention.adminclaims");
+        final List<Component> lore = new ArrayList<>(messages().lore("menu.claims.tool.lore",
+                Messages.component("mode", messages().get("menu.claims.modes." + key))));
+        lore.addAll(messages().lore("menu.claims.tool.click"));
+        final String icon = switch (key) {
+            case "subdivide" -> "iron_shovel";
+            case "admin" -> "netherite_shovel";
+            default -> "golden_shovel";
+        };
+        set(bottom(CENTER), Items.item(icon, messages().itemName("menu.claims.tool.name"), lore), click -> {
+            final String next = switch (key) {
+                case "basic" -> "subdivideclaims";
+                case "subdivide" -> admin ? "adminclaims" : "basicclaims";
+                default -> "basicclaims";
+            };
+            viewer.performCommand(next);
+            refresh();
+        });
     }
 
     @NotNull
@@ -71,6 +101,9 @@ public final class ClaimsMenu extends PagedMenu<Claim> {
     protected void extras() {
         if (owner == null) {
             return;
+        }
+        if (owner.getUniqueId().equals(viewer.getUniqueId())) {
+            tool();
         }
         final PlayerData data = Gp.playerData(owner.getUniqueId());
         set(HEADER, Items.head(owner, messages().itemName("menu.claims.info.name",

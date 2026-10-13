@@ -174,27 +174,25 @@ public final class GuestsMenu extends PagedMenu<GuestsMenu.Guest> {
 
         // Add a guest
         if (manage) {
-            set(bottom(CORNER), Items.item("writable_book", messages().itemName("menu.guests.add.name"),
-                    withClick("menu.guests.add")), click -> plugin.menus().prompt(viewer, "prompt.guest", this, name -> {
-                final OfflinePlayer target = Gp.findPlayer(name);
-                if (target == null) {
-                    messages().send(viewer, "general.player-not-found", Messages.text("player", name));
-                    open();
-                    return;
-                }
-                if (!Gp.exists(claim)) {
-                    messages().send(viewer, "general.claim-gone");
-                    return;
-                }
-                final String shown = target.getName() == null ? name : target.getName();
-                if (plugin.entry().isBanned(claim, target.getUniqueId())) {
-                    messages().send(viewer, "trust.banned-target", Messages.text("player", shown));
-                    open();
-                    return;
-                }
-                new TrustMenu(plugin, viewer, claim, target.getUniqueId().toString(), shown, this).open();
-            }));
+            set(bottom(CORNER), Items.item("emerald", messages().itemName("menu.guests.add.name"),
+                    withClick("menu.guests.add")), click -> new PlayerPickerMenu(plugin, viewer, this, "guest",
+                    player -> !Gp.isOwner(claim, player.getUniqueId()), this::chooseGuest).open());
         }
+    }
+
+    private void chooseGuest(@NotNull OfflinePlayer target) {
+        if (!Gp.exists(claim)) {
+            viewer.closeInventory();
+            messages().send(viewer, "general.claim-gone");
+            return;
+        }
+        final String shown = target.getName() == null ? Gp.name(target.getUniqueId()) : target.getName();
+        if (plugin.entry().isBanned(claim, target.getUniqueId())) {
+            messages().send(viewer, "trust.banned-target", Messages.text("player", shown));
+            open();
+            return;
+        }
+        new TrustMenu(plugin, viewer, claim, target.getUniqueId().toString(), shown, this).open();
     }
 
     @NotNull

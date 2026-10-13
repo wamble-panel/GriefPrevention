@@ -112,29 +112,40 @@ public final class ClaimMenu extends Menu {
                     open();
                 }) : null);
 
-        // Transfer
-        final boolean canTransfer = top && edit && (admin || viewer.hasPermission("gpaddons.transfer") && !claim.isAdminClaim());
-        set(34, button("writable_book", "transfer", canTransfer),
-                canTransfer ? click -> plugin.menus().prompt(viewer, "prompt.transfer", this, this::confirmTransfer) : null);
+        if (top) {
+            // Transfer
+            final boolean canTransfer = edit && (admin || viewer.hasPermission("gpaddons.transfer") && !claim.isAdminClaim());
+            set(34, button("writable_book", "transfer", canTransfer),
+                    canTransfer ? click -> new PlayerPickerMenu(plugin, viewer, this, "transfer",
+                            player -> !Gp.isOwner(claim, player.getUniqueId()), this::confirmTransfer).open() : null);
+        } else {
+            // Whether the main claim's trust applies here too (GriefPrevention's /restrictsubclaim)
+            final boolean inherits = !claim.getSubclaimRestrictions();
+            final boolean canSwitch = Gp.canEdit(viewer, claim.parent);
+            ItemStack inherit = button("iron_chain,chain", "inherit", canSwitch, Messages.component("state",
+                    messages().get(inherits ? "menu.claims.on" : "menu.claims.off")));
+            if (inherits) {
+                inherit = Items.glint(inherit);
+            }
+            set(34, inherit, canSwitch ? click -> {
+                // Restricted now means it will inherit after the switch
+                plugin.actions().inherit(viewer, claim, claim.getSubclaimRestrictions());
+                refresh();
+            } : null);
+        }
 
         // Abandon
         set(bottom(CORNER), button("tnt", "abandon", edit),
                 edit ? click -> confirmAbandon() : null);
     }
 
-    private void confirmTransfer(@NotNull String name) {
-        final OfflinePlayer target = Gp.findPlayer(name);
-        if (target == null) {
-            messages().send(viewer, "general.player-not-found", Messages.text("player", name));
-            open();
-            return;
-        }
+    private void confirmTransfer(@NotNull OfflinePlayer target) {
         if (!Gp.exists(claim) || !plugin.actions().canTransfer(viewer, claim, target)) {
             open();
             return;
         }
         final String claimName = plugin.info().name(claim);
-        final String player = target.getName() == null ? name : target.getName();
+        final String player = target.getName() == null ? Gp.name(target.getUniqueId()) : target.getName();
         final ItemStack subject = Items.head(target,
                 messages().itemName("menu.confirm.transfer.name", Messages.text("player", player)),
                 messages().lore("menu.confirm.transfer.lore", Messages.text("name", claimName), Messages.text("player", player)));
@@ -151,7 +162,8 @@ public final class ClaimMenu extends Menu {
         }).open();
     }
 
-    private void confirmAbandon() {
+    /** Ask whether to abandon this claim (also used by /abandonclaim) */
+    public void confirmAbandon() {
         final String claimName = plugin.info().name(claim);
         final ItemStack subject = Items.item("tnt",
                 messages().itemName("menu.confirm.abandon.name", Messages.text("name", claimName)),

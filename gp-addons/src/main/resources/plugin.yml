@@ -34,8 +34,8 @@ commands:
     usage: /<command> <name|clear>
     aliases: [renameclaim, nameclaim]
   gpaddons:
-    description: Reload GPAddons or re-run the BanFromClaim import
-    usage: /<command> <reload|import-banfromclaim>
+    description: Reload GPAddons, re-run the BanFromClaim import, or restyle GriefPrevention's messages
+    usage: /<command> <reload|import-banfromclaim|gp-messages [force|restore]>
     permission: gpaddons.admin
 permissions:
   gpaddons.menu:
