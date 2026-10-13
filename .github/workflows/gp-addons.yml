@@ -1,0 +1,44 @@
+name: GP Addons
+
+on:
+  push:
+    paths:
+      - 'gp-addons/**'
+      - '.github/workflows/gp-addons.yml'
+      - '.github/scripts/AdventureLinkageCheck.java'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "Build GPAddons"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+      - name: "Set up JDK 21"
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: maven
+          cache-dependency-path: gp-addons/pom.xml
+      - name: "Install GriefPrevention 16.18.7 to compile against"
+        run: |
+          git clone --quiet --depth 1 --branch 16.18.7 https://github.com/GriefPrevention/GriefPrevention.git "$RUNNER_TEMP/gp"
+          mvn --batch-mode --quiet -f "$RUNNER_TEMP/gp/pom.xml" install -DskipTests -Dmaven.javadoc.skip=true -Dgpg.skip
+      - name: "Build"
+        run: mvn --batch-mode -f gp-addons/pom.xml package
+      - name: "Upload jar"
+        uses: actions/upload-artifact@v4
+        with:
+          name: GPAddons
+          path: gp-addons/target/GPAddons-*.jar
+      - name: "Check links against Adventure 5 (Paper 26.x)"
+        run: |
+          mkdir -p "$RUNNER_TEMP/adventure5"
+          for a in adventure-api adventure-key adventure-text-serializer-legacy adventure-text-serializer-plain \
+              adventure-text-serializer-gson adventure-text-serializer-json adventure-text-minimessage; do
+            curl -sSfL -o "$RUNNER_TEMP/adventure5/$a.jar" "https://repo1.maven.org/maven2/net/kyori/$a/5.2.0/$a-5.2.0.jar" \
+              || { echo "Could not download $a"; rm -f "$RUNNER_TEMP/adventure5/$a.jar"; }
+          done
+          java .github/scripts/AdventureLinkageCheck.java gp-addons/target/GPAddons-*.jar "$RUNNER_TEMP"/adventure5/*.jar

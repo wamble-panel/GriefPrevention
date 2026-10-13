@@ -1,0 +1,568 @@
+# GPAddons messages, in MiniMessage format: https://docs.advntr.dev/minimessage/format
+# Placeholders look like <player>. Set a chat message to '' to stop it being sent.
+# In menus, "name" is an item's name and "lore" and "click" are the lines under it.
+prefix: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴄʟᴀɪᴍꜱ</b></gradient> <#8A8A8A>• </#8A8A8A>
+general:
+  no-permission: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪꜱꜱɪᴏɴ ᴛᴏ ᴅᴏ ᴛʜᴀᴛ.</#FF9AA2>
+  players-only: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴏɴʟʏ ᴘʟᴀʏᴇʀꜱ ᴄᴀɴ ᴅᴏ ᴛʜᴀᴛ.</#FF9AA2>
+  not-in-claim: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ꜱᴛᴀɴᴅ ɪɴ ᴀ ᴄʟᴀɪᴍ ᴛᴏ ᴅᴏ ᴛʜᴀᴛ.</#FF9AA2>
+  cannot-manage: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴏɴʟʏ ᴛʜᴇ ᴏᴡɴᴇʀ ᴏʀ ᴀ ᴍᴀɴᴀɢᴇʀ ᴏꜰ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴄᴀɴ ᴅᴏ ᴛʜᴀᴛ.</#FF9AA2>
+  owner-only: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴏɴʟʏ ᴛʜᴇ ᴄʟᴀɪᴍ'ꜱ ᴏᴡɴᴇʀ ᴄᴀɴ ᴅᴏ ᴛʜᴀᴛ.</#FF9AA2>
+  player-not-found: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ɴᴏ ᴘʟᴀʏᴇʀ ᴄᴀʟʟᴇᴅ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ʜᴀꜱ ᴘʟᴀʏᴇᴅ ʜᴇʀᴇ.</#FF9AA2>
+  claim-gone: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴀᴛ ᴄʟᴀɪᴍ ɴᴏ ʟᴏɴɢᴇʀ ᴇxɪꜱᴛꜱ.</#FF9AA2>
+  other-world: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ɢᴏ ᴛᴏ ᴛʜɪꜱ ᴄʟᴀɪᴍ'ꜱ ᴡᴏʀʟᴅ ᴛᴏ ꜱᴇᴇ ɪᴛꜱ ᴏᴜᴛʟɪɴᴇ.</#FF9AA2>
+  reloaded: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʀᴇʟᴏᴀᴅᴇᴅ ᴛʜᴇ ᴄᴏɴꜰɪɢ ᴀɴᴅ ᴍᴇꜱꜱᴀɢᴇꜱ.</#FFD8BE>
+  imported: <#B5EAD7>✔ </#B5EAD7><summary>
+  usage: '<#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴜꜱᴀɢᴇ: </#FFD8BE><#FFC8DD><usage></#FFC8DD>'
+  date-format: yyyy-MM-dd
+  unnamed-claim: Unnamed Claim
+  unnamed-subdivision: Subdivision
+  admin-claim: Admin Claim
+  everyone: Everyone
+entry:
+  banned: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʙᴀɴɴᴇᴅ </#FFD8BE><#FFC8DD><player></#FFC8DD><#FFD8BE> ꜰʀᴏᴍ ᴛʜɪꜱ ᴄʟᴀɪᴍ.</#FFD8BE>
+  unbanned: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴜɴʙᴀɴɴᴇᴅ </#FFD8BE><#FFC8DD><player></#FFC8DD><#FFD8BE>.</#FFD8BE>
+  already-banned: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱ ᴀʟʀᴇᴀᴅʏ ʙᴀɴɴᴇᴅ ʜᴇʀᴇ.</#FF9AA2>
+  not-banned: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱɴ'ᴛ ʙᴀɴɴᴇᴅ ʜᴇʀᴇ.</#FF9AA2>
+  cannot-ban-self: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ'ᴛ ʙᴀɴ ʏᴏᴜʀꜱᴇʟꜰ.</#FF9AA2>
+  cannot-ban-owner: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ'ᴛ ʙᴀɴ ᴛʜᴇ ᴄʟᴀɪᴍ'ꜱ ᴏᴡɴᴇʀ.</#FF9AA2>
+  banned-enter: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ'ʀᴇ ʙᴀɴɴᴇᴅ ꜰʀᴏᴍ </#FF9AA2><#FFC8DD><owner></#FFC8DD><#FF9AA2>'ꜱ ᴄʟᴀɪᴍ.</#FF9AA2>
+  whitelist-enter: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><owner></#FFC8DD><#FF9AA2>'ꜱ ᴄʟᴀɪᴍ ɪꜱ ᴡʜɪᴛᴇʟɪꜱᴛᴇᴅ. ᴀꜱᴋ ᴛʜᴇᴍ ᴛᴏ ʟᴇᴛ ʏᴏᴜ ɪɴ.</#FF9AA2>
+  ejected: <#A2D2FF>➜ </#A2D2FF><#FFD8BE>ʏᴏᴜ ᴡᴇʀᴇ ᴍᴏᴠᴇᴅ ᴏᴜᴛ ᴏꜰ </#FFD8BE><#FFC8DD><owner></#FFC8DD><#FFD8BE>'ꜱ ᴄʟᴀɪᴍ.</#FFD8BE>
+  whitelist-on: '<#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴡʜɪᴛᴇʟɪꜱᴛ ᴏɴ: ᴏɴʟʏ ᴛʀᴜꜱᴛᴇᴅ ᴀɴᴅ ᴡʜɪᴛᴇʟɪꜱᴛᴇᴅ ᴘʟᴀʏᴇʀꜱ ᴄᴀɴ ᴇɴᴛᴇʀ.</#FFD8BE>'
+  whitelist-off: '<#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴡʜɪᴛᴇʟɪꜱᴛ ᴏꜰꜰ: ᴀɴʏᴏɴᴇ ᴡʜᴏ ɪꜱɴ''ᴛ ʙᴀɴɴᴇᴅ ᴄᴀɴ ᴇɴᴛᴇʀ.</#FFD8BE>'
+  entry-added: <#B5EAD7>✔ </#B5EAD7><#FFC8DD><player></#FFC8DD><#FFD8BE> ᴄᴀɴ ɴᴏᴡ ᴇɴᴛᴇʀ ᴡʜɪʟᴇ ᴛʜᴇ ᴡʜɪᴛᴇʟɪꜱᴛ ɪꜱ ᴏɴ.</#FFD8BE>
+  entry-removed: <#B5EAD7>✔ </#B5EAD7><#FFC8DD><player></#FFC8DD><#FFD8BE> ᴡᴀꜱ ᴛᴀᴋᴇɴ ᴏꜰꜰ ᴛʜᴇ ᴡʜɪᴛᴇʟɪꜱᴛ.</#FFD8BE>
+  entry-already: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱ ᴀʟʀᴇᴀᴅʏ ᴏɴ ᴛʜᴇ ᴡʜɪᴛᴇʟɪꜱᴛ.</#FF9AA2>
+  entry-not-found: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱɴ'ᴛ ᴏɴ ᴛʜɪꜱ ᴄʟᴀɪᴍ'ꜱ ᴡʜɪᴛᴇʟɪꜱᴛ.</#FF9AA2>
+  entry-banned: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱ ʙᴀɴɴᴇᴅ ʜᴇʀᴇ. ᴜɴʙᴀɴ ᴛʜᴇᴍ ꜰɪʀꜱᴛ.</#FF9AA2>
+  ban-list-header: <#8A8A8A><st>━━━</st> </#8A8A8A><gradient:#FFB5A7:#FFC8DD><b>✦ ʙᴀɴɴᴇᴅ ꜰʀᴏᴍ </b></gradient> <#FFC8DD><claim></#FFC8DD><#8A8A8A> <st>━━━</st></#8A8A8A>
+  ban-list-entry: <#8A8A8A>• </#8A8A8A><#FFC8DD><player></#FFC8DD><#FFD8BE> — ʙᴀɴɴᴇᴅ ʙʏ </#FFD8BE><#FFE5EC><by></#FFE5EC><#8A8A8A> (<date>)</#8A8A8A>
+  ban-list-empty: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ɴᴏ ᴏɴᴇ ɪꜱ ʙᴀɴɴᴇᴅ ʜᴇʀᴇ.</#FFD8BE>
+flags:
+  set: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ꜱᴇᴛ </#FFD8BE><#FFC8DD><flag></#FFC8DD><#FFD8BE> ᴛᴏ </#FFD8BE><state><#FFD8BE>.</#FFD8BE>
+  reset: '<#B5EAD7>✔ </#B5EAD7><#FFC8DD><flag></#FFC8DD><#FFD8BE> ɪꜱ ʙᴀᴄᴋ ᴛᴏ ᴛʜᴇ ᴅᴇꜰᴀᴜʟᴛ: </#FFD8BE><state><#FFD8BE>.</#FFD8BE>'
+  unknown: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇʀᴇ'ꜱ ɴᴏ ꜰʟᴀɢ ᴄᴀʟʟᴇᴅ </#FF9AA2><#FFC8DD><flag></#FFC8DD><#FF9AA2>.</#FF9AA2>
+  no-flag-permission: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ'ᴛ ᴄʜᴀɴɢᴇ </#FF9AA2><#FFC8DD><flag></#FFC8DD><#FF9AA2>.</#FF9AA2>
+  state-on: <#B5EAD7>✔ ᴀʟʟᴏᴡᴇᴅ</#B5EAD7>
+  state-off: <#FF9AA2>✘ ᴅᴇɴɪᴇᴅ</#FF9AA2>
+  list-header: <#8A8A8A><st>━━━</st> </#8A8A8A><gradient:#FFB5A7:#FFC8DD><b>✦ ꜰʟᴀɢꜱ ɪɴ </b></gradient> <#FFC8DD><claim></#FFC8DD><#8A8A8A> <st>━━━</st></#8A8A8A>
+  list-entry: <#8A8A8A>• </#8A8A8A><#F2F2F2><flag></#F2F2F2><#8A8A8A> — </#8A8A8A><state>
+trust:
+  set: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ɢᴀᴠᴇ </#FFD8BE><#FFC8DD><player></#FFC8DD><#FFD8BE> </#FFD8BE><level><#FFD8BE> ᴛʀᴜꜱᴛ ɪɴ ᴛʜɪꜱ ᴄʟᴀɪᴍ.</#FFD8BE>
+  entry-set: <#B5EAD7>✔ </#B5EAD7><#FFC8DD><player></#FFC8DD><#FFD8BE> ᴄᴀɴ ɴᴏᴡ ᴇɴᴛᴇʀ ᴡʜɪʟᴇ ᴛʜᴇ ᴡʜɪᴛᴇʟɪꜱᴛ ɪꜱ ᴏɴ.</#FFD8BE>
+  removed: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴛᴏᴏᴋ ᴀᴡᴀʏ </#FFD8BE><#FFC8DD><player></#FFC8DD><#FFD8BE>'ꜱ ᴛʀᴜꜱᴛ ɪɴ ᴛʜɪꜱ ᴄʟᴀɪᴍ.</#FFD8BE>
+  manager-on: <#B5EAD7>✔ </#B5EAD7><#FFC8DD><player></#FFC8DD><#FFD8BE> ɪꜱ ɴᴏᴡ ᴀ ᴍᴀɴᴀɢᴇʀ ᴏꜰ ᴛʜɪꜱ ᴄʟᴀɪᴍ.</#FFD8BE>
+  manager-off: <#B5EAD7>✔ </#B5EAD7><#FFC8DD><player></#FFC8DD><#FFD8BE> ɪꜱ ɴᴏ ʟᴏɴɢᴇʀ ᴀ ᴍᴀɴᴀɢᴇʀ ᴏꜰ ᴛʜɪꜱ ᴄʟᴀɪᴍ.</#FFD8BE>
+  cannot-grant: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ'ᴛ ɢɪᴠᴇ ᴛʀᴜꜱᴛ ɪɴ ᴛʜɪꜱ ᴄʟᴀɪᴍ.</#FF9AA2>
+  too-high: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ ᴏɴʟʏ ɢɪᴠᴇ ᴛʀᴜꜱᴛ ᴜᴘ ᴛᴏ ʏᴏᴜʀ ᴏᴡɴ ʟᴇᴠᴇʟ.</#FF9AA2>
+  manager-owner-only: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴏɴʟʏ ᴛʜᴇ ᴄʟᴀɪᴍ'ꜱ ᴏᴡɴᴇʀ ᴄᴀɴ ᴀᴅᴅ ᴏʀ ʀᴇᴍᴏᴠᴇ ᴍᴀɴᴀɢᴇʀꜱ.</#FF9AA2>
+  banned-target: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱ ʙᴀɴɴᴇᴅ ʜᴇʀᴇ. ᴜɴʙᴀɴ ᴛʜᴇᴍ ꜰɪʀꜱᴛ.</#FF9AA2>
+levels:
+  none: <#8A8A8A>ɴᴏ ᴀᴄᴄᴇꜱꜱ</#8A8A8A>
+  entry: <#CDB4DB>ᴇɴᴛʀʏ</#CDB4DB>
+  access: <#A2D2FF>ᴀᴄᴄᴇꜱꜱ</#A2D2FF>
+  container: <#FFE5EC>ᴄᴏɴᴛᴀɪɴᴇʀ</#FFE5EC>
+  build: <#B5EAD7>ʙᴜɪʟᴅ</#B5EAD7>
+  manager: <#FFB5A7>ᴍᴀɴᴀɢᴇʀ</#FFB5A7>
+names:
+  renamed: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʀᴇɴᴀᴍᴇᴅ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ </#FFD8BE><#FFC8DD><name></#FFC8DD><#FFD8BE>.</#FFD8BE>
+  cleared: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʀᴇᴍᴏᴠᴇᴅ ᴛʜɪꜱ ᴄʟᴀɪᴍ'ꜱ ɴᴀᴍᴇ.</#FFD8BE>
+  invalid: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴄʟᴀɪᴍ ɴᴀᴍᴇꜱ ᴄᴀɴ ʙᴇ 1 ᴛᴏ <max> ᴄʜᴀʀᴀᴄᴛᴇʀꜱ.</#FF9AA2>
+transfer:
+  done: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ɢᴀᴠᴇ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ </#FFD8BE><#FFC8DD><player></#FFC8DD><#FFD8BE>.</#FFD8BE>
+  not-enough-blocks: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɴᴇᴇᴅꜱ <needed> ᴜɴᴜꜱᴇᴅ ᴄʟᴀɪᴍ ʙʟᴏᴄᴋꜱ ʙᴜᴛ ʜᴀꜱ <have>.</#FF9AA2>
+  failed: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ɢʀɪᴇꜰᴘʀᴇᴠᴇɴᴛɪᴏɴ ᴄᴏᴜʟᴅɴ'ᴛ ᴛʀᴀɴꜱꜰᴇʀ ᴛʜɪꜱ ᴄʟᴀɪᴍ.</#FF9AA2>
+  main-only: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴏɴʟʏ ᴍᴀɪɴ ᴄʟᴀɪᴍꜱ ᴄᴀɴ ʙᴇ ɢɪᴠᴇɴ ᴀᴡᴀʏ, ɴᴏᴛ ꜱᴜʙᴅɪᴠɪꜱɪᴏɴꜱ.</#FF9AA2>
+  self: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇʏ ᴀʟʀᴇᴀᴅʏ ᴏᴡɴ ɪᴛ.</#FF9AA2>
+abandon:
+  done: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴀʙᴀɴᴅᴏɴᴇᴅ </#FFD8BE><#FFC8DD><claim></#FFC8DD><#FFD8BE>. ʏᴏᴜ ɴᴏᴡ ʜᴀᴠᴇ </#FFD8BE><#FFE5EC><remaining></#FFE5EC><#FFD8BE> ᴄʟᴀɪᴍ ʙʟᴏᴄᴋꜱ ʟᴇꜰᴛ.</#FFD8BE>
+  subdivision-done: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʀᴇᴍᴏᴠᴇᴅ ᴛʜᴇ ꜱᴜʙᴅɪᴠɪꜱɪᴏɴ </#FFD8BE><#FFC8DD><claim></#FFC8DD><#FFD8BE>.</#FFD8BE>
+prompt:
+  guest: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ᴛʀᴜꜱᴛ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
+  ban: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ʙᴀɴ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
+  entry: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ᴡʜɪᴛᴇʟɪꜱᴛ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
+  rename: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴀ ɴᴇᴡ ɴᴀᴍᴇ ꜰᴏʀ ᴛʜɪꜱ ᴄʟᴀɪᴍ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
+  transfer: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ɢɪᴠᴇ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
+  cancelled: <#8A8A8A>✘ ᴄᴀɴᴄᴇʟʟᴇᴅ.</#8A8A8A>
+menu:
+  back:
+    name: <#FFC8DD>◀ ʙᴀᴄᴋ</#FFC8DD>
+    lore: []
+  previous:
+    name: <#FFC8DD>◀ ᴘʀᴇᴠɪᴏᴜꜱ ᴘᴀɢᴇ</#FFC8DD>
+    lore: []
+  next:
+    name: <#FFC8DD>ɴᴇxᴛ ᴘᴀɢᴇ ▶</#FFC8DD>
+    lore: []
+  locked:
+  - ''
+  - <#FF9AA2>✘ ʏᴏᴜ ᴄᴀɴ'ᴛ ᴜꜱᴇ ᴛʜɪꜱ ʜᴇʀᴇ</#FF9AA2>
+  claims:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴄʟᴀɪᴍꜱ</b></gradient> <#8A8A8A>| <owner> (<page>/<pages>)</#8A8A8A>
+    admin-title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴀᴅᴍɪɴ ᴄʟᴀɪᴍꜱ</b></gradient> <#8A8A8A>| (<page>/<pages>)</#8A8A8A>
+    item:
+      name: <#B5EAD7>✿ </#B5EAD7><#F2F2F2><name></#F2F2F2>
+      lore:
+      - <owner_line>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴡᴏʀʟᴅ  </#F2F2F2><#FFE5EC><world></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴄᴇɴᴛᴇʀ  </#F2F2F2><#FFE5EC><x>, <z></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴀʀᴇᴀ  </#F2F2F2><#FFE5EC><area> ʙʟᴏᴄᴋꜱ (<width>×<length>)</#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ꜱᴜʙᴅɪᴠɪꜱɪᴏɴꜱ  </#F2F2F2><#FFE5EC><subdivisions></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ɢᴜᴇꜱᴛꜱ  </#F2F2F2><#FFE5EC><guests></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʙᴀɴꜱ  </#F2F2F2><#FFE5EC><bans></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴡʜɪᴛᴇʟɪꜱᴛ  </#F2F2F2><whitelist>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ</#FFD8BE>
+    owner-you: <#FFD8BE>One of your claims.</#FFD8BE>
+    owner-other: <#FFD8BE>Owned by </#FFD8BE><#FFC8DD><owner></#FFC8DD><#FFD8BE>.</#FFD8BE>
+    owner-admin: <#FFD8BE>An admin claim.</#FFD8BE>
+    info:
+      name: <#FFB5A7>✦ </#FFB5A7><#FFC8DD><player></#FFC8DD>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴄʟᴀɪᴍꜱ  </#F2F2F2><#FFE5EC><claims></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʙʟᴏᴄᴋꜱ ʟᴇꜰᴛ  </#F2F2F2><#B5EAD7><remaining></#B5EAD7>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʙʟᴏᴄᴋꜱ ᴇᴀʀɴᴇᴅ  </#F2F2F2><#FFE5EC><accrued></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʙᴏɴᴜꜱ ʙʟᴏᴄᴋꜱ  </#F2F2F2><#FFE5EC><bonus></#FFE5EC>
+    empty:
+      name: <#FF9AA2>✘ ɴᴏ ᴄʟᴀɪᴍꜱ ʏᴇᴛ</#FF9AA2>
+      lore:
+      - <#FFD8BE>Claim land with a golden shovel:</#FFD8BE>
+      - <#FFD8BE>right-click two opposite corners.</#FFD8BE>
+    'on': <#B5EAD7>✔ ᴏɴ</#B5EAD7>
+    'off': <#8A8A8A>✘ ᴏꜰꜰ</#8A8A8A>
+  claim:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴄʟᴀɪᴍ</b></gradient> <#8A8A8A>| <name></#8A8A8A>
+    buttons:
+      guests:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ɢᴜᴇꜱᴛꜱ</#F2F2F2>
+        lore:
+        - <#FFD8BE>Who may do what here.</#FFD8BE>
+        - ''
+        - <#FFD8BE>Give players access, container,</#FFD8BE>
+        - <#FFD8BE>build or manager trust.</#FFD8BE>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ ɢᴜᴇꜱᴛꜱ</#FFD8BE>
+      flags:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ꜰʟᴀɢꜱ</#F2F2F2>
+        lore:
+        - <#FFD8BE>What everyone may do here.</#FFD8BE>
+        - ''
+        - <#FFD8BE>Building, chests, PvP, explosions,</#FFD8BE>
+        - <#FFD8BE>mob spawning and more.</#FFD8BE>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʜᴀɴɢᴇ ꜰʟᴀɢꜱ</#FFD8BE>
+      bans:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ʙᴀɴꜱ</#F2F2F2>
+        lore:
+        - <#FFD8BE>Players kept out of this claim</#FFD8BE>
+        - <#FFD8BE>and all its subdivisions.</#FFD8BE>
+        - ''
+        - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʙᴀɴɴᴇᴅ  </#F2F2F2><#FFE5EC><bans></#FFE5EC>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ ʙᴀɴꜱ</#FFD8BE>
+      whitelist:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ᴇɴᴛʀʏ ᴡʜɪᴛᴇʟɪꜱᴛ</#F2F2F2>
+        lore:
+        - <#FFD8BE>When on, only the owner, trusted</#FFD8BE>
+        - <#FFD8BE>and whitelisted players may enter.</#FFD8BE>
+        - ''
+        - <#8A8A8A>• </#8A8A8A><#F2F2F2>ꜱᴛᴀᴛᴜꜱ  </#F2F2F2><state>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ</#FFD8BE>
+      subdivisions:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ꜱᴜʙᴅɪᴠɪꜱɪᴏɴꜱ</#F2F2F2>
+        lore:
+        - <#FFD8BE>Smaller areas inside this claim</#FFD8BE>
+        - <#FFD8BE>with their own trust and flags.</#FFD8BE>
+        - ''
+        - <#8A8A8A>• </#8A8A8A><#F2F2F2>ꜱᴜʙᴅɪᴠɪꜱɪᴏɴꜱ  </#F2F2F2><#FFE5EC><count></#FFE5EC>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴠɪᴇᴡ</#FFD8BE>
+      main-claim:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ᴍᴀɪɴ ᴄʟᴀɪᴍ</#F2F2F2>
+        lore:
+        - <#FFD8BE>This is a subdivision of</#FFD8BE>
+        - <#FFD8BE><main>.</#FFD8BE>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴏᴘᴇɴ ɪᴛ</#FFD8BE>
+      outline:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ꜱʜᴏᴡ ᴏᴜᴛʟɪɴᴇ</#F2F2F2>
+        lore:
+        - <#FFD8BE>See this claim's borders.</#FFD8BE>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ꜱʜᴏᴡ</#FFD8BE>
+      rename:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ʀᴇɴᴀᴍᴇ</#F2F2F2>
+        lore:
+        - <#FFD8BE>Give this claim a name.</#FFD8BE>
+        - ''
+        - <#8A8A8A>• </#8A8A8A><#F2F2F2>ɴᴀᴍᴇ  </#F2F2F2><#FFE5EC><name></#FFE5EC>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʀᴇɴᴀᴍᴇ</#FFD8BE>
+      transfer:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ᴛʀᴀɴꜱꜰᴇʀ</#F2F2F2>
+        lore:
+        - <#FFD8BE>Give this claim away.</#FFD8BE>
+        - ''
+        - <#FFD8BE>Moves ownership and the block</#FFD8BE>
+        - <#FFD8BE>cost to another player.</#FFD8BE>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛʀᴀɴꜱꜰᴇʀ</#FFD8BE>
+      abandon:
+        name: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴀʙᴀɴᴅᴏɴ</#FF9AA2>
+        lore:
+        - <#FFD8BE>Delete this claim.</#FFD8BE>
+        - ''
+        - <#FFD8BE>Removes the claim and refunds</#FFD8BE>
+        - <#FFD8BE>its blocks.</#FFD8BE>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴀʙᴀɴᴅᴏɴ</#FFD8BE>
+  guests:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ɢᴜᴇꜱᴛꜱ</b></gradient> <#8A8A8A>| <name></#8A8A8A>
+    player:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2><player></#F2F2F2>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴛʀᴜꜱᴛ  </#F2F2F2><level>
+    group:
+      name: <#CDB4DB>✦ </#CDB4DB><#F2F2F2><group></#F2F2F2>
+      lore:
+      - <#FFD8BE>Everyone with this permission.</#FFD8BE>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴛʀᴜꜱᴛ  </#F2F2F2><level>
+    everyone:
+      name: <#CDB4DB>✦ </#CDB4DB><#F2F2F2>ᴇᴠᴇʀʏᴏɴᴇ</#F2F2F2>
+      lore:
+      - <#FFD8BE>What anyone may do here.</#FFD8BE>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴛʀᴜꜱᴛ  </#F2F2F2><level>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʜᴀɴɢᴇ</#FFD8BE>
+    manager-badge: <#FFB5A7>✦ </#FFB5A7><#FFB5A7>ᴍᴀɴᴀɢᴇʀ</#FFB5A7>
+    click:
+    - ''
+    - <#FFC8DD>➜ <u>ʟᴇꜰᴛ-ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʜᴀɴɢᴇ ᴛʀᴜꜱᴛ</#FFD8BE>
+    - <#FFC8DD>➜ <u>ʀɪɢʜᴛ-ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʀᴇᴍᴏᴠᴇ</#FFD8BE>
+    add:
+      name: <#B5EAD7>✚ </#B5EAD7><#B5EAD7>ᴀᴅᴅ ɢᴜᴇꜱᴛ</#B5EAD7>
+      lore:
+      - <#FFD8BE>Trust a player by typing</#FFD8BE>
+      - <#FFD8BE>their name in chat.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴀᴅᴅ</#FFD8BE>
+    empty:
+      name: <#8A8A8A>ɴᴏ ɢᴜᴇꜱᴛꜱ ʏᴇᴛ</#8A8A8A>
+      lore:
+      - <#FFD8BE>Add one with the button below.</#FFD8BE>
+  trust:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴛʀᴜꜱᴛ</b></gradient> <#8A8A8A>| <player></#8A8A8A>
+    entry:
+      name: <#CDB4DB>✿ </#CDB4DB><#F2F2F2>ᴇɴᴛʀʏ</#F2F2F2>
+      lore:
+      - <#FFD8BE>May enter while the whitelist</#FFD8BE>
+      - <#FFD8BE>is on. Nothing else.</#FFD8BE>
+    access:
+      name: <#A2D2FF>✿ </#A2D2FF><#F2F2F2>ᴀᴄᴄᴇꜱꜱ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Doors, buttons, levers and beds.</#FFD8BE>
+    container:
+      name: <#FFE5EC>✿ </#FFE5EC><#F2F2F2>ᴄᴏɴᴛᴀɪɴᴇʀ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Chests, furnaces, animals and</#FFD8BE>
+      - <#FFD8BE>everything Access allows.</#FFD8BE>
+    build:
+      name: <#B5EAD7>✿ </#B5EAD7><#F2F2F2>ʙᴜɪʟᴅ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Build, break and everything</#FFD8BE>
+      - <#FFD8BE>Container allows.</#FFD8BE>
+    manager:
+      name: <#FFB5A7>✿ </#FFB5A7><#F2F2F2>ᴍᴀɴᴀɢᴇʀ</#F2F2F2>
+      lore:
+      - <#FFD8BE>May trust others, change flags,</#FFD8BE>
+      - <#FFD8BE>ban and whitelist. Owner only.</#FFD8BE>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴍᴀɴᴀɢᴇʀ  </#F2F2F2><state>
+    remove:
+      name: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʀᴇᴍᴏᴠᴇ ᴛʀᴜꜱᴛ</#FF9AA2>
+      lore:
+      - <#FFD8BE>Take away all their trust here.</#FFD8BE>
+    current:
+    - ''
+    - <#B5EAD7>✔ ᴄᴜʀʀᴇɴᴛ</#B5EAD7>
+    click:
+    - ''
+    - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ɢɪᴠᴇ</#FFD8BE>
+    toggle:
+    - ''
+    - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛᴏɢɢʟᴇ</#FFD8BE>
+  flags:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴄʟᴀɪᴍ ꜰʟᴀɢꜱ</b></gradient> <#8A8A8A>| <name></#8A8A8A>
+    item:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2><flag></#F2F2F2>
+    category:
+      player: <#8A8A8A>ꜰᴏʀ ᴜɴᴛʀᴜꜱᴛᴇᴅ ᴘʟᴀʏᴇʀꜱ</#8A8A8A>
+      environment: <#8A8A8A>ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ</#8A8A8A>
+    status: <#CDB4DB>✦ </#CDB4DB><#F2F2F2>ꜱᴛᴀᴛᴜꜱ  </#F2F2F2><state>
+    source:
+      claim: <#8A8A8A>ꜱᴇᴛ ɪɴ ᴛʜɪꜱ ᴄʟᴀɪᴍ</#8A8A8A>
+      main_claim: <#8A8A8A>ꜰʀᴏᴍ ᴛʜᴇ ᴍᴀɪɴ ᴄʟᴀɪᴍ</#8A8A8A>
+      default: <#8A8A8A>ᴅᴇꜰᴀᴜʟᴛ</#8A8A8A>
+    click:
+    - ''
+    - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛᴏɢɢʟᴇ</#FFD8BE>
+    - <#FFC8DD>➜ <u>ꜱʜɪꜰᴛ-ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʀᴇꜱᴇᴛ</#FFD8BE>
+  bans:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ʙᴀɴꜱ</b></gradient> <#8A8A8A>| <name></#8A8A8A>
+    item:
+      name: <#FF9AA2>✘ </#FF9AA2><#F2F2F2><player></#F2F2F2>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʙᴀɴɴᴇᴅ ʙʏ  </#F2F2F2><#FFE5EC><by></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ꜱɪɴᴄᴇ  </#F2F2F2><#FFE5EC><date></#FFE5EC>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴜɴʙᴀɴ</#FFD8BE>
+    add:
+      name: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʙᴀɴ ᴀ ᴘʟᴀʏᴇʀ</#FF9AA2>
+      lore:
+      - <#FFD8BE>Keep a player out of this claim</#FFD8BE>
+      - <#FFD8BE>and its subdivisions.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʙᴀɴ</#FFD8BE>
+    empty:
+      name: <#B5EAD7>✔ ɴᴏ ᴏɴᴇ ɪꜱ ʙᴀɴɴᴇᴅ</#B5EAD7>
+      lore: []
+  whitelist:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴡʜɪᴛᴇʟɪꜱᴛ</b></gradient> <#8A8A8A>| <name></#8A8A8A>
+    'on':
+      name: <#B5EAD7>✔ ᴡʜɪᴛᴇʟɪꜱᴛ ᴏɴ</#B5EAD7>
+      lore:
+      - <#FFD8BE>Only the owner, trusted players</#FFD8BE>
+      - <#FFD8BE>and the players below may enter.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛᴜʀɴ ᴏꜰꜰ</#FFD8BE>
+    'off':
+      name: <#8A8A8A>✘ ᴡʜɪᴛᴇʟɪꜱᴛ ᴏꜰꜰ</#8A8A8A>
+      lore:
+      - <#FFD8BE>Anyone who isn't banned</#FFD8BE>
+      - <#FFD8BE>may enter.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛᴜʀɴ ᴏɴ</#FFD8BE>
+    entry:
+      name: <#CDB4DB>✿ </#CDB4DB><#F2F2F2><player></#F2F2F2>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴍᴀʏ ᴇɴᴛᴇʀ  </#F2F2F2><#B5EAD7>✔ ʏᴇꜱ</#B5EAD7>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʀᴇᴍᴏᴠᴇ</#FFD8BE>
+    trusted:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2><player></#F2F2F2>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴛʀᴜꜱᴛ  </#F2F2F2><level>
+      - ''
+      - <#FFD8BE>Trusted players may always enter.</#FFD8BE>
+      - <#FFD8BE>Change their trust in Guests.</#FFD8BE>
+    add:
+      name: <#B5EAD7>✚ </#B5EAD7><#B5EAD7>ᴀᴅᴅ ᴘʟᴀʏᴇʀ</#B5EAD7>
+      lore:
+      - <#FFD8BE>Let a player in without</#FFD8BE>
+      - <#FFD8BE>giving them any trust.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴀᴅᴅ</#FFD8BE>
+  subdivisions:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ꜱᴜʙᴅɪᴠɪꜱɪᴏɴꜱ</b></gradient> <#8A8A8A>| <name></#8A8A8A>
+    item:
+      name: <#F2F2F2>✿ </#F2F2F2><#F2F2F2><name></#F2F2F2>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴀʀᴇᴀ  </#F2F2F2><#FFE5EC><area> ʙʟᴏᴄᴋꜱ (<width>×<length>)</#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴄᴇɴᴛᴇʀ  </#F2F2F2><#FFE5EC><x>, <z></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ɢᴜᴇꜱᴛꜱ  </#F2F2F2><#FFE5EC><guests></#FFE5EC>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ</#FFD8BE>
+    empty:
+      name: <#8A8A8A>ɴᴏ ꜱᴜʙᴅɪᴠɪꜱɪᴏɴꜱ</#8A8A8A>
+      lore:
+      - <#FFD8BE>Make one with /subdivideclaims</#FFD8BE>
+      - <#FFD8BE>and a golden shovel.</#FFD8BE>
+  confirm:
+    confirm:
+      name: <#B5EAD7><b>✔ ᴄᴏɴꜰɪʀᴍ</b></#B5EAD7>
+      lore: []
+    cancel:
+      name: <#FF9AA2><b>✘ ᴄᴀɴᴄᴇʟ</b></#FF9AA2>
+      lore: []
+    abandon:
+      title: <#FF9AA2><b>✘ ᴀʙᴀɴᴅᴏɴ</b></#FF9AA2> <#8A8A8A><name>?</#8A8A8A>
+      name: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴀʙᴀɴᴅᴏɴ <name></#FF9AA2>
+      lore:
+      - <#FFD8BE>This deletes the claim and</#FFD8BE>
+      - <#FFD8BE>all its subdivisions.</#FFD8BE>
+      - <#FF9AA2>It can't be undone.</#FF9AA2>
+    transfer:
+      title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴛʀᴀɴꜱꜰᴇʀ</b></gradient> <#8A8A8A><name> → <player>?</#8A8A8A>
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ɢɪᴠᴇ ᴛᴏ <player></#F2F2F2>
+      lore:
+      - <#FFD8BE><name> will belong to <player>.</#FFD8BE>
+      - <#FFD8BE>You'll lose access unless</#FFD8BE>
+      - <#FFD8BE>they trust you.</#FFD8BE>
+flag:
+  block_place:
+    name: ᴘʟᴀᴄᴇ ʙʟᴏᴄᴋꜱ
+    description:
+    - <#FFD8BE>Untrusted players may place blocks.</#FFD8BE>
+  block_break:
+    name: ʙʀᴇᴀᴋ ʙʟᴏᴄᴋꜱ
+    description:
+    - <#FFD8BE>Untrusted players may break blocks.</#FFD8BE>
+  block_interact:
+    name: ᴜꜱᴇ ʙʟᴏᴄᴋꜱ
+    description:
+    - <#FFD8BE>Untrusted players may use doors,</#FFD8BE>
+    - <#FFD8BE>gates, beds and workstations.</#FFD8BE>
+  redstone_interact:
+    name: ᴜꜱᴇ ʀᴇᴅꜱᴛᴏɴᴇ
+    description:
+    - <#FFD8BE>Untrusted players may press buttons,</#FFD8BE>
+    - <#FFD8BE>flip levers and step on plates.</#FFD8BE>
+  container_open:
+    name: ᴏᴘᴇɴ ᴄʜᴇꜱᴛꜱ
+    description:
+    - <#FFD8BE>Untrusted players may open chests,</#FFD8BE>
+    - <#FFD8BE>barrels, furnaces and hoppers.</#FFD8BE>
+  farm_block_break:
+    name: ʜᴀʀᴠᴇꜱᴛ ᴄʀᴏᴘꜱ
+    description:
+    - <#FFD8BE>Untrusted players may break crops</#FFD8BE>
+    - <#FFD8BE>and trample farmland.</#FFD8BE>
+  farm_block_place:
+    name: ᴘʟᴀɴᴛ ᴄʀᴏᴘꜱ
+    description:
+    - <#FFD8BE>Untrusted players may plant seeds</#FFD8BE>
+    - <#FFD8BE>and crops.</#FFD8BE>
+  farm_block_interact:
+    name: ᴛᴇɴᴅ ᴄʀᴏᴘꜱ
+    description:
+    - <#FFD8BE>Untrusted players may bonemeal crops</#FFD8BE>
+    - <#FFD8BE>and use composters and hives.</#FFD8BE>
+  fill_bucket:
+    name: ꜰɪʟʟ ʙᴜᴄᴋᴇᴛꜱ
+    description:
+    - <#FFD8BE>Untrusted players may scoop up</#FFD8BE>
+    - <#FFD8BE>water and lava.</#FFD8BE>
+  empty_bucket:
+    name: ᴇᴍᴘᴛʏ ʙᴜᴄᴋᴇᴛꜱ
+    description:
+    - <#FFD8BE>Untrusted players may pour out</#FFD8BE>
+    - <#FFD8BE>water and lava.</#FFD8BE>
+  place_hanging_entity:
+    name: ᴘʟᴀᴄᴇ ᴅᴇᴄᴏʀᴀᴛɪᴏɴꜱ
+    description:
+    - <#FFD8BE>Untrusted players may hang paintings,</#FFD8BE>
+    - <#FFD8BE>item frames and armor stands.</#FFD8BE>
+  break_hanging_entity:
+    name: ʙʀᴇᴀᴋ ᴅᴇᴄᴏʀᴀᴛɪᴏɴꜱ
+    description:
+    - <#FFD8BE>Untrusted players may break paintings,</#FFD8BE>
+    - <#FFD8BE>item frames and armor stands.</#FFD8BE>
+  place_vehicle:
+    name: ᴘʟᴀᴄᴇ ᴠᴇʜɪᴄʟᴇꜱ
+    description:
+    - <#FFD8BE>Untrusted players may place</#FFD8BE>
+    - <#FFD8BE>minecarts and boats.</#FFD8BE>
+  break_vehicle:
+    name: ʙʀᴇᴀᴋ ᴠᴇʜɪᴄʟᴇꜱ
+    description:
+    - <#FFD8BE>Untrusted players may break</#FFD8BE>
+    - <#FFD8BE>minecarts and boats.</#FFD8BE>
+  entity_interact:
+    name: ᴜꜱᴇ ᴀɴɪᴍᴀʟꜱ
+    description:
+    - <#FFD8BE>Untrusted players may feed, ride,</#FFD8BE>
+    - <#FFD8BE>leash and trade with mobs.</#FFD8BE>
+  use_spawn_egg:
+    name: ꜱᴘᴀᴡɴ ᴇɢɢꜱ
+    description:
+    - <#FFD8BE>Untrusted players may use spawn eggs</#FFD8BE>
+    - <#FFD8BE>and throw eggs.</#FFD8BE>
+  ender_pearl_teleport:
+    name: ᴇɴᴅᴇʀ ᴘᴇᴀʀʟꜱ
+    description:
+    - <#FFD8BE>Untrusted players may teleport in</#FFD8BE>
+    - <#FFD8BE>with pearls and chorus fruit.</#FFD8BE>
+  start_raid:
+    name: ꜱᴛᴀʀᴛ ʀᴀɪᴅꜱ
+    description:
+    - <#FFD8BE>Untrusted players with Bad Omen</#FFD8BE>
+    - <#FFD8BE>may start raids here.</#FFD8BE>
+  player_damage_player:
+    name: ᴘᴠᴘ
+    description:
+    - <#FFD8BE>Players may fight each other here.</#FFD8BE>
+  player_damage_monster:
+    name: ꜰɪɢʜᴛ ᴍᴏɴꜱᴛᴇʀꜱ
+    description:
+    - <#FFD8BE>Untrusted players may hurt</#FFD8BE>
+    - <#FFD8BE>hostile mobs.</#FFD8BE>
+  player_damage_entity:
+    name: ʜᴜʀᴛ ᴀɴɪᴍᴀʟꜱ
+    description:
+    - <#FFD8BE>Untrusted players may hurt</#FFD8BE>
+    - <#FFD8BE>passive mobs.</#FFD8BE>
+  player_damage_persistent_entity:
+    name: ʜᴜʀᴛ ɴᴀᴍᴇᴅ ᴍᴏʙꜱ
+    description:
+    - <#FFD8BE>Untrusted players may hurt name-tagged</#FFD8BE>
+    - <#FFD8BE>and tamed mobs.</#FFD8BE>
+  monster_spawn:
+    name: ᴍᴏɴꜱᴛᴇʀ ꜱᴘᴀᴡɴɪɴɢ
+    description:
+    - <#FFD8BE>Hostile mobs spawn here.</#FFD8BE>
+  passive_mob_spawn:
+    name: ᴀɴɪᴍᴀʟ ꜱᴘᴀᴡɴɪɴɢ
+    description:
+    - <#FFD8BE>Passive mobs spawn here.</#FFD8BE>
+  monster_damage_terrain:
+    name: ᴍᴏʙ ᴇxᴘʟᴏꜱɪᴏɴꜱ
+    description:
+    - <#FFD8BE>Creeper and wither explosions</#FFD8BE>
+    - <#FFD8BE>may break blocks here.</#FFD8BE>
+  explosion_damage_terrain:
+    name: ᴛɴᴛ ᴇxᴘʟᴏꜱɪᴏɴꜱ
+    description:
+    - <#FFD8BE>TNT, TNT minecarts, beds and</#FFD8BE>
+    - <#FFD8BE>respawn anchors may break blocks here.</#FFD8BE>
+  explosion_damage_entity:
+    name: ᴇxᴘʟᴏꜱɪᴏɴ ᴅᴀᴍᴀɢᴇ
+    description:
+    - <#FFD8BE>Explosions may hurt players,</#FFD8BE>
+    - <#FFD8BE>mobs and armor stands here.</#FFD8BE>
+  fire_burn:
+    name: ꜰɪʀᴇ ʙᴜʀɴꜱ ʙʟᴏᴄᴋꜱ
+    description:
+    - <#FFD8BE>Fire may destroy blocks here.</#FFD8BE>
+  fire_spread:
+    name: ꜰɪʀᴇ ꜱᴘʀᴇᴀᴅ
+    description:
+    - <#FFD8BE>Fire may spread here.</#FFD8BE>
+  redstone_actuate:
+    name: ʀᴇᴅꜱᴛᴏɴᴇ ᴍᴀᴄʜɪɴᴇꜱ
+    description:
+    - <#FFD8BE>Pistons and dispensers work here.</#FFD8BE>

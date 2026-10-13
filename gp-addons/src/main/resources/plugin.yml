@@ -1,0 +1,70 @@
+name: GPAddons
+version: '${project.version}'
+main: dev.wamble.gpaddons.GPAddons
+api-version: '1.21'
+depend: [GriefPrevention]
+description: Claim menus, flags, claim bans and an entry whitelist for GriefPrevention
+commands:
+  claims:
+    description: Open the claim menu
+    usage: /<command> [here|player|admin]
+    aliases: [claimmenu, cmenu, claimgui]
+  claimban:
+    description: Ban a player from the claim you're standing in
+    usage: /<command> <player>
+    aliases: [banfromclaim, bfc]
+  claimunban:
+    description: Unban a player from the claim you're standing in
+    usage: /<command> <player>
+    aliases: [unbanfromclaim, ubfc]
+  claimbans:
+    description: See who is banned from the claim you're standing in
+    usage: /<command>
+    aliases: [claimbanlist, bfclist]
+  claimwhitelist:
+    description: Only let trusted and whitelisted players into your claim
+    usage: /<command> [on|off|add <player>|remove <player>]
+    aliases: [claimprivate, claimentry]
+  claimflags:
+    description: Choose what everyone may do in your claim
+    usage: /<command> [flag] [on|off|default]
+    aliases: [claimflag]
+  claimname:
+    description: Name the claim you're standing in
+    usage: /<command> <name|clear>
+    aliases: [renameclaim, nameclaim]
+  gpaddons:
+    description: Reload GPAddons or re-run the BanFromClaim import
+    usage: /<command> <reload|import-banfromclaim>
+    permission: gpaddons.admin
+permissions:
+  gpaddons.menu:
+    description: Use /claims
+    default: true
+  gpaddons.ban:
+    description: Ban players from claims you manage
+    default: true
+  gpaddons.whitelist:
+    description: Use the entry whitelist in claims you manage
+    default: true
+  gpaddons.flags:
+    description: Change flags in claims you manage (each flag can also be denied with gpaddons.flag.<flag>)
+    default: true
+  gpaddons.rename:
+    description: Name your claims
+    default: true
+  gpaddons.transfer:
+    description: Give your claims to another player
+    default: true
+  gpaddons.other:
+    description: Open another player's claims with /claims <player>
+    default: op
+  gpaddons.bypass:
+    description: Enter claims you are banned or not whitelisted from
+    default: op
+  gpaddons.admin:
+    description: Manage any claim's flags, bans, whitelist and name; reload the add-on
+    default: op
+    children:
+      gpaddons.other: true
+      gpaddons.bypass: true

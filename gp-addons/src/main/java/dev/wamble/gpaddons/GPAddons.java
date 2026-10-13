@@ -1,0 +1,129 @@
+package dev.wamble.gpaddons;
+
+import dev.wamble.gpaddons.command.Commands;
+import dev.wamble.gpaddons.data.BanFromClaimImporter;
+import dev.wamble.gpaddons.data.ClaimStore;
+import dev.wamble.gpaddons.entry.EntryListener;
+import dev.wamble.gpaddons.entry.EntryService;
+import dev.wamble.gpaddons.flag.FlagListener;
+import dev.wamble.gpaddons.flag.FlagService;
+import dev.wamble.gpaddons.menu.ClaimActions;
+import dev.wamble.gpaddons.menu.ClaimInfo;
+import dev.wamble.gpaddons.menu.Menu;
+import dev.wamble.gpaddons.menu.MenuManager;
+import dev.wamble.gpaddons.outline.OutlineListener;
+import dev.wamble.gpaddons.protect.SpongeListener;
+import dev.wamble.gpaddons.text.Messages;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.logging.Level;
+
+/**
+ * GPAddons: claim menus, HuskClaims-style flags, claim bans and an entry whitelist on top of GriefPrevention.
+ * GriefPrevention keeps claims and trust; GPAddons keeps its own extras in data.yml, keyed by claim ID.
+ */
+public final class GPAddons extends JavaPlugin {
+
+    private final ClaimStore store = new ClaimStore(this);
+    private final Messages messages = new Messages(this);
+    private final FlagService flags = new FlagService(this);
+    private final EntryService entry = new EntryService(this);
+    private final ClaimInfo info = new ClaimInfo(this);
+    private final ClaimActions actions = new ClaimActions(this);
+    private final MenuManager menus = new MenuManager(this);
+
+    @Override
+    public void onEnable() {
+        saveDefaultConfig();
+        messages.reload();
+        flags.reload();
+        store.load();
+        store.startAutoSave();
+        new BanFromClaimImporter(this).importIfNeeded();
+
+        final PluginManager plugins = getServer().getPluginManager();
+        plugins.registerEvents(new FlagListener(this), this);
+        plugins.registerEvents(new EntryListener(this), this);
+        plugins.registerEvents(new SpongeListener(this), this);
+        plugins.registerEvents(menus, this);
+        if (hasOutlineEvent()) {
+            plugins.registerEvents(new OutlineListener(this), this);
+        } else {
+            getLogger().warning("This GriefPrevention version can't have its claim outline changed; the raised outline is off");
+        }
+        new Commands(this).register();
+
+        try {
+            flags.applyAllExplosions();
+        } catch (RuntimeException e) {
+            getLogger().log(Level.WARNING, "Couldn't apply explosion flags to claims", e);
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        // Nothing may be taken out of a menu once it stops responding to clicks
+        for (Player player : getServer().getOnlinePlayers()) {
+            if (player.getOpenInventory().getTopInventory().getHolder() instanceof Menu) {
+                player.closeInventory();
+            }
+        }
+        store.saveNow();
+    }
+
+    /** Re-read config.yml and messages.yml */
+    public void reload() {
+        reloadConfig();
+        messages.reload();
+        flags.reload();
+        flags.applyAllExplosions();
+    }
+
+    private static boolean hasOutlineEvent() {
+        try {
+            Class.forName("com.griefprevention.events.BoundaryVisualizationEvent");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
+
+    @NotNull
+    public ClaimStore store() {
+        return store;
+    }
+
+    @NotNull
+    public Messages messages() {
+        return messages;
+    }
+
+    @NotNull
+    public FlagService flags() {
+        return flags;
+    }
+
+    @NotNull
+    public EntryService entry() {
+        return entry;
+    }
+
+    @NotNull
+    public ClaimInfo info() {
+        return info;
+    }
+
+    @NotNull
+    public ClaimActions actions() {
+        return actions;
+    }
+
+    @NotNull
+    public MenuManager menus() {
+        return menus;
+    }
+
+}
