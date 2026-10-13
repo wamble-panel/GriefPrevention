@@ -39,6 +39,12 @@ public abstract class PagedMenu<T> extends Menu {
         return null;
     }
 
+    /** What clicking the empty-list icon does, or null if nothing */
+    @Nullable
+    protected Action emptyAction() {
+        return null;
+    }
+
     /** Buttons besides the entries and page arrows */
     protected void extras() {
     }
@@ -60,7 +66,7 @@ public abstract class PagedMenu<T> extends Menu {
         if (entries.isEmpty()) {
             final ItemStack empty = emptyIcon();
             if (empty != null) {
-                set(22, empty);
+                set(22, empty, emptyAction());
             }
         }
         if (page > 0) {

@@ -155,7 +155,27 @@ public final class GuestsMenu extends PagedMenu<GuestsMenu.Guest> {
 
     @Override
     protected @Nullable ItemStack emptyIcon() {
-        return Items.item("cobweb", messages().itemName("menu.guests.empty.name"), messages().lore("menu.guests.empty.lore"));
+        final List<Component> lore = new ArrayList<>(messages().lore("menu.guests.empty.lore"));
+        if (Gp.canManage(viewer, claim)) {
+            lore.addAll(messages().lore("menu.guests.empty.click"));
+        }
+        return Items.item("cobweb", messages().itemName("menu.guests.empty.name"), lore);
+    }
+
+    @Override
+    protected @Nullable Action emptyAction() {
+        if (!Gp.canManage(viewer, claim)) {
+            return null;
+        }
+        return click -> plugin.menus().prompt(viewer, "prompt.guest", this, name -> {
+            final OfflinePlayer target = Gp.findPlayer(name);
+            if (target == null) {
+                messages().send(viewer, "general.player-not-found", Messages.text("player", name));
+                open();
+                return;
+            }
+            chooseGuest(target);
+        });
     }
 
     @Override

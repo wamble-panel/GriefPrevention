@@ -34,6 +34,7 @@ public final class MenuManager implements Listener {
     private final GPAddons plugin;
     private final Map<UUID, Prompt> prompts = new ConcurrentHashMap<>();
     private final Map<UUID, Long> lastClick = new HashMap<>();
+    private boolean dialogsWork = true;
 
     public MenuManager(@NotNull GPAddons plugin) {
         this.plugin = plugin;
@@ -45,6 +46,18 @@ public final class MenuManager implements Listener {
      */
     public void prompt(@NotNull Player player, @NotNull String messageKey, @Nullable Menu reopen,
                        @NotNull Consumer<String> answer) {
+        // Minecraft's own input screen where the server has it (1.21.7+), otherwise typing in chat
+        if (dialogsWork && plugin.getConfig().getBoolean("menus.use-input-screens", true)) {
+            final String purpose = messageKey.substring(messageKey.lastIndexOf('.') + 1);
+            final int maxLength = purpose.equals("rename") ? plugin.getConfig().getInt("names.max-length", 32) : 16;
+            try {
+                InputDialog.show(plugin, player, purpose, maxLength, reopen, answer);
+                return;
+            } catch (LinkageError | RuntimeException e) {
+                dialogsWork = false;
+                plugin.getLogger().warning("This server can't show input screens, so players will type in chat instead (" + e + ")");
+            }
+        }
         prompts.put(player.getUniqueId(), new Prompt(answer, reopen, System.currentTimeMillis() + PROMPT_TIMEOUT_MILLIS));
         player.closeInventory();
         plugin.messages().send(player, messageKey);

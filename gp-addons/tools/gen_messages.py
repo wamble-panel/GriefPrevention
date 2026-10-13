@@ -203,6 +203,18 @@ def messages():
             "transfer": prompt("type the player to give this claim to in chat"),
             "cancelled": c(GREY, "✘ " + sc("cancelled.")),
         },
+        # The input screens (Minecraft 1.21.7+) used instead of typing in chat
+        "dialog": {
+            "guest": {"title": header("✦ add a guest"), "body": c(PEACH, "Who should be trusted in this claim?")},
+            "ban": {"title": header("✦ ban a player"), "body": c(PEACH, "Who should be kept out of this claim?")},
+            "entry": {"title": header("✦ whitelist a player"), "body": c(PEACH, "Who may enter while the whitelist is on?")},
+            "transfer": {"title": header("✦ transfer claim"), "body": c(PEACH, "Who should this claim belong to?")},
+            "rename": {"title": header("✦ rename claim"), "body": c(PEACH, "What should this claim be called?")},
+            "player-label": c(WHITE, sc("player")),
+            "name-label": c(WHITE, sc("claim name")),
+            "confirm": c(MINT, sc("✔ confirm")),
+            "cancel": c(RED, sc("✘ cancel")),
+        },
         "menu": menu(),
         "flag": {key: {"name": sc(label), "description": desc(*lines)} for key, label, lines in FLAGS},
     }
@@ -317,7 +329,8 @@ def menu():
                     "lore": desc("Trust a player by typing", "their name in chat."),
                     "click": [blank, click("to add")]},
             "empty": {"name": c(GREY, sc("no guests yet")),
-                      "lore": desc("Add one with the button below.")},
+                      "lore": desc("Trust a player so they can", "build, open chests or visit."),
+                      "click": [blank, click("to add a guest")]},
         },
         "trust": {
             "title": title("trust", "<player>"),

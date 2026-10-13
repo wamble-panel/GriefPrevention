@@ -87,6 +87,26 @@ prompt:
   rename: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴀ ɴᴇᴡ ɴᴀᴍᴇ ꜰᴏʀ ᴛʜɪꜱ ᴄʟᴀɪᴍ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   transfer: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ɢɪᴠᴇ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   cancelled: <#8A8A8A>✘ ᴄᴀɴᴄᴇʟʟᴇᴅ.</#8A8A8A>
+dialog:
+  guest:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴀᴅᴅ ᴀ ɢᴜᴇꜱᴛ</b></gradient>
+    body: <#FFD8BE>Who should be trusted in this claim?</#FFD8BE>
+  ban:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ʙᴀɴ ᴀ ᴘʟᴀʏᴇʀ</b></gradient>
+    body: <#FFD8BE>Who should be kept out of this claim?</#FFD8BE>
+  entry:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴡʜɪᴛᴇʟɪꜱᴛ ᴀ ᴘʟᴀʏᴇʀ</b></gradient>
+    body: <#FFD8BE>Who may enter while the whitelist is on?</#FFD8BE>
+  transfer:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴛʀᴀɴꜱꜰᴇʀ ᴄʟᴀɪᴍ</b></gradient>
+    body: <#FFD8BE>Who should this claim belong to?</#FFD8BE>
+  rename:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ʀᴇɴᴀᴍᴇ ᴄʟᴀɪᴍ</b></gradient>
+    body: <#FFD8BE>What should this claim be called?</#FFD8BE>
+  player-label: <#F2F2F2>ᴘʟᴀʏᴇʀ</#F2F2F2>
+  name-label: <#F2F2F2>ᴄʟᴀɪᴍ ɴᴀᴍᴇ</#F2F2F2>
+  confirm: <#B5EAD7>✔ ᴄᴏɴꜰɪʀᴍ</#B5EAD7>
+  cancel: <#FF9AA2>✘ ᴄᴀɴᴄᴇʟ</#FF9AA2>
 menu:
   back:
     name: <#FFC8DD>◀ ʙᴀᴄᴋ</#FFC8DD>
@@ -294,7 +314,11 @@ menu:
     empty:
       name: <#8A8A8A>ɴᴏ ɢᴜᴇꜱᴛꜱ ʏᴇᴛ</#8A8A8A>
       lore:
-      - <#FFD8BE>Add one with the button below.</#FFD8BE>
+      - <#FFD8BE>Trust a player so they can</#FFD8BE>
+      - <#FFD8BE>build, open chests or visit.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴀᴅᴅ ᴀ ɢᴜᴇꜱᴛ</#FFD8BE>
   trust:
     title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴛʀᴜꜱᴛ</b></gradient> <#8A8A8A>| <player></#8A8A8A>
     entry:
