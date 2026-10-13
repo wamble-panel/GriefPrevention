@@ -25,7 +25,7 @@ outline:
 
 menus:
   # Ask for player names and claim names with Minecraft's input screen (1.21.7+) instead of typing in chat
-  use-input-screens: true
+  use-input-screens: false
   # Open the menus for GriefPrevention's /claimslist, /trustlist, /abandonclaim, and /trust with no name
   replace-griefprevention-commands: true
 

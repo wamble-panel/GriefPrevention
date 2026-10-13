@@ -47,7 +47,7 @@ public final class MenuManager implements Listener {
     public void prompt(@NotNull Player player, @NotNull String messageKey, @Nullable Menu reopen,
                        @NotNull Consumer<String> answer) {
         // Minecraft's own input screen where the server has it (1.21.7+), otherwise typing in chat
-        if (dialogsWork && plugin.getConfig().getBoolean("menus.use-input-screens", true)) {
+        if (dialogsWork && plugin.getConfig().getBoolean("menus.use-input-screens", false)) {
             final String purpose = messageKey.substring(messageKey.lastIndexOf('.') + 1);
             final int maxLength = purpose.equals("rename") ? plugin.getConfig().getInt("names.max-length", 32) : 16;
             try {
