@@ -14,6 +14,7 @@ import dev.wamble.gpaddons.menu.Menu;
 import dev.wamble.gpaddons.menu.MenuManager;
 import dev.wamble.gpaddons.outline.OutlineListener;
 import dev.wamble.gpaddons.protect.CushionListener;
+import dev.wamble.gpaddons.protect.DoorListener;
 import dev.wamble.gpaddons.protect.SpongeListener;
 import dev.wamble.gpaddons.text.GpMessages;
 import dev.wamble.gpaddons.text.Messages;
@@ -53,6 +54,7 @@ public final class GPAddons extends JavaPlugin {
         plugins.registerEvents(new EntryListener(this), this);
         plugins.registerEvents(new SpongeListener(this), this);
         plugins.registerEvents(new CushionListener(), this);
+        plugins.registerEvents(new DoorListener(this), this);
         plugins.registerEvents(menus, this);
         plugins.registerEvents(new GpCommandMenus(this), this);
         if (hasOutlineEvent()) {

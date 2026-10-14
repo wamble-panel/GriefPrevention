@@ -36,6 +36,9 @@ griefprevention-messages:
   restyle: true
 
 protection:
+  # Doors, trapdoors and fence gates in claims need access trust (or the claim's Use Blocks flag),
+  # even though GriefPrevention leaves wooden doors and trapdoors unlocked by default
+  lock-doors: true
   # Stop sponges outside a claim soaking up water inside it
   sponges: true
 
