@@ -87,6 +87,15 @@ prompt:
   rename: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴀ ɴᴇᴡ ɴᴀᴍᴇ ꜰᴏʀ ᴛʜɪꜱ ᴄʟᴀɪᴍ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   transfer: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ɢɪᴠᴇ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   cancelled: <#8A8A8A>✘ ᴄᴀɴᴄᴇʟʟᴇᴅ.</#8A8A8A>
+notices:
+  enter: <#CDB4DB>✿ </#CDB4DB><#FFD8BE>ᴇɴᴛᴇʀɪɴɢ </#FFD8BE><#FFC8DD><owner></#FFC8DD><#FFD8BE>'ꜱ ᴄʟᴀɪᴍ</#FFD8BE>
+  enter-named: <#CDB4DB>✿ </#CDB4DB><#FFD8BE>ᴇɴᴛᴇʀɪɴɢ </#FFD8BE><#FFC8DD><name></#FFC8DD><#8A8A8A> • </#8A8A8A><#FFD8BE>ʙʏ </#FFD8BE><#FFE5EC><owner></#FFE5EC>
+  enter-own: <#B5EAD7>✿ </#B5EAD7><#FFD8BE>ᴡᴇʟᴄᴏᴍᴇ ʜᴏᴍᴇ</#FFD8BE>
+  enter-admin: <#FFB5A7>✦ </#FFB5A7><#FFD8BE>ᴇɴᴛᴇʀɪɴɢ ᴀɴ ᴀᴅᴍɪɴ ᴄʟᴀɪᴍ</#FFD8BE>
+  enter-admin-named: <#FFB5A7>✦ </#FFB5A7><#FFD8BE>ᴇɴᴛᴇʀɪɴɢ </#FFD8BE><#FFC8DD><name></#FFC8DD>
+  leave: <#8A8A8A>➜ ʟᴇᴀᴠɪɴɢ <owner>'ꜱ ᴄʟᴀɪᴍ</#8A8A8A>
+  leave-own: <#8A8A8A>➜ ʟᴇᴀᴠɪɴɢ ʏᴏᴜʀ ᴄʟᴀɪᴍ</#8A8A8A>
+  leave-admin: <#8A8A8A>➜ ʟᴇᴀᴠɪɴɢ ᴛʜᴇ ᴀᴅᴍɪɴ ᴄʟᴀɪᴍ</#8A8A8A>
 dialog:
   guest:
     title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴀᴅᴅ ᴀ ɢᴜᴇꜱᴛ</b></gradient>

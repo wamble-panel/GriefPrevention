@@ -15,6 +15,26 @@ outline:
   height-offset:
     glow: 0
     blocks: 1
+  # The blocks each kind of outline is made of, for both styles: corners and the blocks along the sides.
+  # Any block works, with states in brackets if you like, e.g. redstone_ore[lit=true]
+  blocks:
+    claim:
+      corner: glowstone
+      side: gold_block
+    admin-claim:
+      corner: glowstone
+      side: pumpkin
+    subdivision:
+      corner: iron_block
+      side: white_wool
+    # Shown while making a claim, after the first corner
+    new-claim:
+      corner: diamond_block
+      side: diamond_block
+    # Where a new claim would overlap another one
+    conflict:
+      corner: redstone_ore[lit=true]
+      side: netherrack
   # Glow colours for each kind of outline (hex)
   glow-colors:
     claim: '#FFC8DD'
@@ -22,6 +42,14 @@ outline:
     subdivision: '#CDB4DB'
     conflict: '#FF9AA2'
     other: '#A2D2FF'
+
+claim-notices:
+  # "✿ Entering Steve's Claim" when walking into someone's claim (texts are in messages.yml under notices)
+  enabled: true
+  # Where to show it: actionbar (above the hotbar), title (middle of the screen) or chat
+  display: actionbar
+  # Also say when leaving a claim
+  show-leaving: false
 
 menus:
   # Ask for player names and claim names with Minecraft's input screen (1.21.7+) instead of typing in chat

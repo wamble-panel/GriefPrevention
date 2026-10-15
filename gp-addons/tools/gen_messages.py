@@ -203,6 +203,18 @@ def messages():
             "transfer": prompt("type the player to give this claim to in chat"),
             "cancelled": c(GREY, "✘ " + sc("cancelled.")),
         },
+        # Shown when walking into (and optionally out of) a claim
+        "notices": {
+            "enter": c(LILAC, "✿ ") + c(PEACH, sc("entering ")) + hl("<owner>") + c(PEACH, sc("'s claim")),
+            "enter-named": c(LILAC, "✿ ") + c(PEACH, sc("entering ")) + hl("<name>")
+                           + c(GREY, " • ") + c(PEACH, sc("by ")) + c(LIGHT, "<owner>"),
+            "enter-own": c(MINT, "✿ ") + c(PEACH, sc("welcome home")),
+            "enter-admin": c(CORAL, "✦ ") + c(PEACH, sc("entering an admin claim")),
+            "enter-admin-named": c(CORAL, "✦ ") + c(PEACH, sc("entering ")) + hl("<name>"),
+            "leave": c(GREY, "➜ " + sc("leaving ") + "<owner>" + sc("'s claim")),
+            "leave-own": c(GREY, "➜ " + sc("leaving your claim")),
+            "leave-admin": c(GREY, "➜ " + sc("leaving the admin claim")),
+        },
         # The input screens (Minecraft 1.21.7+) used instead of typing in chat
         "dialog": {
             "guest": {"title": header("✦ add a guest"), "body": c(PEACH, "Who should be trusted in this claim?")},

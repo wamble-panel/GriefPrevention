@@ -4,6 +4,7 @@ import dev.wamble.gpaddons.command.Commands;
 import dev.wamble.gpaddons.command.GpCommandMenus;
 import dev.wamble.gpaddons.data.BanFromClaimImporter;
 import dev.wamble.gpaddons.data.ClaimStore;
+import dev.wamble.gpaddons.entry.ClaimNoticeListener;
 import dev.wamble.gpaddons.entry.EntryListener;
 import dev.wamble.gpaddons.entry.EntryService;
 import dev.wamble.gpaddons.flag.FlagListener;
@@ -43,6 +44,9 @@ public final class GPAddons extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        // Add settings from newer versions to an existing config.yml
+        getConfig().options().copyDefaults(true);
+        saveConfig();
         messages.reload();
         flags.reload();
         store.load();
@@ -52,6 +56,7 @@ public final class GPAddons extends JavaPlugin {
         final PluginManager plugins = getServer().getPluginManager();
         plugins.registerEvents(new FlagListener(this), this);
         plugins.registerEvents(new EntryListener(this), this);
+        plugins.registerEvents(new ClaimNoticeListener(this), this);
         plugins.registerEvents(new SpongeListener(this), this);
         plugins.registerEvents(new CushionListener(), this);
         plugins.registerEvents(new DoorListener(this), this);

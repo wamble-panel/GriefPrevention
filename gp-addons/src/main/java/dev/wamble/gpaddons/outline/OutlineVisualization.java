@@ -37,25 +37,28 @@ public final class OutlineVisualization extends BlockBoundaryVisualization {
     private final boolean glow;
     private final boolean waterTransparent;
     private final Map<String, Color> colors;
+    private final Map<String, BlockData> blocks;
 
     /**
      * @param colors glow colours by boundary type name (CLAIM, ADMIN_CLAIM, SUBDIVISION, CONFLICT_ZONE),
      *               with OTHER for the rest
      */
     public OutlineVisualization(@NotNull Plugin plugin, @NotNull World world, @NotNull IntVector visualizeFrom,
-                                int height, int heightOffset, boolean glow, @NotNull Map<String, Color> colors) {
+                                int height, int heightOffset, boolean glow, @NotNull Map<String, Color> colors,
+                                @NotNull Map<String, BlockData> blocks) {
         super(world, visualizeFrom, height);
         this.plugin = plugin;
         this.heightOffset = heightOffset;
         this.glow = glow;
         this.colors = colors;
+        this.blocks = blocks;
         this.waterTransparent = visualizeFrom.toBlock(world).getType() == Material.WATER;
     }
 
     @Override
     protected @NotNull Consumer<@NotNull IntVector> addCornerElements(@NotNull Boundary boundary) {
         final String type = boundary.type().name();
-        final BlockData data = switch (type) {
+        final BlockData data = blocks.containsKey(type + ".corner") ? blocks.get(type + ".corner") : switch (type) {
             case "SUBDIVISION" -> Material.IRON_BLOCK.createBlockData();
             case "INITIALIZE_ZONE", "NATURE_RESTORATION_ZONE" -> Material.DIAMOND_BLOCK.createBlockData();
             case "CONFLICT_ZONE" -> litRedstoneOre();
@@ -67,7 +70,7 @@ public final class OutlineVisualization extends BlockBoundaryVisualization {
     @Override
     protected @NotNull Consumer<@NotNull IntVector> addSideElements(@NotNull Boundary boundary) {
         final String type = boundary.type().name();
-        final BlockData data = switch (type) {
+        final BlockData data = blocks.containsKey(type + ".side") ? blocks.get(type + ".side") : switch (type) {
             case "ADMIN_CLAIM" -> Material.PUMPKIN.createBlockData();
             case "SUBDIVISION" -> Material.WHITE_WOOL.createBlockData();
             case "INITIALIZE_ZONE", "NATURE_RESTORATION_ZONE" -> Material.DIAMOND_BLOCK.createBlockData();
