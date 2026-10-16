@@ -73,6 +73,7 @@ public final class GPAddons extends JavaPlugin {
         plugins.registerEvents(teams, this);
         plugins.registerEvents(perks, this);
         plugins.registerEvents(storage, this);
+        perks.refundLures();
         perks.start();
         teams.refreshAll();
         plugins.registerEvents(new SpongeListener(this), this);
@@ -141,7 +142,8 @@ public final class GPAddons extends JavaPlugin {
      * One-off changes to an existing config.yml. Version 2: hostile mobs no longer spawn in claims by default
      * (owners unlock it with the Monster Lure team upgrade). Version 3: the Team Vault upgrade is now Team
      * Storage, and the new-claim glow is off-white. Version 4: only team claims glow light blue (a 3.x build
-     * briefly made every claim blue), other claims are pink again.
+     * briefly made every claim blue), other claims are pink again. Version 5: hostile mobs spawn in claims
+     * again by default and the Monster Lure isn't needed (Peaceful Grounds turns spawns down instead).
      */
     private void migrateConfig() {
         final int version = getConfig().getInt("config-version", 1);
@@ -162,7 +164,11 @@ public final class GPAddons extends JavaPlugin {
         if (version < 4 && "#A2D2FF".equalsIgnoreCase(getConfig().getString("outline.glow-colors.claim", ""))) {
             getConfig().set("outline.glow-colors.claim", "#FFC8DD");
         }
-        getConfig().set("config-version", 4);
+        if (version < 5) {
+            getConfig().set("flags.defaults.monster_spawn", true);
+            getConfig().set("teams.upgrades.monster_lure.required", false);
+        }
+        getConfig().set("config-version", 5);
         saveConfig();
     }
 

@@ -37,7 +37,7 @@ public enum ClaimFlag {
     PLAYER_DAMAGE_PERSISTENT_ENTITY(Category.PLAYER, "name_tag", false),
 
     // Things that happen on their own
-    MONSTER_SPAWN(Category.ENVIRONMENT, "spawner", false),
+    MONSTER_SPAWN(Category.ENVIRONMENT, "spawner", true),
     PASSIVE_MOB_SPAWN(Category.ENVIRONMENT, "egg", true),
     MONSTER_DAMAGE_TERRAIN(Category.ENVIRONMENT, "creeper_head", false),
     EXPLOSION_DAMAGE_TERRAIN(Category.ENVIRONMENT, "tnt", false),

@@ -20,7 +20,8 @@ import java.util.List;
  */
 public final class TeamUpgradesMenu extends Menu {
 
-    private static final int[] SLOTS = {19, 20, 21, 22, 23, 24, 25, 30, 32};
+    private static final int[] SLOTS_8 = {19, 20, 21, 22, 23, 24, 25, 31};
+    private static final int[] SLOTS_9 = {19, 20, 21, 22, 23, 24, 25, 30, 32};
 
     private final Team team;
 
@@ -50,9 +51,11 @@ public final class TeamUpgradesMenu extends Menu {
     protected void draw() {
         set(HEADER, pointsItem(plugin, team));
         final boolean canSpend = team.can(viewer.getUniqueId(), TeamPermission.SPEND_POINTS);
-        final TeamUpgrade[] upgrades = TeamUpgrade.values();
-        for (int i = 0; i < upgrades.length && i < SLOTS.length; i++) {
-            final TeamUpgrade upgrade = upgrades[i];
+        final List<TeamUpgrade> upgrades = java.util.Arrays.stream(TeamUpgrade.values())
+                .filter(plugin.perks()::available).toList();
+        final int[] slots = upgrades.size() <= SLOTS_8.length ? SLOTS_8 : SLOTS_9;
+        for (int i = 0; i < upgrades.size() && i < slots.length; i++) {
+            final TeamUpgrade upgrade = upgrades.get(i);
             final int level = team.level(upgrade);
             final List<Component> lore = new ArrayList<>(messages().lore("team-upgrades." + upgrade.id() + ".description"));
             lore.add(Component.empty());
@@ -75,7 +78,7 @@ public final class TeamUpgradesMenu extends Menu {
             }
             final ItemStack item = Items.item(upgrade.icon(), messages().itemName("menu.team.upgrade.name",
                     plugin.messages().formatted("upgrade", "team-upgrades." + upgrade.id() + ".name")), lore);
-            set(SLOTS[i], level > 0 ? Items.glint(item) : item, canSpend && !maxed ? click -> {
+            set(slots[i], level > 0 ? Items.glint(item) : item, canSpend && !maxed ? click -> {
                 plugin.perks().buy(viewer, upgrade);
                 refresh();
             } : null);

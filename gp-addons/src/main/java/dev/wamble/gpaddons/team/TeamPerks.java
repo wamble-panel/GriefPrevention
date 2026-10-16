@@ -155,10 +155,42 @@ public final class TeamPerks implements Listener {
         return costs.size() >= level && level > 0 ? Math.max(0, costs.get(level - 1)) : upgrade.defaultCost(level);
     }
 
+    /** Whether an upgrade is offered: the Monster Lure only when monster spawning needs unlocking */
+    public boolean available(@NotNull TeamUpgrade upgrade) {
+        return upgrade != TeamUpgrade.MONSTER_LURE || lureRequired();
+    }
+
+    private boolean lureRequired() {
+        return plugin.getConfig().getBoolean("teams.upgrades.monster_lure.required", false);
+    }
+
+    /** Give back the points for a Monster Lure bought while it was still needed */
+    public void refundLures() {
+        if (lureRequired()) {
+            return;
+        }
+        for (Team team : teams().teams()) {
+            final Integer level = team.upgrades().remove(TeamUpgrade.MONSTER_LURE.id());
+            if (level != null && level > 0) {
+                int refund = 0;
+                for (int l = 1; l <= level; l++) {
+                    refund += cost(TeamUpgrade.MONSTER_LURE, l);
+                }
+                team.points(team.points() + refund);
+                teams().changed();
+                plugin.getLogger().info("Gave team " + teams().plainName(team) + " back " + refund
+                        + " points for the Monster Lure, which isn't needed any more");
+            }
+        }
+    }
+
     public boolean buy(@NotNull Player player, @NotNull TeamUpgrade upgrade) {
         final Team team = teams().teamOf(player.getUniqueId());
         if (team == null || !teams().enabled()) {
             plugin.messages().send(player, team == null ? "team.no-team" : "team.disabled");
+            return false;
+        }
+        if (!available(upgrade)) {
             return false;
         }
         if (!team.can(player.getUniqueId(), TeamPermission.SPEND_POINTS)) {
@@ -428,7 +460,7 @@ public final class TeamPerks implements Listener {
 
     /** Whether hostile mobs may be allowed to spawn in this claim: only a team claim with the Monster Lure */
     public boolean monsterSpawningUnlocked(@NotNull Claim claim) {
-        if (!teams().enabled() || !plugin.getConfig().getBoolean("teams.upgrades.monster_lure.required", true)) {
+        if (!teams().enabled() || !lureRequired()) {
             return true;
         }
         final Claim top = Gp.top(claim);
