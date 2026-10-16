@@ -1,6 +1,8 @@
 package dev.wamble.gpaddons.team;
 
 import dev.wamble.gpaddons.GPAddons;
+import dev.wamble.gpaddons.data.ClaimData;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,6 +107,35 @@ public final class TeamStore {
             }
         }
         team.members().remove(team.leader());
+        final ConfigurationSection home = t.getConfigurationSection("home");
+        if (home != null && home.getString("world") != null) {
+            team.home(new ClaimData.Home(home.getString("world"), home.getDouble("x"), home.getDouble("y"),
+                    home.getDouble("z"), (float) home.getDouble("yaw"), (float) home.getDouble("pitch")));
+        }
+        team.points(t.getInt("points"));
+        team.completed().addAll(t.getStringList("quests.completed"));
+        final ConfigurationSection progress = t.getConfigurationSection("quests.progress");
+        if (progress != null) {
+            progress.getKeys(false).forEach(key -> team.progress().put(key, progress.getLong(key)));
+        }
+        final ConfigurationSection upgrades = t.getConfigurationSection("upgrades");
+        if (upgrades != null) {
+            upgrades.getKeys(false).forEach(key -> team.upgrades().put(key, upgrades.getInt(key)));
+        }
+        final ConfigurationSection vault = t.getConfigurationSection("vault");
+        if (vault != null) {
+            for (String slot : vault.getKeys(false)) {
+                try {
+                    final int index = Integer.parseInt(slot);
+                    final String data = vault.getString(slot);
+                    if (index >= 0 && index < team.vault().length && data != null) {
+                        team.vault()[index] = ItemStack.deserializeBytes(Base64.getDecoder().decode(data));
+                    }
+                } catch (RuntimeException e) {
+                    // One unreadable item shouldn't lose the rest of the vault
+                }
+            }
+        }
         return team;
     }
 
@@ -140,6 +172,25 @@ public final class TeamStore {
             }
             yaml.set(path + ".ranks", ranks);
             team.members().forEach((uuid, rank) -> yaml.set(path + ".members." + uuid, rank));
+            final ClaimData.Home home = team.home();
+            if (home != null) {
+                yaml.set(path + ".home.world", home.world());
+                yaml.set(path + ".home.x", home.x());
+                yaml.set(path + ".home.y", home.y());
+                yaml.set(path + ".home.z", home.z());
+                yaml.set(path + ".home.yaw", (double) home.yaw());
+                yaml.set(path + ".home.pitch", (double) home.pitch());
+            }
+            yaml.set(path + ".points", team.points());
+            yaml.set(path + ".quests.completed", new ArrayList<>(team.completed()));
+            team.progress().forEach((quest, value) -> yaml.set(path + ".quests.progress." + quest, value));
+            team.upgrades().forEach((upgrade, level) -> yaml.set(path + ".upgrades." + upgrade, level));
+            for (int i = 0; i < team.vault().length; i++) {
+                final ItemStack item = team.vault()[i];
+                if (item != null && !item.getType().isAir()) {
+                    yaml.set(path + ".vault." + i, Base64.getEncoder().encodeToString(item.serializeAsBytes()));
+                }
+            }
         }
         return yaml.saveToString();
     }

@@ -173,8 +173,9 @@ public final class FlagListener implements Listener {
         if (claim == null) {
             return;
         }
-        final ClaimFlag flag = event.getEntity() instanceof Enemy ? ClaimFlag.MONSTER_SPAWN : ClaimFlag.PASSIVE_MOB_SPAWN;
-        if (!flags().get(claim, flag)) {
+        final boolean allowed = event.getEntity() instanceof Enemy ? flags().monstersSpawn(claim)
+                : flags().get(claim, ClaimFlag.PASSIVE_MOB_SPAWN);
+        if (!allowed) {
             event.setCancelled(true);
         }
     }

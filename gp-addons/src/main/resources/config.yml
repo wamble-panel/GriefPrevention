@@ -1,3 +1,5 @@
+config-version: 2
+
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃  GPAddons: claim menus, flags, bans and an      ┃
 # ┃  entry whitelist for GriefPrevention            ┃
@@ -63,6 +65,34 @@ teams:
   max-ranks: 10
   # How long an invite lasts
   invite-expiry-seconds: 300
+  # /team home (the Swift Return upgrade shortens both)
+  home:
+    warmup-seconds: 3
+    cooldown-seconds: 30
+  # Quest goals and the team points each quest gives
+  quests:
+    gathering_the_crew: {goal: 3, points: 1}
+    a_place_to_call_home: {goal: 1, points: 1}
+    shared_ground: {goal: 1, points: 1}
+    into_the_unknown: {goal: 3, points: 1}
+    the_final_frontier: {goal: 3, points: 1}
+    family_reunion: {goal: 4, points: 1}
+    strength_in_numbers: {goal: 100, points: 1}
+    harvest_festival: {goal: 500, points: 1}
+    master_builders: {goal: 2000, points: 1}
+    deep_delvers: {goal: 250, points: 1}
+  # Team points each upgrade level costs
+  upgrades:
+    bountiful_harvest: {costs: [1, 2, 3]}
+    animal_husbandry: {costs: [1, 2, 3]}
+    team_vault: {costs: [1, 2, 3]}
+    bigger_team: {costs: [1, 2, 3]}
+    land_grant: {costs: [1, 2, 3]}
+    wisdom: {costs: [1, 2, 3]}
+    swift_return: {costs: [1, 2, 3]}
+    # Lets a team's claims have hostile mobs spawning (the Monster Spawning flag). Set required: false to let
+    # every claim owner turn it on without the upgrade
+    monster_lure: {costs: [2], required: true}
 
 teleport:
   # Owners and managers can teleport to their claims from /claims (right-click a claim, or the Teleport button)
@@ -140,7 +170,8 @@ flags:
     player_damage_monster: true
     player_damage_entity: false
     player_damage_persistent_entity: false
-    monster_spawn: true
+    # Off by default: a claim's owner turns it on after their team buys the Monster Lure upgrade
+    monster_spawn: false
     passive_mob_spawn: true
     monster_damage_terrain: false
     explosion_damage_terrain: false

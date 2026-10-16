@@ -21,7 +21,7 @@ import java.util.List;
  */
 public final class TeamRankMenu extends Menu {
 
-    private static final int[] PERMISSION_SLOTS = {19, 20, 21, 23, 24, 25};
+    private static final int[] PERMISSION_SLOTS = {19, 20, 21, 22, 23, 24, 25, 31};
 
     private final Team team;
     private final Rank rank;

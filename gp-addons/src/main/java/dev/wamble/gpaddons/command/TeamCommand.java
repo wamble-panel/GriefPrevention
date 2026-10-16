@@ -33,7 +33,8 @@ import java.util.UUID;
 public final class TeamCommand implements TabExecutor {
 
     private static final List<String> SUBCOMMANDS = List.of("create", "invite", "add", "accept", "deny", "leave",
-            "kick", "promote", "demote", "transfer", "rename", "disband", "rank", "info", "list", "help");
+            "kick", "promote", "demote", "transfer", "rename", "disband", "rank", "home", "sethome", "vault",
+            "quests", "upgrades", "info", "list", "help");
     private static final List<String> RANK_SUBCOMMANDS = List.of("create", "delete", "rename", "perm", "set", "list");
 
     private final GPAddons plugin;
@@ -143,6 +144,19 @@ public final class TeamCommand implements TabExecutor {
             }
             case "disband" -> disband(player, args.length > 1 ? args[1] : null);
             case "rank", "ranks" -> rank(player, label, Arrays.copyOfRange(args, 1, args.length));
+            case "home" -> teams().home(player);
+            case "sethome" -> teams().setHome(player);
+            case "vault" -> plugin.vaults().open(player);
+            case "quests", "upgrades" -> {
+                final Team team = teams().teamOf(player.getUniqueId());
+                if (team == null) {
+                    messages().send(player, "team.no-team");
+                } else if (args[0].equalsIgnoreCase("quests")) {
+                    new dev.wamble.gpaddons.menu.TeamQuestsMenu(plugin, player, team, new TeamMenu(plugin, player, team, null)).open();
+                } else {
+                    new dev.wamble.gpaddons.menu.TeamUpgradesMenu(plugin, player, team, new TeamMenu(plugin, player, team, null)).open();
+                }
+            }
             default -> help(player);
         }
         return true;

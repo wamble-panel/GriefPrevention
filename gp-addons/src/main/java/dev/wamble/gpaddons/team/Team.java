@@ -1,10 +1,15 @@
 package dev.wamble.gpaddons.team;
 
+import dev.wamble.gpaddons.data.ClaimData;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +26,14 @@ public final class Team {
     /** Members other than the leader, with their rank IDs */
     private final Map<UUID, String> members = new LinkedHashMap<>();
     private final List<Rank> ranks = new ArrayList<>();
+    @Nullable
+    private ClaimData.Home home;
+    private int points;
+    private final Set<String> completed = new LinkedHashSet<>();
+    private final Map<String, Long> progress = new HashMap<>();
+    private final Map<String, Integer> upgrades = new HashMap<>();
+    /** The shared vault's slots (up to three rows) */
+    private final ItemStack[] vault = new ItemStack[27];
 
     public Team(@NotNull String id, @NotNull String name, @NotNull UUID leader, long created) {
         this.id = id;
@@ -74,6 +87,51 @@ public final class Team {
     /** Everyone, leader included */
     public int size() {
         return members.size() + 1;
+    }
+
+    @Nullable
+    public ClaimData.Home home() {
+        return home;
+    }
+
+    public void home(@Nullable ClaimData.Home home) {
+        this.home = home;
+    }
+
+    /** Team points, earned from quests and spent on upgrades */
+    public int points() {
+        return points;
+    }
+
+    public void points(int points) {
+        this.points = Math.max(0, points);
+    }
+
+    /** IDs of finished quests */
+    @NotNull
+    public Set<String> completed() {
+        return completed;
+    }
+
+    /** Progress towards unfinished quests, by quest ID */
+    @NotNull
+    public Map<String, Long> progress() {
+        return progress;
+    }
+
+    /** Upgrade levels by upgrade ID; missing means level 0 */
+    @NotNull
+    public Map<String, Integer> upgrades() {
+        return upgrades;
+    }
+
+    public int level(@NotNull TeamUpgrade upgrade) {
+        return upgrades.getOrDefault(upgrade.id(), 0);
+    }
+
+    @NotNull
+    public ItemStack[] vault() {
+        return vault;
     }
 
     @Nullable

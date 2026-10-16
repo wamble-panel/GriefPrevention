@@ -38,6 +38,7 @@ public final class ClaimTeleports implements Listener {
     private final GPAddons plugin;
     private final Map<UUID, Pending> pending = new HashMap<>();
     private final Map<UUID, Long> lastTeleport = new HashMap<>();
+    private final Map<UUID, Long> lastHome = new HashMap<>();
 
     public ClaimTeleports(@NotNull GPAddons plugin) {
         this.plugin = plugin;
@@ -113,6 +114,65 @@ public final class ClaimTeleports implements Listener {
             }
         }, warmup * 20L);
         pending.put(player.getUniqueId(), new Pending(task, player.getLocation()));
+    }
+
+    /**
+     * Teleport to a fixed spot (the team home) with a warm-up and cooldown of its own. The spot must still be
+     * safe, and bans and whitelists still apply.
+     */
+    public void teleportTo(@NotNull Player player, @NotNull Location target, @NotNull String name, int warmup,
+                           int cooldownSeconds) {
+        if (Gp.playerData(player.getUniqueId()).inPvpCombat()) {
+            plugin.messages().send(player, "teleport.in-combat");
+            return;
+        }
+        final boolean bypass = player.hasPermission("gpaddons.teleport.instant");
+        final Long last = lastHome.get(player.getUniqueId());
+        final long cooldown = cooldownSeconds * 1000L;
+        if (!bypass && last != null && System.currentTimeMillis() - last < cooldown) {
+            final long left = (cooldown - (System.currentTimeMillis() - last) + 999) / 1000;
+            plugin.messages().send(player, "teleport.cooldown", Messages.text("seconds", Long.toString(left)));
+            return;
+        }
+        cancel(player.getUniqueId());
+        player.closeInventory();
+        final int wait = bypass ? 0 : warmup;
+        if (wait == 0) {
+            goTo(player, target, name);
+            return;
+        }
+        plugin.messages().send(player, "teleport.warmup", Messages.text("claim", name),
+                Messages.text("seconds", Integer.toString(wait)));
+        final BukkitTask task = plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            pending.remove(player.getUniqueId());
+            if (player.isOnline()) {
+                goTo(player, target, name);
+            }
+        }, wait * 20L);
+        pending.put(player.getUniqueId(), new Pending(task, player.getLocation()));
+    }
+
+    private void goTo(@NotNull Player player, @NotNull Location target, @NotNull String name) {
+        target.getWorld().getChunkAtAsync(target).thenAccept(chunk -> {
+            if (!player.isOnline()) {
+                return;
+            }
+            if (!safe(target)) {
+                plugin.messages().send(player, "teleport.no-safe-spot");
+                return;
+            }
+            final Claim arriving = Gp.claimAt(target, null);
+            if (arriving != null && !plugin.entry().canEnter(player, arriving)) {
+                plugin.entry().notifyBlocked(player, arriving);
+                return;
+            }
+            lastHome.put(player.getUniqueId(), System.currentTimeMillis());
+            player.teleportAsync(target, PlayerTeleportEvent.TeleportCause.PLUGIN).thenAccept(done -> {
+                if (done) {
+                    plugin.messages().send(player, "teleport.done", Messages.text("claim", name));
+                }
+            });
+        });
     }
 
     private void go(@NotNull Player player, @NotNull Claim claim, @NotNull String name) {

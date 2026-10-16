@@ -64,7 +64,8 @@ public final class TeamMenu extends Menu {
                         Messages.text("leader", Gp.name(team.leader())),
                         Messages.text("members", team.size() + (max > 0 ? "/" + max : "")),
                         Messages.component("rank", teams().rankDisplay(team, viewer.getUniqueId())),
-                        Messages.text("created", plugin.info().date(team.created()))))));
+                        Messages.text("created", plugin.info().date(team.created())),
+                        Messages.text("points", Integer.toString(team.points()))))));
 
         set(19, Items.head(viewer, messages().itemName("menu.team.members.name"), lore("members", true)),
                 click -> new TeamMembersMenu(plugin, viewer, team, this).open());
@@ -86,6 +87,29 @@ public final class TeamMenu extends Menu {
                         open();
                     }
                 }) : null);
+
+        // Team home: click to go, shift-click to set it here
+        final boolean canSetHome = team.can(viewer.getUniqueId(), dev.wamble.gpaddons.team.TeamPermission.SET_HOME);
+        final List<Component> homeLore = new ArrayList<>(messages().lore("menu.team.home.lore",
+                plugin.messages().formatted("state", team.home() != null ? "menu.team.yes" : "menu.team.no")));
+        if (team.home() != null) {
+            homeLore.addAll(messages().lore("menu.team.home.click"));
+        }
+        if (canSetHome) {
+            homeLore.addAll(messages().lore("menu.team.home.click-set"));
+        }
+        set(28, Items.item("red_bed", messages().itemName("menu.team.home.name"), homeLore), click -> {
+            if (click.isShiftClick() && canSetHome) {
+                teams().setHome(viewer);
+                refresh();
+            } else {
+                teams().home(viewer);
+            }
+        });
+        set(30, button("writable_book", "quests", true), click -> new TeamQuestsMenu(plugin, viewer, team, this).open());
+        set(32, button("nether_star", "upgrades", true), click -> new TeamUpgradesMenu(plugin, viewer, team, this).open());
+        final boolean vault = team.level(dev.wamble.gpaddons.team.TeamUpgrade.TEAM_VAULT) > 0;
+        set(34, button("ender_chest", "vault", vault), vault ? click -> plugin.vaults().open(viewer) : null);
 
         if (leader) {
             set(bottom(CORNER), button("tnt", "disband", true), click -> new ConfirmMenu(plugin, viewer, this,

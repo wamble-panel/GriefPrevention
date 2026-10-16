@@ -60,7 +60,7 @@ public final class FlagsMenu extends Menu {
     @NotNull
     private ItemStack icon(@NotNull ClaimFlag flag) {
         final FlagService flags = plugin.flags();
-        final boolean on = flags.get(claim, flag);
+        final boolean on = flag == ClaimFlag.MONSTER_SPAWN ? flags.monstersSpawn(claim) : flags.get(claim, flag);
         final String category = flag.category().name().toLowerCase(Locale.ROOT);
         final List<Component> lore = new ArrayList<>();
         lore.add(Messages.plain(messages().get("menu.flags.category." + category)));
@@ -71,7 +71,11 @@ public final class FlagsMenu extends Menu {
                 Messages.component("state", messages().get(on ? "flags.state-on" : "flags.state-off")))));
         lore.add(Messages.plain(messages().get("menu.flags.source."
                 + flags.source(claim, flag).name().toLowerCase(Locale.ROOT))));
-        lore.addAll(messages().lore(flags.canChange(viewer, claim, flag) ? "menu.flags.click" : "menu.locked"));
+        if (flag == ClaimFlag.MONSTER_SPAWN && !plugin.perks().monsterSpawningUnlocked(claim)) {
+            lore.addAll(messages().lore("menu.flags.lure-locked"));
+        } else {
+            lore.addAll(messages().lore(flags.canChange(viewer, claim, flag) ? "menu.flags.click" : "menu.locked"));
+        }
         final ItemStack item = Items.item(flag.icon(), messages().itemName("menu.flags.item.name",
                 Messages.component("flag", messages().get("flag." + flag.id() + ".name"))), lore);
         return on ? Items.glint(item) : item;

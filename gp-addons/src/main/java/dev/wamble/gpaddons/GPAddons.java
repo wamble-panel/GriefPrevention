@@ -20,7 +20,9 @@ import dev.wamble.gpaddons.protect.CushionListener;
 import dev.wamble.gpaddons.protect.DoorListener;
 import dev.wamble.gpaddons.protect.RegionClaimGuard;
 import dev.wamble.gpaddons.protect.SpongeListener;
+import dev.wamble.gpaddons.team.TeamPerks;
 import dev.wamble.gpaddons.team.TeamService;
+import dev.wamble.gpaddons.team.TeamVaults;
 import dev.wamble.gpaddons.text.GpMessages;
 import dev.wamble.gpaddons.text.Messages;
 import org.bukkit.entity.Player;
@@ -46,10 +48,13 @@ public final class GPAddons extends JavaPlugin {
     private final GpMessages gpMessages = new GpMessages(this);
     private final ClaimTeleports teleports = new ClaimTeleports(this);
     private final TeamService teams = new TeamService(this);
+    private final TeamPerks perks = new TeamPerks(this);
+    private final TeamVaults vaults = new TeamVaults(this);
 
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        migrateConfig();
         // Add settings from newer versions to an existing config.yml
         getConfig().options().copyDefaults(true);
         saveConfig();
@@ -66,6 +71,9 @@ public final class GPAddons extends JavaPlugin {
         plugins.registerEvents(new ClaimNoticeListener(this), this);
         plugins.registerEvents(teleports, this);
         plugins.registerEvents(teams, this);
+        plugins.registerEvents(perks, this);
+        plugins.registerEvents(vaults, this);
+        perks.start();
         teams.refreshAll();
         plugins.registerEvents(new SpongeListener(this), this);
         plugins.registerEvents(new CushionListener(), this);
@@ -104,6 +112,7 @@ public final class GPAddons extends JavaPlugin {
                 player.closeInventory();
             }
         }
+        vaults.closeAll();
         store.saveNow();
         teams.clearAll();
         teams.saveNow();
@@ -116,6 +125,19 @@ public final class GPAddons extends JavaPlugin {
         flags.reload();
         flags.applyAllExplosions();
         teams.refreshAll();
+    }
+
+    /**
+     * One-off changes to an existing config.yml. Version 2: hostile mobs no longer spawn in claims by default
+     * (owners unlock it with the Monster Lure team upgrade).
+     */
+    private void migrateConfig() {
+        final int version = getConfig().getInt("config-version", 1);
+        if (version < 2) {
+            getConfig().set("flags.defaults.monster_spawn", false);
+        }
+        getConfig().set("config-version", 2);
+        saveConfig();
     }
 
     private static boolean hasOutlineEvent() {
@@ -160,6 +182,16 @@ public final class GPAddons extends JavaPlugin {
     @NotNull
     public MenuManager menus() {
         return menus;
+    }
+
+    @NotNull
+    public TeamPerks perks() {
+        return perks;
+    }
+
+    @NotNull
+    public TeamVaults vaults() {
+        return vaults;
     }
 
     @NotNull

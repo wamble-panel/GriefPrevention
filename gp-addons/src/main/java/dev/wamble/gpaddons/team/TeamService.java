@@ -74,7 +74,70 @@ public final class TeamService implements Listener {
         }
     }
 
-    // ---- Lookups ----
+    public void changed() {
+        store.changed();
+    }
+
+    /** The team's members who are online */
+    @NotNull
+    public List<Player> online(@NotNull Team team) {
+        final List<Player> online = new ArrayList<>();
+        final Player leader = plugin.getServer().getPlayer(team.leader());
+        if (leader != null) {
+            online.add(leader);
+        }
+        for (UUID member : team.members().keySet()) {
+            final Player player = plugin.getServer().getPlayer(member);
+            if (player != null) {
+                online.add(player);
+            }
+        }
+        return online;
+    }
+
+    // ---- Team home ----
+
+    /** Set the team home where the player stands; it must be in a claim owned by someone in the team */
+    public boolean setHome(@NotNull Player player) {
+        final Team team = requireTeam(player);
+        if (team == null || !require(player, team, TeamPermission.SET_HOME)) {
+            return false;
+        }
+        final org.bukkit.Location at = player.getLocation();
+        final Claim claim = Gp.claimAt(at, null);
+        final UUID owner = claim == null ? null : Gp.top(claim).getOwnerID();
+        if (owner == null || !team.isMember(owner)) {
+            plugin.messages().send(player, "team.home-not-in-claim");
+            return false;
+        }
+        team.home(new dev.wamble.gpaddons.data.ClaimData.Home(at.getWorld().getName(), at.getX(), at.getY(), at.getZ(),
+                at.getYaw(), at.getPitch()));
+        store.changed();
+        broadcast(team, "team.home-set", Messages.text("player", player.getName()));
+        plugin.perks().complete(team, TeamQuest.A_PLACE_TO_CALL_HOME);
+        return true;
+    }
+
+    /** Teleport to the team home, with the Swift Return upgrade shortening the wait */
+    public boolean home(@NotNull Player player) {
+        final Team team = requireTeam(player);
+        if (team == null) {
+            return false;
+        }
+        final dev.wamble.gpaddons.data.ClaimData.Home home = team.home();
+        final org.bukkit.World world = home == null ? null : plugin.getServer().getWorld(home.world());
+        if (home == null || world == null) {
+            plugin.messages().send(player, "team.no-home");
+            return false;
+        }
+        final int swift = Math.min(3, team.level(TeamUpgrade.SWIFT_RETURN));
+        final int warmup = Math.max(0, plugin.getConfig().getInt("teams.home.warmup-seconds", 3) - swift);
+        final int cooldown = Math.max(0, plugin.getConfig().getInt("teams.home.cooldown-seconds", 30))
+                * new int[]{6, 4, 2, 1}[swift] / 6;
+        plugin.teleports().teleportTo(player, new org.bukkit.Location(world, home.x(), home.y(), home.z(), home.yaw(),
+                home.pitch()), plugin.messages().raw("team.home-label"), warmup, cooldown);
+        return true;
+    }
 
     @Nullable
     public Team teamOf(@NotNull UUID uuid) {
@@ -249,7 +312,7 @@ public final class TeamService implements Listener {
         }
         final Team team = new Team(newId(store.teams().keySet()), name, player.getUniqueId(), System.currentTimeMillis());
         team.ranks().add(defaultRank(team, "Officer", TeamPermission.INVITE, TeamPermission.KICK,
-                TeamPermission.PROMOTE, TeamPermission.CLAIM_ACCESS));
+                TeamPermission.PROMOTE, TeamPermission.CLAIM_ACCESS, TeamPermission.SET_HOME));
         team.ranks().add(defaultRank(team, "Member", TeamPermission.CLAIM_ACCESS));
         team.ranks().add(defaultRank(team, "Recruit"));
         store.teams().put(team.id(), team);
@@ -275,6 +338,16 @@ public final class TeamService implements Listener {
             return false;
         }
         broadcast(team, "team.disbanded", teamTag(team));
+        plugin.vaults().close(team);
+        // The vault's items go to whoever disbands the team, so nothing is lost
+        for (int i = 0; i < team.vault().length; i++) {
+            final org.bukkit.inventory.ItemStack item = team.vault()[i];
+            if (item != null && !item.getType().isAir()) {
+                actor.getInventory().addItem(item).values()
+                        .forEach(left -> actor.getWorld().dropItemNaturally(actor.getLocation(), left));
+                team.vault()[i] = null;
+            }
+        }
         if (!team.isMember(actor.getUniqueId())) {
             plugin.messages().send(actor, "team.disbanded", teamTag(team));
         }
@@ -314,7 +387,7 @@ public final class TeamService implements Listener {
             return false;
         }
         if (full(team)) {
-            plugin.messages().send(actor, "team.full", Messages.text("max", Integer.toString(maxMembers())));
+            plugin.messages().send(actor, "team.full", Messages.text("max", Integer.toString(maxMembers(team))));
             return false;
         }
         final Map<String, Long> pending = invites.computeIfAbsent(target.getUniqueId(), k -> new LinkedHashMap<>());
@@ -388,7 +461,7 @@ public final class TeamService implements Listener {
             return false;
         }
         if (full(team)) {
-            plugin.messages().send(player, "team.full", Messages.text("max", Integer.toString(maxMembers())));
+            plugin.messages().send(player, "team.full", Messages.text("max", Integer.toString(maxMembers(team))));
             return false;
         }
         invites.remove(player.getUniqueId());
@@ -398,6 +471,7 @@ public final class TeamService implements Listener {
         refresh(player);
         plugin.messages().send(player, "team.joined", teamTag(team));
         broadcast(team, "team.member-joined", player.getUniqueId(), Messages.text("player", player.getName()));
+        plugin.perks().reach(team, TeamQuest.GATHERING_THE_CREW, team.size());
         return true;
     }
 
@@ -453,6 +527,10 @@ public final class TeamService implements Listener {
     }
 
     private void removeMember(@NotNull Team team, @NotNull UUID member) {
+        final Player online = plugin.getServer().getPlayer(member);
+        if (online != null) {
+            plugin.vaults().closeFor(online, team);
+        }
         team.members().remove(member);
         byMember.remove(member);
         store.changed();
@@ -479,8 +557,13 @@ public final class TeamService implements Listener {
         return plugin.getConfig().getInt("teams.max-members", 0);
     }
 
+    /** The member limit, with the Bigger Team upgrade's extra slots (0 = no limit) */
+    public int maxMembers(@NotNull Team team) {
+        return maxMembers() <= 0 ? 0 : maxMembers() + 2 * team.level(TeamUpgrade.BIGGER_TEAM);
+    }
+
     private boolean full(@NotNull Team team) {
-        return maxMembers() > 0 && team.size() >= maxMembers();
+        return maxMembers(team) > 0 && team.size() >= maxMembers(team);
     }
 
     // ---- Ranks of members ----
@@ -719,7 +802,7 @@ public final class TeamService implements Listener {
 
     // ---- Messages ----
 
-    private void broadcast(@NotNull Team team, @NotNull String key, @NotNull TagResolver... placeholders) {
+    public void broadcast(@NotNull Team team, @NotNull String key, @NotNull TagResolver... placeholders) {
         broadcast(team, key, (UUID) null, placeholders);
     }
 

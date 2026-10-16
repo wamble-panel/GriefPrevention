@@ -15,7 +15,9 @@ public enum TeamPermission {
     PROMOTE("golden_helmet"),
     MANAGE_RANKS("name_tag"),
     RENAME("writable_book"),
-    CLAIM_ACCESS("grass_block");
+    CLAIM_ACCESS("grass_block"),
+    SET_HOME("red_bed"),
+    SPEND_POINTS("experience_bottle");
 
     private final String icon;
 
