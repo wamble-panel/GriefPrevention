@@ -296,7 +296,6 @@ TEAM_UPGRADES = [
     ("wisdom", "Wisdom", ["More XP while a teammate", "is close by."], ["+10% XP", "+20% XP", "+30% XP"]),
     ("swift_return", "Swift Return", ["A quicker /team home."], ["2s wait, 20s cooldown", "1s wait, 10s cooldown", "instant, 5s cooldown"]),
     ("peaceful_grounds", "Peaceful Grounds", ["Fewer hostile mobs spawn", "naturally in and around the", "team claim. Spawners and farms", "further away still work."], ["-25% hostile spawns", "-50% hostile spawns", "-75% hostile spawns"]),
-    ("monster_lure", "Monster Lure", ["Lets the team claim turn on", "hostile mob spawning (flag)."], ["Monster Spawning flag unlocked"]),
 ]
 
 
@@ -424,7 +423,7 @@ def team_menu():
         "storage": {"name": name(sc("team storage")), "lore": desc("A shared chest for the team.", "Unlock it with the Team Storage upgrade."),
                     "click": [blank, click("to open")]},
         "team-claim": {"name": name(sc("team claim"), symbol="✦", symbol_color=LILAC),
-                       "lore": desc("The leader's claim where", "team upgrades work: crops,", "animals, peaceful grounds", "and the monster lure."),
+                       "lore": desc("The leader's claim where", "team upgrades work: crops,", "animals and peaceful", "grounds."),
                        "set": [stat("claim", hl("<name>")), stat("where", c(LIGHT, "<world> <x>, <z>"))],
                        "none": [c(GREY, sc("✘ not chosen yet"))],
                        "gone": [c(RED, sc("✘ the claim is gone or no longer the team's"))],
@@ -654,7 +653,6 @@ def menu():
             "category": {"player": c(GREY, sc("for untrusted players")),
                          "environment": c(GREY, sc("environment"))},
             "status": c(LILAC, "✦ ") + c(WHITE, sc("status  ")) + "<state>",
-            "lure-locked": ["", c(RED, sc("✘ only in a team claim with the")), c(CORAL, sc("monster lure")) + c(RED, sc(" team upgrade"))],
             "source": {"claim": c(GREY, sc("set in this claim")),
                        "main_claim": c(GREY, sc("from the main claim")),
                        "default": c(GREY, sc("default"))},

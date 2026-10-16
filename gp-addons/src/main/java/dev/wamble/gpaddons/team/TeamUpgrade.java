@@ -6,8 +6,8 @@ import java.util.Locale;
 
 /**
  * Team upgrades, bought with team points. Costs per level can be changed in config.yml
- * (teams.upgrades.&lt;upgrade&gt;.costs). The ones that change the land (harvest, husbandry, peaceful grounds,
- * monster lure) only work in the team claim.
+ * (teams.upgrades.&lt;upgrade&gt;.costs). The ones that change the land (harvest, husbandry, peaceful grounds)
+ * only work in the team claim.
  */
 public enum TeamUpgrade {
 
@@ -18,8 +18,7 @@ public enum TeamUpgrade {
     LAND_GRANT("golden_shovel", 1, 2, 3),
     WISDOM("experience_bottle", 1, 2, 3),
     SWIFT_RETURN("ender_pearl", 1, 2, 3),
-    PEACEFUL_GROUNDS("lily_of_the_valley", 1, 2, 3),
-    MONSTER_LURE("zombie_head", 2);
+    PEACEFUL_GROUNDS("lily_of_the_valley", 1, 2, 3);
 
     private final String icon;
     private final int[] costs;

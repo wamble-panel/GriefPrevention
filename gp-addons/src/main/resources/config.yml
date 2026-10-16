@@ -1,4 +1,4 @@
-config-version: 5
+config-version: 6
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃  GPAddons: claim menus, flags, bans and an      ┃
@@ -72,7 +72,7 @@ teams:
     warmup-seconds: 3
     cooldown-seconds: 30
   # The leader picks one of their own claims as the team claim (/team setclaim, or the team menu). Upgrades
-  # that change the land (Bountiful Harvest, Animal Husbandry, Peaceful Grounds, Monster Lure) only work there.
+  # that change the land (Bountiful Harvest, Animal Husbandry, Peaceful Grounds) only work there.
   # Picking the first one is free; moving it to another claim costs this many team points.
   team-claim:
     change-cost: 2
@@ -100,10 +100,6 @@ teams:
     # Fewer hostile mobs spawn naturally in and around the team claim (radius = blocks out from its edges).
     # Spawners, eggs and mob farms further away aren't affected.
     peaceful_grounds: {costs: [1, 2, 3], reduction-percent: [25, 50, 75], radius: 48}
-    # Off by default: hostile mobs spawn in claims as normal, so Peaceful Grounds has something to do.
-    # With required: true, only a team claim with this upgrade can have the Monster Spawning flag on
-    # (also set flags.defaults.monster_spawn to false). While it's false the upgrade isn't offered.
-    monster_lure: {costs: [2], required: false}
 
 teleport:
   # Owners and managers can teleport to their claims from /claims (right-click a claim, or the Teleport button)

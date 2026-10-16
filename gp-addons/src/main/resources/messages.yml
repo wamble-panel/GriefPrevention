@@ -387,13 +387,6 @@ team-upgrades:
     - <#FFD8BE>-25% ʜᴏꜱᴛɪʟᴇ ꜱᴘᴀᴡɴꜱ</#FFD8BE>
     - <#FFD8BE>-50% ʜᴏꜱᴛɪʟᴇ ꜱᴘᴀᴡɴꜱ</#FFD8BE>
     - <#FFD8BE>-75% ʜᴏꜱᴛɪʟᴇ ꜱᴘᴀᴡɴꜱ</#FFD8BE>
-  monster_lure:
-    name: <#FFB5A7>ᴍᴏɴꜱᴛᴇʀ ʟᴜʀᴇ</#FFB5A7>
-    description:
-    - <#FFD8BE>Lets the team claim turn on</#FFD8BE>
-    - <#FFD8BE>hostile mob spawning (flag).</#FFD8BE>
-    levels:
-    - <#FFD8BE>ᴍᴏɴꜱᴛᴇʀ ꜱᴘᴀᴡɴɪɴɢ ꜰʟᴀɢ ᴜɴʟᴏᴄᴋᴇᴅ</#FFD8BE>
 menu:
   back:
     name: <#FFC8DD>◀ ʙᴀᴄᴋ</#FFC8DD>
@@ -680,10 +673,6 @@ menu:
       player: <#8A8A8A>ꜰᴏʀ ᴜɴᴛʀᴜꜱᴛᴇᴅ ᴘʟᴀʏᴇʀꜱ</#8A8A8A>
       environment: <#8A8A8A>ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ</#8A8A8A>
     status: <#CDB4DB>✦ </#CDB4DB><#F2F2F2>ꜱᴛᴀᴛᴜꜱ  </#F2F2F2><state>
-    lure-locked:
-    - ''
-    - <#FF9AA2>✘ ᴏɴʟʏ ɪɴ ᴀ ᴛᴇᴀᴍ ᴄʟᴀɪᴍ ᴡɪᴛʜ ᴛʜᴇ</#FF9AA2>
-    - <#FFB5A7>ᴍᴏɴꜱᴛᴇʀ ʟᴜʀᴇ</#FFB5A7><#FF9AA2> ᴛᴇᴀᴍ ᴜᴘɢʀᴀᴅᴇ</#FF9AA2>
     source:
       claim: <#8A8A8A>ꜱᴇᴛ ɪɴ ᴛʜɪꜱ ᴄʟᴀɪᴍ</#8A8A8A>
       main_claim: <#8A8A8A>ꜰʀᴏᴍ ᴛʜᴇ ᴍᴀɪɴ ᴄʟᴀɪᴍ</#8A8A8A>
@@ -821,8 +810,8 @@ menu:
       lore:
       - <#FFD8BE>The leader's claim where</#FFD8BE>
       - '<#FFD8BE>team upgrades work: crops,</#FFD8BE>'
-      - <#FFD8BE>animals, peaceful grounds</#FFD8BE>
-      - <#FFD8BE>and the monster lure.</#FFD8BE>
+      - <#FFD8BE>animals and peaceful</#FFD8BE>
+      - <#FFD8BE>grounds.</#FFD8BE>
       set:
       - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴄʟᴀɪᴍ  </#F2F2F2><#FFC8DD><name></#FFC8DD>
       - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴡʜᴇʀᴇ  </#F2F2F2><#FFE5EC><world> <x>, <z></#FFE5EC>

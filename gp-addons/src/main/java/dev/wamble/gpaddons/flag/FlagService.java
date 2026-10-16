@@ -42,9 +42,9 @@ public final class FlagService {
         return data == null ? null : data.flags().get(flag);
     }
 
-    /** Whether hostile mobs spawn here: the flag is on and, for player claims, the team has the Monster Lure */
+    /** Whether hostile mobs spawn here */
     public boolean monstersSpawn(@NotNull Claim claim) {
-        return get(claim, ClaimFlag.MONSTER_SPAWN) && plugin.perks().monsterSpawningUnlocked(claim);
+        return get(claim, ClaimFlag.MONSTER_SPAWN);
     }
 
     public boolean get(@NotNull Claim claim, @NotNull ClaimFlag flag) {
@@ -82,9 +82,6 @@ public final class FlagService {
     public boolean canChange(@NotNull Player player, @NotNull Claim claim, @NotNull ClaimFlag flag) {
         if (Gp.isAdmin(player)) {
             return true;
-        }
-        if (flag == ClaimFlag.MONSTER_SPAWN && !plugin.perks().monsterSpawningUnlocked(claim)) {
-            return false;
         }
         return player.hasPermission("gpaddons.flags") && Gp.canManage(player, claim)
                 && (!player.isPermissionSet(flag.permission()) || player.hasPermission(flag.permission()));

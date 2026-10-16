@@ -35,8 +35,8 @@ public final class Messages {
 
     /** Keys whose text changed, by the messages-version that changed them */
     private static final Map<Integer, List<String>> UPDATED = Map.of(
-            2, List.of("team.help", "menu.flags.lure-locked", "team-upgrades.bountiful_harvest.description",
-                    "team-upgrades.animal_husbandry.description", "team-upgrades.monster_lure.description"),
+            2, List.of("team.help", "team-upgrades.bountiful_harvest.description",
+                    "team-upgrades.animal_husbandry.description"),
             3, List.of("menu.team.home.lore"));
 
     private final GPAddons plugin;
