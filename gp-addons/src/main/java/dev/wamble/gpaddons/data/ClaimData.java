@@ -1,6 +1,7 @@
 package dev.wamble.gpaddons.data;
 
 import dev.wamble.gpaddons.flag.ClaimFlag;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
@@ -19,8 +20,16 @@ public final class ClaimData {
     public record Ban(@Nullable UUID by, long at) {
     }
 
+    /** Where players arrive when teleporting to the claim */
+    public record Home(@NotNull String world, double x, double y, double z, float yaw, float pitch) {
+    }
+
     @Nullable
     private String name;
+    @Nullable
+    private String icon;
+    @Nullable
+    private Home home;
     private boolean whitelist;
     private final Set<UUID> entry = new LinkedHashSet<>();
     private final Map<UUID, Ban> bans = new LinkedHashMap<>();
@@ -33,6 +42,25 @@ public final class ClaimData {
 
     public void name(@Nullable String name) {
         this.name = name == null || name.isBlank() ? null : name;
+    }
+
+    /** The item shown for this claim in menus, as a material key, or null for the default */
+    @Nullable
+    public String icon() {
+        return icon;
+    }
+
+    public void icon(@Nullable String icon) {
+        this.icon = icon == null || icon.isBlank() ? null : icon;
+    }
+
+    @Nullable
+    public Home home() {
+        return home;
+    }
+
+    public void home(@Nullable Home home) {
+        this.home = home;
     }
 
     public boolean whitelist() {
@@ -58,7 +86,7 @@ public final class ClaimData {
     }
 
     public boolean isEmpty() {
-        return name == null && !whitelist && entry.isEmpty() && bans.isEmpty() && flags.isEmpty();
+        return name == null && icon == null && home == null && !whitelist && entry.isEmpty() && bans.isEmpty() && flags.isEmpty();
     }
 
 }

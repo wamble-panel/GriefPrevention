@@ -48,9 +48,16 @@ public final class ClaimInfo {
         return messages().raw(claim.isAdminClaim() ? "general.admin-claim" : "general.unnamed-claim");
     }
 
+    /** The icon the owner picked, falling back to one for the claim's dimension */
+    @NotNull
+    public String icon(@NotNull Claim claim) {
+        final ClaimData data = plugin.store().get(claim);
+        return data != null && data.icon() != null ? data.icon() + "," + defaultIcon(claim) : defaultIcon(claim);
+    }
+
     /** An icon for the claim's dimension */
     @NotNull
-    public static String icon(@NotNull Claim claim) {
+    public static String defaultIcon(@NotNull Claim claim) {
         if (claim.isAdminClaim()) {
             return "beacon";
         }
@@ -93,6 +100,9 @@ public final class ClaimInfo {
                         ? "menu.claims.on" : "menu.claims.off"))));
         if (clickable) {
             lore.addAll(messages().lore("menu.claims.item.click"));
+            if (plugin.teleports().canTeleport(viewer, claim)) {
+                lore.addAll(messages().lore("menu.claims.item.teleport"));
+            }
         }
         return Items.item(icon(claim), messages().itemName("menu.claims.item.name",
                 Messages.text("name", name(claim))), lore);

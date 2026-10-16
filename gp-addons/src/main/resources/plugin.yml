@@ -56,6 +56,12 @@ permissions:
   gpaddons.transfer:
     description: Give your claims to another player
     default: true
+  gpaddons.teleport:
+    description: Teleport to claims you own or manage from /claims
+    default: true
+  gpaddons.teleport.instant:
+    description: Teleport to claims without the warm-up or cooldown
+    default: op
   gpaddons.other:
     description: Open another player's claims with /claims <player>
     default: op

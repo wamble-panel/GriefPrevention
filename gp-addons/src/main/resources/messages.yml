@@ -87,6 +87,18 @@ prompt:
   rename: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴀ ɴᴇᴡ ɴᴀᴍᴇ ꜰᴏʀ ᴛʜɪꜱ ᴄʟᴀɪᴍ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   transfer: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ɢɪᴠᴇ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   cancelled: <#8A8A8A>✘ ᴄᴀɴᴄᴇʟʟᴇᴅ.</#8A8A8A>
+teleport:
+  warmup: <#A2D2FF>⌛ </#A2D2FF><#FFD8BE>ᴛᴇʟᴇᴘᴏʀᴛɪɴɢ ᴛᴏ </#FFD8BE><#FFC8DD><claim></#FFC8DD><#FFD8BE> ɪɴ </#FFD8BE><#FFE5EC><seconds></#FFE5EC><#FFD8BE>ꜱ. ᴅᴏɴ'ᴛ ᴍᴏᴠᴇ!</#FFD8BE>
+  done: <#A2D2FF>➜ </#A2D2FF><#FFD8BE>ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ ᴛᴏ </#FFD8BE><#FFC8DD><claim></#FFC8DD><#FFD8BE>.</#FFD8BE>
+  cancelled: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛᴇʟᴇᴘᴏʀᴛ ᴄᴀɴᴄᴇʟʟᴇᴅ ʙᴇᴄᴀᴜꜱᴇ ʏᴏᴜ ᴍᴏᴠᴇᴅ ᴏʀ ɢᴏᴛ ʜᴜʀᴛ.</#FF9AA2>
+  cooldown: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ ᴛᴇʟᴇᴘᴏʀᴛ ᴀɢᴀɪɴ ɪɴ <seconds>ꜱ.</#FF9AA2>
+  in-combat: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ'ᴛ ᴛᴇʟᴇᴘᴏʀᴛ ᴅᴜʀɪɴɢ ᴘᴠᴘ ᴄᴏᴍʙᴀᴛ.</#FF9AA2>
+  no-safe-spot: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇʀᴇ'ꜱ ɴᴏ ꜱᴀꜰᴇ ꜱᴘᴏᴛ ᴛᴏ ʟᴀɴᴅ. ꜱᴇᴛ ᴀ ᴛᴇʟᴇᴘᴏʀᴛ ᴘᴏɪɴᴛ ɪɴꜱɪᴅᴇ ᴛʜᴇ ᴄʟᴀɪᴍ ꜰɪʀꜱᴛ.</#FF9AA2>
+  home-set: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ꜱᴇᴛ ᴛʜɪꜱ ᴄʟᴀɪᴍ'ꜱ ᴛᴇʟᴇᴘᴏʀᴛ ᴘᴏɪɴᴛ ᴛᴏ ᴡʜᴇʀᴇ ʏᴏᴜ'ʀᴇ ꜱᴛᴀɴᴅɪɴɢ.</#FFD8BE>
+  home-outside: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ꜱᴛᴀɴᴅ ɪɴꜱɪᴅᴇ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ ꜱᴇᴛ ɪᴛꜱ ᴛᴇʟᴇᴘᴏʀᴛ ᴘᴏɪɴᴛ.</#FF9AA2>
+icon:
+  set: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴄʜᴀɴɢᴇᴅ ᴛʜɪꜱ ᴄʟᴀɪᴍ'ꜱ ɪᴄᴏɴ.</#FFD8BE>
+  reset: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴛʜɪꜱ ᴄʟᴀɪᴍ'ꜱ ɪᴄᴏɴ ɪꜱ ʙᴀᴄᴋ ᴛᴏ ᴛʜᴇ ᴅᴇꜰᴀᴜʟᴛ.</#FFD8BE>
 notices:
   enter: <#CDB4DB>✿ </#CDB4DB><#FFD8BE>ᴇɴᴛᴇʀɪɴɢ </#FFD8BE><#FFC8DD><owner></#FFC8DD><#FFD8BE>'ꜱ ᴄʟᴀɪᴍ</#FFD8BE>
   enter-named: <#CDB4DB>✿ </#CDB4DB><#FFD8BE>ᴇɴᴛᴇʀɪɴɢ </#FFD8BE><#FFC8DD><name></#FFC8DD><#8A8A8A> • </#8A8A8A><#FFD8BE>ʙʏ </#FFD8BE><#FFE5EC><owner></#FFE5EC>
@@ -147,6 +159,8 @@ menu:
       click:
       - ''
       - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ</#FFD8BE>
+      teleport:
+      - <#FFC8DD>➜ <u>ʀɪɢʜᴛ-ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛᴇʟᴇᴘᴏʀᴛ</#FFD8BE>
     owner-you: <#FFD8BE>One of your claims.</#FFD8BE>
     owner-other: <#FFD8BE>Owned by </#FFD8BE><#FFC8DD><owner></#FFC8DD><#FFD8BE>.</#FFD8BE>
     owner-admin: <#FFD8BE>An admin claim.</#FFD8BE>
@@ -164,6 +178,8 @@ menu:
       - <#FFD8BE>right-click two opposite corners.</#FFD8BE>
     'on': <#B5EAD7>✔ ᴏɴ</#B5EAD7>
     'off': <#8A8A8A>✘ ᴏꜰꜰ</#8A8A8A>
+    point-set: <#FFE5EC>ʏᴏᴜʀ ᴛᴇʟᴇᴘᴏʀᴛ ᴘᴏɪɴᴛ</#FFE5EC>
+    point-center: <#FFE5EC>ᴛʜᴇ ᴍɪᴅᴅʟᴇ ᴏꜰ ᴛʜᴇ ᴄʟᴀɪᴍ</#FFE5EC>
     tool:
       name: <#FFB5A7>✦ </#FFB5A7><#F2F2F2>ᴄʟᴀɪᴍ ᴛᴏᴏʟ</#F2F2F2>
       lore:
@@ -242,6 +258,26 @@ menu:
         click:
         - ''
         - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ꜱᴡɪᴛᴄʜ</#FFD8BE>
+      teleport:
+        name: <#A2D2FF>➜ </#A2D2FF><#F2F2F2>ᴛᴇʟᴇᴘᴏʀᴛ</#F2F2F2>
+        lore:
+        - <#FFD8BE>Go straight to this claim.</#FFD8BE>
+        - ''
+        - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴀʀʀɪᴠᴇ ᴀᴛ  </#F2F2F2><point>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛᴇʟᴇᴘᴏʀᴛ</#FFD8BE>
+        click-set:
+        - <#FFC8DD>➜ <u>ꜱʜɪꜰᴛ-ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ꜱᴇᴛ ɪᴛ ᴛᴏ ᴡʜᴇʀᴇ ʏᴏᴜ ꜱᴛᴀɴᴅ</#FFD8BE>
+      icon:
+        name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ᴄʜᴀɴɢᴇ ɪᴄᴏɴ</#F2F2F2>
+        lore:
+        - <#FFD8BE>Hold any item, then click to</#FFD8BE>
+        - <#FFD8BE>make it this claim's icon.</#FFD8BE>
+        - <#FFD8BE>Click with an empty hand to reset.</#FFD8BE>
+        click:
+        - ''
+        - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʜᴀɴɢᴇ</#FFD8BE>
       main-claim:
         name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ᴍᴀɪɴ ᴄʟᴀɪᴍ</#F2F2F2>
         lore:

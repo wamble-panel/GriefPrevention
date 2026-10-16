@@ -43,6 +43,14 @@ outline:
     conflict: '#FF9AA2'
     other: '#A2D2FF'
 
+teleport:
+  # Owners and managers can teleport to their claims from /claims (right-click a claim, or the Teleport button)
+  enabled: true
+  # Seconds to stand still before teleporting (moving or getting hurt cancels it)
+  warmup-seconds: 3
+  # Seconds between teleports
+  cooldown-seconds: 30
+
 claim-notices:
   # "✿ Entering Steve's Claim" when walking into someone's claim (texts are in messages.yml under notices)
   enabled: true

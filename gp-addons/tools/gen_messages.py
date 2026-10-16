@@ -203,6 +203,21 @@ def messages():
             "transfer": prompt("type the player to give this claim to in chat"),
             "cancelled": c(GREY, "✘ " + sc("cancelled.")),
         },
+        "teleport": {
+            "warmup": c(SKY, "⌛ ") + c(PEACH, sc("teleporting to ")) + hl("<claim>") + c(PEACH, sc(" in "))
+                      + c(LIGHT, "<seconds>") + c(PEACH, sc("s. don't move!")),
+            "done": c(SKY, "➜ ") + c(PEACH, sc("teleported to ")) + hl("<claim>") + c(PEACH, "."),
+            "cancelled": err("teleport cancelled because you moved or got hurt."),
+            "cooldown": err("you can teleport again in <seconds>s."),
+            "in-combat": err("you can't teleport during pvp combat."),
+            "no-safe-spot": err("there's no safe spot to land. set a teleport point inside the claim first."),
+            "home-set": ok("set this claim's teleport point to where you're standing."),
+            "home-outside": err("stand inside this claim to set its teleport point."),
+        },
+        "icon": {
+            "set": ok("changed this claim's icon."),
+            "reset": ok("this claim's icon is back to the default."),
+        },
         # Shown when walking into (and optionally out of) a claim
         "notices": {
             "enter": c(LILAC, "✿ ") + c(PEACH, sc("entering ")) + hl("<owner>") + c(PEACH, sc("'s claim")),
@@ -257,6 +272,7 @@ def menu():
                     stat("whitelist", "<whitelist>"),
                 ],
                 "click": [blank, click("to manage")],
+                "teleport": [click("to teleport", verb="right-click")],
             },
             "owner-you": c(PEACH, "One of your claims."),
             "owner-other": c(PEACH, "Owned by ") + hl("<owner>") + c(PEACH, "."),
@@ -276,6 +292,8 @@ def menu():
             },
             "on": c(MINT, sc("✔ on")),
             "off": c(GREY, sc("✘ off")),
+            "point-set": c(LIGHT, sc("your teleport point")),
+            "point-center": c(LIGHT, sc("the middle of the claim")),
             "tool": {
                 "name": name(sc("claim tool"), symbol="✦", symbol_color=CORAL),
                 "lore": desc("What your golden shovel does", "when you right-click land.") + [blank, stat("mode", "<mode>")],
@@ -309,6 +327,13 @@ def menu():
                 "inherit": {"name": name(sc("inherit trust")),
                             "lore": desc("Whether players trusted in the", "main claim are trusted here too.") + [blank, stat("inherit", "<state>")],
                             "click": [blank, click("to switch")]},
+                "teleport": {"name": name(sc("teleport"), symbol="➜", symbol_color=SKY),
+                             "lore": desc("Go straight to this claim.") + [blank, stat("arrive at", "<point>")],
+                             "click": [blank, click("to teleport")],
+                             "click-set": [click("to set it to where you stand", verb="shift-click")]},
+                "icon": {"name": name(sc("change icon")),
+                         "lore": desc("Hold any item, then click to", "make it this claim's icon.", "Click with an empty hand to reset."),
+                         "click": [blank, click("to change")]},
                 "main-claim": {"name": name(sc("main claim")),
                                "lore": desc("This is a subdivision of", "<main>."),
                                "click": [blank, click("to open it")]},

@@ -70,6 +70,12 @@ public final class ClaimStore {
     private static ClaimData read(@NotNull ConfigurationSection c) {
         final ClaimData data = new ClaimData();
         data.name(c.getString("name"));
+        data.icon(c.getString("icon"));
+        final ConfigurationSection home = c.getConfigurationSection("home");
+        if (home != null && home.getString("world") != null) {
+            data.home(new ClaimData.Home(home.getString("world"), home.getDouble("x"), home.getDouble("y"),
+                    home.getDouble("z"), (float) home.getDouble("yaw"), (float) home.getDouble("pitch")));
+        }
         data.whitelist(c.getBoolean("whitelist", false));
         for (String uuid : c.getStringList("entry")) {
             parse(uuid).ifPresent(data.entry()::add);
@@ -162,6 +168,16 @@ public final class ClaimStore {
             }
             final String path = "claims." + id;
             yaml.set(path + ".name", data.name());
+            yaml.set(path + ".icon", data.icon());
+            final ClaimData.Home home = data.home();
+            if (home != null) {
+                yaml.set(path + ".home.world", home.world());
+                yaml.set(path + ".home.x", home.x());
+                yaml.set(path + ".home.y", home.y());
+                yaml.set(path + ".home.z", home.z());
+                yaml.set(path + ".home.yaw", (double) home.yaw());
+                yaml.set(path + ".home.pitch", (double) home.pitch());
+            }
             if (data.whitelist()) {
                 yaml.set(path + ".whitelist", true);
             }

@@ -88,7 +88,13 @@ public final class ClaimsMenu extends PagedMenu<Claim> {
 
     @Override
     protected @Nullable Action action(@NotNull Claim claim) {
-        return click -> new ClaimMenu(plugin, viewer, claim, this).open();
+        return click -> {
+            if (click.isRightClick() && plugin.teleports().canTeleport(viewer, claim)) {
+                plugin.teleports().teleport(viewer, claim);
+            } else {
+                new ClaimMenu(plugin, viewer, claim, this).open();
+            }
+        };
     }
 
     @Override

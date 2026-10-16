@@ -5,6 +5,7 @@ import dev.wamble.gpaddons.command.GpCommandMenus;
 import dev.wamble.gpaddons.data.BanFromClaimImporter;
 import dev.wamble.gpaddons.data.ClaimStore;
 import dev.wamble.gpaddons.entry.ClaimNoticeListener;
+import dev.wamble.gpaddons.entry.ClaimTeleports;
 import dev.wamble.gpaddons.entry.EntryListener;
 import dev.wamble.gpaddons.entry.EntryService;
 import dev.wamble.gpaddons.flag.FlagListener;
@@ -40,6 +41,7 @@ public final class GPAddons extends JavaPlugin {
     private final ClaimActions actions = new ClaimActions(this);
     private final MenuManager menus = new MenuManager(this);
     private final GpMessages gpMessages = new GpMessages(this);
+    private final ClaimTeleports teleports = new ClaimTeleports(this);
 
     @Override
     public void onEnable() {
@@ -57,6 +59,7 @@ public final class GPAddons extends JavaPlugin {
         plugins.registerEvents(new FlagListener(this), this);
         plugins.registerEvents(new EntryListener(this), this);
         plugins.registerEvents(new ClaimNoticeListener(this), this);
+        plugins.registerEvents(teleports, this);
         plugins.registerEvents(new SpongeListener(this), this);
         plugins.registerEvents(new CushionListener(), this);
         plugins.registerEvents(new DoorListener(this), this);
@@ -145,6 +148,11 @@ public final class GPAddons extends JavaPlugin {
     @NotNull
     public MenuManager menus() {
         return menus;
+    }
+
+    @NotNull
+    public ClaimTeleports teleports() {
+        return teleports;
     }
 
     @NotNull

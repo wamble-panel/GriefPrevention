@@ -8,6 +8,7 @@ import dev.wamble.gpaddons.util.Items;
 import me.ryanhamshire.GriefPrevention.Claim;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
+import org.bukkit.Keyed;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -133,6 +134,44 @@ public final class ClaimMenu extends Menu {
                 refresh();
             } : null);
         }
+
+        // Teleport, or shift-click to set where players arrive
+        if (plugin.teleports().enabled()) {
+            final boolean canTeleport = plugin.teleports().canTeleport(viewer, claim);
+            final List<Component> lore = new ArrayList<>(messages().lore("menu.claim.buttons.teleport.lore",
+                    Messages.component("point", messages().get(plugin.teleports().hasHome(claim)
+                            ? "menu.claims.point-set" : "menu.claims.point-center"))));
+            if (canTeleport) {
+                lore.addAll(messages().lore("menu.claim.buttons.teleport.click"));
+                if (manage) {
+                    lore.addAll(messages().lore("menu.claim.buttons.teleport.click-set"));
+                }
+            } else {
+                lore.addAll(messages().lore("menu.locked"));
+            }
+            set(39, Items.item("ender_pearl", messages().itemName("menu.claim.buttons.teleport.name"), lore),
+                    canTeleport ? click -> {
+                        if (click.isShiftClick()) {
+                            plugin.teleports().setHome(viewer, claim);
+                            refresh();
+                        } else {
+                            plugin.teleports().teleport(viewer, claim);
+                        }
+                    } : null);
+        }
+
+        // Icon: whatever the viewer holds, or the default with an empty hand
+        set(41, button(plugin.info().icon(claim), "icon", manage), manage ? click -> {
+            final ItemStack held = viewer.getInventory().getItemInMainHand();
+            if (held.getType().isAir()) {
+                plugin.store().edit(claim).icon(null);
+                messages().send(viewer, "icon.reset");
+            } else {
+                plugin.store().edit(claim).icon(((Keyed) held.getType()).getKey().toString());
+                messages().send(viewer, "icon.set");
+            }
+            refresh();
+        } : null);
 
         // Abandon
         set(bottom(CORNER), button("tnt", "abandon", edit),
