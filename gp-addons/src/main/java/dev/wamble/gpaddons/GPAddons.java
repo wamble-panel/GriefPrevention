@@ -2,6 +2,7 @@ package dev.wamble.gpaddons;
 
 import dev.wamble.gpaddons.command.Commands;
 import dev.wamble.gpaddons.command.GpCommandMenus;
+import dev.wamble.gpaddons.command.TeamCommand;
 import dev.wamble.gpaddons.data.BanFromClaimImporter;
 import dev.wamble.gpaddons.data.ClaimStore;
 import dev.wamble.gpaddons.entry.ClaimNoticeListener;
@@ -17,7 +18,9 @@ import dev.wamble.gpaddons.menu.MenuManager;
 import dev.wamble.gpaddons.outline.OutlineListener;
 import dev.wamble.gpaddons.protect.CushionListener;
 import dev.wamble.gpaddons.protect.DoorListener;
+import dev.wamble.gpaddons.protect.RegionClaimGuard;
 import dev.wamble.gpaddons.protect.SpongeListener;
+import dev.wamble.gpaddons.team.TeamService;
 import dev.wamble.gpaddons.text.GpMessages;
 import dev.wamble.gpaddons.text.Messages;
 import org.bukkit.entity.Player;
@@ -42,6 +45,7 @@ public final class GPAddons extends JavaPlugin {
     private final MenuManager menus = new MenuManager(this);
     private final GpMessages gpMessages = new GpMessages(this);
     private final ClaimTeleports teleports = new ClaimTeleports(this);
+    private final TeamService teams = new TeamService(this);
 
     @Override
     public void onEnable() {
@@ -53,6 +57,7 @@ public final class GPAddons extends JavaPlugin {
         flags.reload();
         store.load();
         store.startAutoSave();
+        teams.load();
         new BanFromClaimImporter(this).importIfNeeded();
 
         final PluginManager plugins = getServer().getPluginManager();
@@ -60,9 +65,12 @@ public final class GPAddons extends JavaPlugin {
         plugins.registerEvents(new EntryListener(this), this);
         plugins.registerEvents(new ClaimNoticeListener(this), this);
         plugins.registerEvents(teleports, this);
+        plugins.registerEvents(teams, this);
+        teams.refreshAll();
         plugins.registerEvents(new SpongeListener(this), this);
         plugins.registerEvents(new CushionListener(), this);
         plugins.registerEvents(new DoorListener(this), this);
+        RegionClaimGuard.register(this);
         plugins.registerEvents(menus, this);
         plugins.registerEvents(new GpCommandMenus(this), this);
         if (hasOutlineEvent()) {
@@ -71,6 +79,7 @@ public final class GPAddons extends JavaPlugin {
             getLogger().warning("This GriefPrevention version can't have its claim outline changed; the raised outline is off");
         }
         new Commands(this).register();
+        new TeamCommand(this).register();
 
         if (getConfig().getBoolean("griefprevention-messages.restyle", true)) {
             try {
@@ -96,6 +105,8 @@ public final class GPAddons extends JavaPlugin {
             }
         }
         store.saveNow();
+        teams.clearAll();
+        teams.saveNow();
     }
 
     /** Re-read config.yml and messages.yml */
@@ -104,6 +115,7 @@ public final class GPAddons extends JavaPlugin {
         messages.reload();
         flags.reload();
         flags.applyAllExplosions();
+        teams.refreshAll();
     }
 
     private static boolean hasOutlineEvent() {
@@ -148,6 +160,11 @@ public final class GPAddons extends JavaPlugin {
     @NotNull
     public MenuManager menus() {
         return menus;
+    }
+
+    @NotNull
+    public TeamService teams() {
+        return teams;
     }
 
     @NotNull

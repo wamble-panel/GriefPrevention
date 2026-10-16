@@ -43,6 +43,27 @@ outline:
     conflict: '#FF9AA2'
     other: '#A2D2FF'
 
+worldguard:
+  # Stop players claiming land that overlaps a WorldGuard region (spawn, safe zones...), and resizing into one.
+  # Players with gpaddons.claim-in-regions are allowed. Only works when WorldGuard is installed.
+  block-claims-in-regions: true
+  # Regions where claiming is still allowed
+  allowed-regions: []
+
+teams:
+  # Turn the whole team system on or off (/team, team access in claims)
+  enabled: true
+  # Team names are letters, numbers and underscores. Players with gpaddons.team.color may colour them with
+  # hex codes, e.g. /team create &#FFB5A7Pink or <gradient:#FFB5A7:#FFC8DD>Pink</gradient>
+  name-length:
+    min: 3
+    max: 16
+  # Most players in one team, leader included (0 = no limit)
+  max-members: 0
+  max-ranks: 10
+  # How long an invite lasts
+  invite-expiry-seconds: 300
+
 teleport:
   # Owners and managers can teleport to their claims from /claims (right-click a claim, or the Teleport button)
   enabled: true

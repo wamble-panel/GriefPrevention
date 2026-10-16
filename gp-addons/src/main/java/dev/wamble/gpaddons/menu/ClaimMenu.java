@@ -135,6 +135,20 @@ public final class ClaimMenu extends Menu {
             } : null);
         }
 
+        // Team access: what the owner's team may do here
+        final dev.wamble.gpaddons.team.Team team = plugin.teams().enabled() && !claim.isAdminClaim()
+                && claim.getOwnerID() != null ? plugin.teams().teamOf(claim.getOwnerID()) : null;
+        if (team != null) {
+            final String trustId = plugin.teams().trustId(team);
+            final List<Component> teamLore = new ArrayList<>(messages().lore("menu.team.claim.lore",
+                    Messages.component("team", plugin.teams().display(team)),
+                    Messages.component("level", plugin.info().level(Gp.trust(claim).get(trustId),
+                            Gp.isManager(claim, trustId)))));
+            teamLore.addAll(messages().lore(manage ? "menu.team.claim.click" : "menu.locked"));
+            set(37, Items.item("pink_banner,white_banner", messages().itemName("menu.team.claim.name"), teamLore),
+                    manage ? click -> new TrustMenu(plugin, viewer, claim, trustId, plugin.teams().plainName(team), this).open() : null);
+        }
+
         // Teleport, or shift-click to set where players arrive
         if (plugin.teleports().enabled()) {
             final boolean canTeleport = plugin.teleports().canTeleport(viewer, claim);

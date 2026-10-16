@@ -82,7 +82,11 @@ public final class GuestsMenu extends PagedMenu<GuestsMenu.Guest> {
     @NotNull
     private String shown(@NotNull Guest guest) {
         final UUID uuid = guest.uuid();
-        return uuid == null ? guest.id() : Gp.name(uuid);
+        if (uuid != null) {
+            return Gp.name(uuid);
+        }
+        final dev.wamble.gpaddons.team.Team team = plugin.teams().teamOfTrustId(guest.id());
+        return team != null ? plugin.teams().plainName(team) : guest.id();
     }
 
     @Override
@@ -127,6 +131,11 @@ public final class GuestsMenu extends PagedMenu<GuestsMenu.Guest> {
         }
         lore.addAll(manage ? messages().lore("menu.guests.click") : messages().lore("menu.locked"));
         if (uuid == null) {
+            final dev.wamble.gpaddons.team.Team team = plugin.teams().teamOfTrustId(guest.id());
+            if (team != null) {
+                return Items.item("pink_banner,white_banner", messages().itemName(key + ".name",
+                        Messages.component("group", plugin.teams().display(team))), lore);
+            }
             final String group = guest.id().length() > 2 ? guest.id().substring(1, guest.id().length() - 1) : guest.id();
             return Items.item("bookshelf", messages().itemName(key + ".name", Messages.text("group", group)), lore);
         }

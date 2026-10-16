@@ -11,6 +11,7 @@ general:
   player-not-found: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ɴᴏ ᴘʟᴀʏᴇʀ ᴄᴀʟʟᴇᴅ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ʜᴀꜱ ᴘʟᴀʏᴇᴅ ʜᴇʀᴇ.</#FF9AA2>
   claim-gone: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴀᴛ ᴄʟᴀɪᴍ ɴᴏ ʟᴏɴɢᴇʀ ᴇxɪꜱᴛꜱ.</#FF9AA2>
   other-world: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ɢᴏ ᴛᴏ ᴛʜɪꜱ ᴄʟᴀɪᴍ'ꜱ ᴡᴏʀʟᴅ ᴛᴏ ꜱᴇᴇ ɪᴛꜱ ᴏᴜᴛʟɪɴᴇ.</#FF9AA2>
+  in-region: '<#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ''ᴛ ᴄʟᴀɪᴍ ʜᴇʀᴇ: ɪᴛ ᴏᴠᴇʀʟᴀᴘꜱ ᴛʜᴇ ᴘʀᴏᴛᴇᴄᴛᴇᴅ ᴀʀᴇᴀ </#FF9AA2><#FFC8DD><region></#FFC8DD><#FF9AA2>.</#FF9AA2>'
   reloaded: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʀᴇʟᴏᴀᴅᴇᴅ ᴛʜᴇ ᴄᴏɴꜰɪɢ ᴀɴᴅ ᴍᴇꜱꜱᴀɢᴇꜱ.</#FFD8BE>
   imported: <#B5EAD7>✔ </#B5EAD7><summary>
   usage: '<#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴜꜱᴀɢᴇ: </#FFD8BE><#FFC8DD><usage></#FFC8DD>'
@@ -81,6 +82,10 @@ abandon:
   done: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴀʙᴀɴᴅᴏɴᴇᴅ </#FFD8BE><#FFC8DD><claim></#FFC8DD><#FFD8BE>. ʏᴏᴜ ɴᴏᴡ ʜᴀᴠᴇ </#FFD8BE><#FFE5EC><remaining></#FFE5EC><#FFD8BE> ᴄʟᴀɪᴍ ʙʟᴏᴄᴋꜱ ʟᴇꜰᴛ.</#FFD8BE>
   subdivision-done: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʀᴇᴍᴏᴠᴇᴅ ᴛʜᴇ ꜱᴜʙᴅɪᴠɪꜱɪᴏɴ </#FFD8BE><#FFC8DD><claim></#FFC8DD><#FFD8BE>.</#FFD8BE>
 prompt:
+  team-invite: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ɪɴᴠɪᴛᴇ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
+  team-rename: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ɴᴇᴡ ᴛᴇᴀᴍ ɴᴀᴍᴇ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
+  rank-create: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ɴᴇᴡ ʀᴀɴᴋ'ꜱ ɴᴀᴍᴇ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
+  rank-rename: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ʀᴀɴᴋ'ꜱ ɴᴇᴡ ɴᴀᴍᴇ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   guest: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ᴛʀᴜꜱᴛ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   ban: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ʙᴀɴ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
   entry: <#CDB4DB>✎ </#CDB4DB><#FFD8BE>ᴛʏᴘᴇ ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴛᴏ ᴡʜɪᴛᴇʟɪꜱᴛ ɪɴ ᴄʜᴀᴛ, ᴏʀ ᴛʏᴘᴇ </#FFD8BE><#FF9AA2>ᴄᴀɴᴄᴇʟ</#FF9AA2><#FFD8BE>.</#FFD8BE>
@@ -128,6 +133,103 @@ dialog:
   name-label: <#F2F2F2>ᴄʟᴀɪᴍ ɴᴀᴍᴇ</#F2F2F2>
   confirm: <#B5EAD7>✔ ᴄᴏɴꜰɪʀᴍ</#B5EAD7>
   cancel: <#FF9AA2>✘ ᴄᴀɴᴄᴇʟ</#FF9AA2>
+team:
+  disabled: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛᴇᴀᴍꜱ ᴀʀᴇ ᴛᴜʀɴᴇᴅ ᴏꜰꜰ ᴏɴ ᴛʜɪꜱ ꜱᴇʀᴠᴇʀ.</#FF9AA2>
+  no-team: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ'ʀᴇ ɴᴏᴛ ɪɴ ᴀ ᴛᴇᴀᴍ. ᴍᴀᴋᴇ ᴏɴᴇ ᴡɪᴛʜ </#FF9AA2><#FFC8DD>/team create <name></#FFC8DD><#FF9AA2>.</#FF9AA2>
+  already-in-team: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ'ʀᴇ ᴀʟʀᴇᴀᴅʏ ɪɴ ᴀ ᴛᴇᴀᴍ. ʟᴇᴀᴠᴇ ɪᴛ ꜰɪʀꜱᴛ.</#FF9AA2>
+  target-in-team: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱ ᴀʟʀᴇᴀᴅʏ ɪɴ ᴀ ᴛᴇᴀᴍ.</#FF9AA2>
+  not-member: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱɴ'ᴛ ɪɴ ʏᴏᴜʀ ᴛᴇᴀᴍ.</#FF9AA2>
+  no-permission: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜʀ ʀᴀɴᴋ ᴄᴀɴ'ᴛ ᴅᴏ ᴛʜᴀᴛ.</#FF9AA2>
+  leader-only: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴏɴʟʏ ᴛʜᴇ ᴛᴇᴀᴍ ʟᴇᴀᴅᴇʀ ᴄᴀɴ ᴅᴏ ᴛʜᴀᴛ.</#FF9AA2>
+  outranked: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ʜᴀꜱ ᴛʜᴇ ꜱᴀᴍᴇ ᴏʀ ᴀ ʜɪɢʜᴇʀ ʀᴀɴᴋ ᴛʜᴀɴ ʏᴏᴜ.</#FF9AA2>
+  not-found: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇʀᴇ'ꜱ ɴᴏ ᴛᴇᴀᴍ ᴄᴀʟʟᴇᴅ </#FF9AA2><#FFC8DD><team></#FFC8DD><#FF9AA2>.</#FF9AA2>
+  created: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴄʀᴇᴀᴛᴇᴅ ᴛʜᴇ ᴛᴇᴀᴍ </#FFD8BE><team><#FFD8BE>. ɪɴᴠɪᴛᴇ ᴘʟᴀʏᴇʀꜱ ᴡɪᴛʜ </#FFD8BE><#FFC8DD>/team invite <player></#FFC8DD><#FFD8BE>.</#FFD8BE>
+  name-invalid: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛᴇᴀᴍ ɴᴀᴍᴇꜱ ᴀʀᴇ <min> ᴛᴏ <max> ʟᴇᴛᴛᴇʀꜱ, ɴᴜᴍʙᴇʀꜱ ᴏʀ ᴜɴᴅᴇʀꜱᴄᴏʀᴇꜱ.</#FF9AA2>
+  name-taken: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴀ ᴛᴇᴀᴍ ᴡɪᴛʜ ᴛʜᴀᴛ ɴᴀᴍᴇ ᴀʟʀᴇᴀᴅʏ ᴇxɪꜱᴛꜱ.</#FF9AA2>
+  no-color-permission: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪꜱꜱɪᴏɴ ᴛᴏ ᴜꜱᴇ ᴄᴏʟᴏᴜʀꜱ ɪɴ ɴᴀᴍᴇꜱ.</#FF9AA2>
+  invited: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ɪɴᴠɪᴛᴇᴅ </#FFD8BE><#FFC8DD><player></#FFC8DD><#FFD8BE> ᴛᴏ ᴛʜᴇ ᴛᴇᴀᴍ.</#FFD8BE>
+  already-invited: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ᴀʟʀᴇᴀᴅʏ ʜᴀꜱ ᴀɴ ɪɴᴠɪᴛᴇ.</#FF9AA2>
+  invite-received: <#CDB4DB>✦ </#CDB4DB><#FFC8DD><player></#FFC8DD><#FFD8BE> ɪɴᴠɪᴛᴇᴅ ʏᴏᴜ ᴛᴏ </#FFD8BE><team><#FFD8BE>. </#FFD8BE><accept><hover:show_text:'<#B5EAD7>ᴊᴏɪɴ ᴛʜᴇ ᴛᴇᴀᴍ</#B5EAD7>'><#B5EAD7><b>[✔ ᴀᴄᴄᴇᴘᴛ]</b></#B5EAD7></hover></accept> <deny><hover:show_text:'<#FF9AA2>ꜱᴀʏ ɴᴏ</#FF9AA2>'><#FF9AA2><b>[✘ ᴅᴇɴʏ]</b></#FF9AA2></hover></deny>
+  no-invites: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀɴʏ ᴛᴇᴀᴍ ɪɴᴠɪᴛᴇꜱ.</#FF9AA2>
+  denied: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴛᴜʀɴᴇᴅ ᴅᴏᴡɴ ᴛʜᴇ ɪɴᴠɪᴛᴇ ꜰʀᴏᴍ </#FFD8BE><team><#FFD8BE>.</#FFD8BE>
+  joined: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʏᴏᴜ ᴊᴏɪɴᴇᴅ </#FFD8BE><team><#FFD8BE>!</#FFD8BE>
+  member-joined: <#B5EAD7>✿ </#B5EAD7><#FFC8DD><player></#FFC8DD><#FFD8BE> ᴊᴏɪɴᴇᴅ ᴛʜᴇ ᴛᴇᴀᴍ!</#FFD8BE>
+  member-left: <#8A8A8A>✘ </#8A8A8A><#FFC8DD><player></#FFC8DD><#8A8A8A> ʟᴇꜰᴛ ᴛʜᴇ ᴛᴇᴀᴍ.</#8A8A8A>
+  left: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʏᴏᴜ ʟᴇꜰᴛ </#FFD8BE><team><#FFD8BE>.</#FFD8BE>
+  kicked: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴋɪᴄᴋᴇᴅ </#FFD8BE><#FFC8DD><player></#FFC8DD><#FFD8BE> ꜰʀᴏᴍ ᴛʜᴇ ᴛᴇᴀᴍ.</#FFD8BE>
+  member-kicked: <#8A8A8A>✘ </#8A8A8A><#FFC8DD><player></#FFC8DD><#8A8A8A> ᴡᴀꜱ ᴋɪᴄᴋᴇᴅ ꜰʀᴏᴍ ᴛʜᴇ ᴛᴇᴀᴍ.</#8A8A8A>
+  you-were-kicked: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴡᴇʀᴇ ᴋɪᴄᴋᴇᴅ ꜰʀᴏᴍ </#FF9AA2><team><#FF9AA2>.</#FF9AA2>
+  rank-changed: <#CDB4DB>✦ </#CDB4DB><#FFC8DD><player></#FFC8DD><#FFD8BE> ɪꜱ ɴᴏᴡ </#FFD8BE><rank><#FFD8BE>.</#FFD8BE>
+  cant-promote: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ᴄᴀɴ'ᴛ ʙᴇ ᴘʀᴏᴍᴏᴛᴇᴅ ᴀɴʏ ʜɪɢʜᴇʀ ʙʏ ʏᴏᴜ.</#FF9AA2>
+  cant-demote: <#FF9AA2>✘ </#FF9AA2><#FFC8DD><player></#FFC8DD><#FF9AA2> ɪꜱ ᴀʟʀᴇᴀᴅʏ ᴛʜᴇ ʟᴏᴡᴇꜱᴛ ʀᴀɴᴋ.</#FF9AA2>
+  renamed: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴛʜᴇ ᴛᴇᴀᴍ ɪꜱ ɴᴏᴡ ᴄᴀʟʟᴇᴅ </#FFD8BE><team><#FFD8BE>.</#FFD8BE>
+  new-leader: <#FFB5A7>✦ </#FFB5A7><#FFC8DD><player></#FFC8DD><#FFD8BE> ɪꜱ ᴛʜᴇ ɴᴇᴡ ᴛᴇᴀᴍ ʟᴇᴀᴅᴇʀ!</#FFD8BE>
+  disbanded: <#FF9AA2>✘ </#FF9AA2><team><#FF9AA2> ᴡᴀꜱ ᴅɪꜱʙᴀɴᴅᴇᴅ.</#FF9AA2>
+  leader-cant-leave: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ɢɪᴠᴇ ᴛʜᴇ ᴛᴇᴀᴍ ᴛᴏ ꜱᴏᴍᴇᴏɴᴇ ᴇʟꜱᴇ ꜰɪʀꜱᴛ, ᴏʀ ᴅɪꜱʙᴀɴᴅ ɪᴛ.</#FF9AA2>
+  full: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇ ᴛᴇᴀᴍ ɪꜱ ꜰᴜʟʟ (<max> ᴍᴇᴍʙᴇʀꜱ).</#FF9AA2>
+  rank-created: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴄʀᴇᴀᴛᴇᴅ ᴛʜᴇ ʀᴀɴᴋ </#FFD8BE><rank><#FFD8BE>.</#FFD8BE>
+  rank-deleted: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴅᴇʟᴇᴛᴇᴅ ᴛʜᴇ ʀᴀɴᴋ </#FFD8BE><rank><#FFD8BE>.</#FFD8BE>
+  rank-renamed: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ʀᴇɴᴀᴍᴇᴅ ᴛʜᴇ ʀᴀɴᴋ ᴛᴏ </#FFD8BE><rank><#FFD8BE>.</#FFD8BE>
+  rank-moved: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ᴍᴏᴠᴇᴅ </#FFD8BE><rank><#FFD8BE>.</#FFD8BE>
+  rank-exists: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇ ᴛᴇᴀᴍ ᴀʟʀᴇᴀᴅʏ ʜᴀꜱ ᴀ ʀᴀɴᴋ ᴡɪᴛʜ ᴛʜᴀᴛ ɴᴀᴍᴇ.</#FF9AA2>
+  rank-last: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴀ ᴛᴇᴀᴍ ɴᴇᴇᴅꜱ ᴀᴛ ʟᴇᴀꜱᴛ ᴏɴᴇ ʀᴀɴᴋ.</#FF9AA2>
+  rank-not-found: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇʀᴇ'ꜱ ɴᴏ ʀᴀɴᴋ ᴄᴀʟʟᴇᴅ </#FF9AA2><#FFC8DD><rank></#FFC8DD><#FF9AA2>.</#FF9AA2>
+  rank-too-high: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴄᴀɴ ᴏɴʟʏ ᴍᴀɴᴀɢᴇ ʀᴀɴᴋꜱ ʙᴇʟᴏᴡ ʏᴏᴜʀ ᴏᴡɴ.</#FF9AA2>
+  max-ranks: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴀ ᴛᴇᴀᴍ ᴄᴀɴ ʜᴀᴠᴇ ᴀᴛ ᴍᴏꜱᴛ <max> ʀᴀɴᴋꜱ.</#FF9AA2>
+  perm-set: <#B5EAD7>✔ </#B5EAD7><rank><#FFD8BE> </#FFD8BE><state><#FFD8BE> </#FFD8BE><#FFC8DD><perm></#FFC8DD><#FFD8BE>.</#FFD8BE>
+  perm-on: <#B5EAD7>ᴄᴀɴ ɴᴏᴡ</#B5EAD7>
+  perm-off: <#FF9AA2>ᴄᴀɴ ɴᴏ ʟᴏɴɢᴇʀ</#FF9AA2>
+  claim-trust: <#B5EAD7>✔ </#B5EAD7><#FFD8BE>ꜱᴇᴛ ʏᴏᴜʀ ᴛᴇᴀᴍ'ꜱ ᴛʀᴜꜱᴛ ɪɴ ᴛʜɪꜱ ᴄʟᴀɪᴍ ᴛᴏ </#FFD8BE><level><#FFD8BE>.</#FFD8BE>
+  leader-rank: <#FFB5A7><b>ʟᴇᴀᴅᴇʀ</b></#FFB5A7>
+  info-header: <#8A8A8A><st>━━━</st> </#8A8A8A><team><#8A8A8A> <st>━━━</st></#8A8A8A>
+  info-line: <#8A8A8A>• </#8A8A8A><#F2F2F2><label>  </#F2F2F2><value>
+  list-header: <#8A8A8A><st>━━━</st> </#8A8A8A><gradient:#FFB5A7:#FFC8DD><b>✦ ᴛᴇᴀᴍꜱ</b></gradient><#8A8A8A> <st>━━━</st></#8A8A8A>
+  list-entry: <#8A8A8A>• </#8A8A8A><team><#8A8A8A> — </#8A8A8A><#FFE5EC><members> ᴍᴇᴍʙᴇʀꜱ</#FFE5EC>
+  help:
+  - <#8A8A8A><st>━━━</st> </#8A8A8A><gradient:#FFB5A7:#FFC8DD><b>✦ ᴛᴇᴀᴍ ᴄᴏᴍᴍᴀɴᴅꜱ</b></gradient><#8A8A8A> <st>━━━</st></#8A8A8A>
+  - <#FFC8DD>/team</#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ᴏᴘᴇɴ ʏᴏᴜʀ ᴛᴇᴀᴍ ᴍᴇɴᴜ</#FFD8BE>
+  - <#FFC8DD>/team create <name></#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ꜱᴛᴀʀᴛ ᴀ ᴛᴇᴀᴍ</#FFD8BE>
+  - <#FFC8DD>/team invite <player></#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ɪɴᴠɪᴛᴇ ꜱᴏᴍᴇᴏɴᴇ</#FFD8BE>
+  - <#FFC8DD>/team accept</#FFC8DD><#8A8A8A> / </#8A8A8A><#FFC8DD>deny</#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ᴀɴꜱᴡᴇʀ ᴀɴ ɪɴᴠɪᴛᴇ</#FFD8BE>
+  - <#FFC8DD>/team promote|demote <player></#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ᴄʜᴀɴɢᴇ ᴀ ᴍᴇᴍʙᴇʀ'ꜱ ʀᴀɴᴋ</#FFD8BE>
+  - <#FFC8DD>/team rank create|delete|rename|perm</#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ᴍᴀɴᴀɢᴇ ʀᴀɴᴋꜱ</#FFD8BE>
+  - <#FFC8DD>/team rename <name></#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ʀᴇɴᴀᴍᴇ ᴛʜᴇ ᴛᴇᴀᴍ</#FFD8BE>
+  - <#FFC8DD>/team kick|transfer <player></#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ᴋɪᴄᴋ ᴏʀ ʜᴀɴᴅ ᴏᴠᴇʀ ᴛʜᴇ ᴛᴇᴀᴍ</#FFD8BE>
+  - <#FFC8DD>/team leave</#FFC8DD><#8A8A8A> / </#8A8A8A><#FFC8DD>disband</#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ʟᴇᴀᴠᴇ ᴏʀ ᴇɴᴅ ᴛʜᴇ ᴛᴇᴀᴍ</#FFD8BE>
+  - <#FFC8DD>/team info [team]</#FFC8DD><#8A8A8A> / </#8A8A8A><#FFC8DD>list</#FFC8DD><#8A8A8A> — </#8A8A8A><#FFD8BE>ʟᴏᴏᴋ ᴜᴘ ᴛᴇᴀᴍꜱ</#FFD8BE>
+  labels:
+    leader: ʟᴇᴀᴅᴇʀ
+    members: ᴍᴇᴍʙᴇʀꜱ
+    your-rank: ʏᴏᴜʀ ʀᴀɴᴋ
+    created: ᴄʀᴇᴀᴛᴇᴅ
+team-perms:
+  invite:
+    name: ɪɴᴠɪᴛᴇ
+    description:
+    - <#FFD8BE>May invite players to the team.</#FFD8BE>
+  kick:
+    name: ᴋɪᴄᴋ
+    description:
+    - <#FFD8BE>May kick members of a lower rank.</#FFD8BE>
+  promote:
+    name: ᴘʀᴏᴍᴏᴛᴇ & ᴅᴇᴍᴏᴛᴇ
+    description:
+    - <#FFD8BE>May change the rank of members</#FFD8BE>
+    - <#FFD8BE>below their own rank.</#FFD8BE>
+  manage_ranks:
+    name: ᴍᴀɴᴀɢᴇ ʀᴀɴᴋꜱ
+    description:
+    - <#FFD8BE>May create, rename, reorder and</#FFD8BE>
+    - <#FFD8BE>change ranks below their own.</#FFD8BE>
+  rename:
+    name: ʀᴇɴᴀᴍᴇ ᴛᴇᴀᴍ
+    description:
+    - <#FFD8BE>May change the team's name.</#FFD8BE>
+  claim_access:
+    name: ᴛᴇᴀᴍ ᴄʟᴀɪᴍꜱ
+    description:
+    - <#FFD8BE>Gets the trust that members give</#FFD8BE>
+    - <#FFD8BE>the team in their claims.</#FFD8BE>
 menu:
   back:
     name: <#FFC8DD>◀ ʙᴀᴄᴋ</#FFC8DD>
@@ -498,7 +600,191 @@ menu:
       lore:
       - <#FFD8BE>Make one with /subdivideclaims</#FFD8BE>
       - <#FFD8BE>and a golden shovel.</#FFD8BE>
+  team:
+    title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴛᴇᴀᴍ</b></gradient> <team>
+    header:
+      name: <team>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʟᴇᴀᴅᴇʀ  </#F2F2F2><#FFC8DD><leader></#FFC8DD>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴍᴇᴍʙᴇʀꜱ  </#F2F2F2><#FFE5EC><members></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʏᴏᴜʀ ʀᴀɴᴋ  </#F2F2F2><rank>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴄʀᴇᴀᴛᴇᴅ  </#F2F2F2><#FFE5EC><created></#FFE5EC>
+    members:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ᴍᴇᴍʙᴇʀꜱ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Everyone in the team and</#FFD8BE>
+      - <#FFD8BE>their ranks.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴠɪᴇᴡ</#FFD8BE>
+    ranks:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ʀᴀɴᴋꜱ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Ranks and what each may do.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ</#FFD8BE>
+    invite:
+      name: <#B5EAD7>✚ </#B5EAD7><#F2F2F2>ɪɴᴠɪᴛᴇ ᴀ ᴘʟᴀʏᴇʀ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Ask someone to join the team.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ɪɴᴠɪᴛᴇ</#FFD8BE>
+    rename:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ʀᴇɴᴀᴍᴇ ᴛᴇᴀᴍ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Change the team's name.</#FFD8BE>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ɴᴀᴍᴇ  </#F2F2F2><team>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʀᴇɴᴀᴍᴇ</#FFD8BE>
+    leave:
+      name: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʟᴇᴀᴠᴇ ᴛᴇᴀᴍ</#FF9AA2>
+      lore:
+      - <#FFD8BE>Leave this team.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʟᴇᴀᴠᴇ</#FFD8BE>
+    disband:
+      name: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴅɪꜱʙᴀɴᴅ ᴛᴇᴀᴍ</#FF9AA2>
+      lore:
+      - <#FFD8BE>End the team for everyone.</#FFD8BE>
+      - <#FFD8BE>It can't be undone.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴅɪꜱʙᴀɴᴅ</#FFD8BE>
+    members-title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴍᴇᴍʙᴇʀꜱ</b></gradient> <team>
+    member:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2><player></#F2F2F2>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʀᴀɴᴋ  </#F2F2F2><rank>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴏɴʟɪɴᴇ  </#F2F2F2><online>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ</#FFD8BE>
+    member-title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴍᴇᴍʙᴇʀ</b></gradient> <#8A8A8A>| <player></#8A8A8A>
+    promote:
+      name: <#B5EAD7>▲ </#B5EAD7><#F2F2F2>ᴘʀᴏᴍᴏᴛᴇ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Move up one rank.</#FFD8BE>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʙᴇᴄᴏᴍᴇꜱ  </#F2F2F2><rank>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴘʀᴏᴍᴏᴛᴇ</#FFD8BE>
+    demote:
+      name: <#FF9AA2>▼ </#FF9AA2><#F2F2F2>ᴅᴇᴍᴏᴛᴇ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Move down one rank.</#FFD8BE>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ʙᴇᴄᴏᴍᴇꜱ  </#F2F2F2><rank>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴅᴇᴍᴏᴛᴇ</#FFD8BE>
+    set-rank:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ꜱᴇᴛ ʀᴀɴᴋ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Pick any rank below yours.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʜᴏᴏꜱᴇ</#FFD8BE>
+    kick:
+      name: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴋɪᴄᴋ</#FF9AA2>
+      lore:
+      - <#FFD8BE>Remove them from the team.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴋɪᴄᴋ</#FFD8BE>
+    make-leader:
+      name: <#FFB5A7>✦ </#FFB5A7><#F2F2F2>ᴍᴀᴋᴇ ʟᴇᴀᴅᴇʀ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Hand the team over to them.</#FFD8BE>
+      - <#FFD8BE>You'll become the top rank.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʜᴀɴᴅ ᴏᴠᴇʀ</#FFD8BE>
+    ranks-title: <gradient:#FFB5A7:#FFC8DD><b>✦ ʀᴀɴᴋꜱ</b></gradient> <team>
+    rank:
+      name: <rank>
+      lore:
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴘᴏꜱɪᴛɪᴏɴ  </#F2F2F2><#FFE5EC><position></#FFE5EC>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴍᴇᴍʙᴇʀꜱ  </#F2F2F2><#FFE5EC><members></#FFE5EC>
+      - ''
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴀɴᴀɢᴇ</#FFD8BE>
+    rank-perm-line: <#8A8A8A>• </#8A8A8A><state> <#F2F2F2><perm></#F2F2F2>
+    create-rank:
+      name: <#B5EAD7>✚ </#B5EAD7><#F2F2F2>ᴄʀᴇᴀᴛᴇ ʀᴀɴᴋ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Add a new rank just above</#FFD8BE>
+      - <#FFD8BE>the lowest one.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʀᴇᴀᴛᴇ</#FFD8BE>
+    rank-title: <gradient:#FFB5A7:#FFC8DD><b>✦ ʀᴀɴᴋ</b></gradient> <rank>
+    perm:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2><perm></#F2F2F2>
+      status: <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴀʟʟᴏᴡᴇᴅ  </#F2F2F2><state>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴛᴏɢɢʟᴇ</#FFD8BE>
+    move-up:
+      name: <#B5EAD7>▲ </#B5EAD7><#F2F2F2>ᴍᴏᴠᴇ ᴜᴘ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Swap with the rank above.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴏᴠᴇ</#FFD8BE>
+    move-down:
+      name: <#FF9AA2>▼ </#FF9AA2><#F2F2F2>ᴍᴏᴠᴇ ᴅᴏᴡɴ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Swap with the rank below.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴍᴏᴠᴇ</#FFD8BE>
+    rename-rank:
+      name: <#FFC8DD>✿ </#FFC8DD><#F2F2F2>ʀᴇɴᴀᴍᴇ ʀᴀɴᴋ</#F2F2F2>
+      lore:
+      - <#FFD8BE>Give this rank a new name.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ʀᴇɴᴀᴍᴇ</#FFD8BE>
+    delete-rank:
+      name: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴅᴇʟᴇᴛᴇ ʀᴀɴᴋ</#FF9AA2>
+      lore:
+      - <#FFD8BE>Its members move down a rank.</#FFD8BE>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴅᴇʟᴇᴛᴇ</#FFD8BE>
+    pick-rank-title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴄʜᴏᴏꜱᴇ ᴀ ʀᴀɴᴋ</b></gradient>
+    pick-rank:
+      name: <rank>
+      lore: []
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʜᴏᴏꜱᴇ</#FFD8BE>
+    claim:
+      name: <#CDB4DB>✦ </#CDB4DB><#F2F2F2>ᴛᴇᴀᴍ ᴀᴄᴄᴇꜱꜱ</#F2F2F2>
+      lore:
+      - <#FFD8BE>What your team may do here.</#FFD8BE>
+      - <#FFD8BE>Ranks without Team Claims</#FFD8BE>
+      - <#FFD8BE>don't get this.</#FFD8BE>
+      - ''
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴛᴇᴀᴍ  </#F2F2F2><team>
+      - <#8A8A8A>• </#8A8A8A><#F2F2F2>ᴛʀᴜꜱᴛ  </#F2F2F2><level>
+      click:
+      - ''
+      - <#FFC8DD>➜ <u>ᴄʟɪᴄᴋ</u></#FFC8DD><#FFD8BE> ᴛᴏ ᴄʜᴀɴɢᴇ</#FFD8BE>
+    'yes': <#B5EAD7>✔ ʏᴇꜱ</#B5EAD7>
+    'no': <#8A8A8A>✘ ɴᴏ</#8A8A8A>
+    online: <#B5EAD7>ᴏɴʟɪɴᴇ</#B5EAD7>
+    offline: <#8A8A8A>ᴏꜰꜰʟɪɴᴇ</#8A8A8A>
   picker:
+    team-invite:
+      title: <gradient:#FFB5A7:#FFC8DD><b>✦ ɪɴᴠɪᴛᴇ ᴛᴏ ᴛᴇᴀᴍ</b></gradient>
     guest:
       title: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴀᴅᴅ ᴀ ɢᴜᴇꜱᴛ</b></gradient>
     ban:

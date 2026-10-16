@@ -3,6 +3,7 @@ version: '${project.version}'
 main: dev.wamble.gpaddons.GPAddons
 api-version: '1.21'
 depend: [GriefPrevention]
+softdepend: [WorldGuard]
 description: Claim menus, flags, claim bans and an entry whitelist for GriefPrevention
 commands:
   claims:
@@ -33,6 +34,10 @@ commands:
     description: Name the claim you're standing in
     usage: /<command> <name|clear>
     aliases: [renameclaim, nameclaim]
+  team:
+    description: Your team menu and team commands
+    usage: /<command> [create|invite|accept|deny|leave|kick|promote|demote|transfer|rename|disband|rank|info|list]
+    aliases: [teams]
   gpaddons:
     description: Reload GPAddons, re-run the BanFromClaim import, or restyle GriefPrevention's messages
     usage: /<command> <reload|import-banfromclaim|gp-messages [force|restore]>
@@ -56,6 +61,21 @@ permissions:
   gpaddons.transfer:
     description: Give your claims to another player
     default: true
+  gpaddons.claim-in-regions:
+    description: Claim land that overlaps WorldGuard regions
+    default: op
+  gpaddons.team:
+    description: Use /team
+    default: true
+  gpaddons.team.create:
+    description: Create a team
+    default: true
+  gpaddons.team.color:
+    description: Use hex colours and gradients in team and rank names
+    default: op
+  gpaddons.team.admin:
+    description: Disband any team with /team disband <team>
+    default: op
   gpaddons.teleport:
     description: Teleport to claims you own or manage from /claims
     default: true

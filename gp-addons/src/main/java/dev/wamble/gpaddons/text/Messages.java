@@ -2,9 +2,11 @@ package dev.wamble.gpaddons.text;
 
 import dev.wamble.gpaddons.GPAddons;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.command.CommandSender;
@@ -109,6 +111,12 @@ public final class Messages {
     @NotNull
     public static TagResolver component(@NotNull String key, @NotNull Component value) {
         return Placeholder.component(key, value);
+    }
+
+    /** A tag that runs a command when its text is clicked, e.g. &lt;accept&gt;[accept]&lt;/accept&gt; */
+    @NotNull
+    public static TagResolver command(@NotNull String key, @NotNull String command) {
+        return TagResolver.resolver(key, Tag.styling(ClickEvent.runCommand(command)));
     }
 
 }
