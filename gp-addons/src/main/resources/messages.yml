@@ -1,7 +1,7 @@
 # GPAddons messages, in MiniMessage format: https://docs.advntr.dev/minimessage/format
 # Placeholders look like <player>. Set a chat message to '' to stop it being sent.
 # In menus, "name" is an item's name and "lore" and "click" are the lines under it.
-messages-version: 2
+messages-version: 3
 prefix: <gradient:#FFB5A7:#FFC8DD><b>✦ ᴄʟᴀɪᴍꜱ</b></gradient> <#8A8A8A>• </#8A8A8A>
 general:
   no-permission: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪꜱꜱɪᴏɴ ᴛᴏ ᴅᴏ ᴛʜᴀᴛ.</#FF9AA2>
@@ -185,6 +185,10 @@ team:
   home-set: <#B5EAD7>✔ </#B5EAD7><#FFC8DD><player></#FFC8DD><#FFD8BE> ꜱᴇᴛ ᴛʜᴇ ᴛᴇᴀᴍ ʜᴏᴍᴇ.</#FFD8BE>
   no-home: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜʀ ᴛᴇᴀᴍ ʜᴀꜱ ɴᴏ ʜᴏᴍᴇ ʏᴇᴛ. ꜱᴇᴛ ᴏɴᴇ ᴡɪᴛʜ </#FF9AA2><#FFC8DD>/team sethome</#FFC8DD><#FF9AA2>.</#FF9AA2>
   home-not-in-claim: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇ ᴛᴇᴀᴍ ʜᴏᴍᴇ ʜᴀꜱ ᴛᴏ ʙᴇ ɪɴ ᴀ ᴄʟᴀɪᴍ ᴏᴡɴᴇᴅ ʙʏ ꜱᴏᴍᴇᴏɴᴇ ɪɴ ʏᴏᴜʀ ᴛᴇᴀᴍ.</#FF9AA2>
+  home-needs-team-claim: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ʏᴏᴜʀ ᴛᴇᴀᴍ ʟᴇᴀᴅᴇʀ ʜᴀꜱ ᴛᴏ ᴘɪᴄᴋ ᴀ ᴛᴇᴀᴍ ᴄʟᴀɪᴍ ꜰɪʀꜱᴛ (</#FF9AA2><#FFC8DD>/team setclaim</#FFC8DD><#FF9AA2>).</#FF9AA2>
+  home-not-team-claim: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇ ᴛᴇᴀᴍ ʜᴏᴍᴇ ʜᴀꜱ ᴛᴏ ʙᴇ ɪɴꜱɪᴅᴇ ᴛʜᴇ ᴛᴇᴀᴍ ᴄʟᴀɪᴍ.</#FF9AA2>
+  home-outside-team-claim: <#FF9AA2>✘ </#FF9AA2><#FF9AA2>ᴛʜᴇ ᴛᴇᴀᴍ ʜᴏᴍᴇ ɪꜱɴ'ᴛ ɪɴ ᴛʜᴇ ᴛᴇᴀᴍ ᴄʟᴀɪᴍ ᴀɴʏᴍᴏʀᴇ. ꜱᴇᴛ ᴀ ɴᴇᴡ ᴏɴᴇ ᴡɪᴛʜ </#FF9AA2><#FFC8DD>/team sethome</#FFC8DD><#FF9AA2>.</#FF9AA2>
+  home-cleared: <#8A8A8A>✘ </#8A8A8A><#FFD8BE>ᴛʜᴇ ᴏʟᴅ ᴛᴇᴀᴍ ʜᴏᴍᴇ ɪꜱɴ'ᴛ ɪɴ ᴛʜᴇ ɴᴇᴡ ᴛᴇᴀᴍ ᴄʟᴀɪᴍ, ꜱᴏ ɪᴛ ᴡᴀꜱ ʀᴇᴍᴏᴠᴇᴅ. ꜱᴇᴛ ᴀ ɴᴇᴡ ᴏɴᴇ ᴡɪᴛʜ </#FFD8BE><#FFC8DD>/team sethome</#FFC8DD><#FFD8BE>.</#FFD8BE>
   home-label: ᴛᴇᴀᴍ ʜᴏᴍᴇ
   quest-complete: <#B5EAD7>✦ </#B5EAD7><gradient:#FFB5A7:#FFC8DD><b>ǫᴜᴇꜱᴛ ᴄᴏᴍᴘʟᴇᴛᴇ!</b></gradient> <quest><#FFD8BE> — +</#FFD8BE><#FFE5EC><points></#FFE5EC><#FFD8BE> ᴛᴇᴀᴍ ᴘᴏɪɴᴛ</#FFD8BE>
   upgrade-bought: <#FFB5A7>✦ </#FFB5A7><#FFC8DD><player></#FFC8DD><#FFD8BE> ᴜᴘɢʀᴀᴅᴇᴅ </#FFD8BE><upgrade><#FFD8BE> ᴛᴏ ʟᴇᴠᴇʟ </#FFD8BE><#FFE5EC><level></#FFE5EC><#FFD8BE>!</#FFD8BE>
@@ -779,6 +783,8 @@ menu:
       name: <#A2D2FF>➜ </#A2D2FF><#F2F2F2>ᴛᴇᴀᴍ ʜᴏᴍᴇ</#F2F2F2>
       lore:
       - <#FFD8BE>Where the team gathers.</#FFD8BE>
+      - <#FFD8BE>It has to be inside the</#FFD8BE>
+      - <#FFD8BE>team claim.</#FFD8BE>
       - ''
       - <#8A8A8A>• </#8A8A8A><#F2F2F2>ꜱᴇᴛ  </#F2F2F2><state>
       click:

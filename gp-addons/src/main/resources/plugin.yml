@@ -3,7 +3,7 @@ version: '${project.version}'
 main: dev.wamble.gpaddons.GPAddons
 api-version: '1.21'
 depend: [GriefPrevention]
-softdepend: [WorldGuard]
+softdepend: [WorldGuard, PlaceholderAPI]
 description: Claim menus, flags, claim bans and an entry whitelist for GriefPrevention
 commands:
   claims:

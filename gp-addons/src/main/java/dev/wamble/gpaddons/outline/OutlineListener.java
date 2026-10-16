@@ -49,14 +49,16 @@ public final class OutlineListener implements Listener {
                 ? config.getInt("outline.height-offset")
                 : config.getInt("outline.height-offset." + (glow ? "glow" : "blocks"), glow ? 0 : 1)));
         final Map<String, Color> colors = Map.of(
-                "CLAIM", color(config, "claim", 0xA2D2FF),
+                "CLAIM", color(config, "claim", 0xFFC8DD),
+                "TEAM_CLAIM", color(config, "team-claim", 0xA2D2FF),
                 "ADMIN_CLAIM", color(config, "admin-claim", 0xFFB5A7),
                 "SUBDIVISION", color(config, "subdivision", 0xCDB4DB),
                 "CONFLICT_ZONE", color(config, "conflict", 0xFF9AA2),
                 "OTHER", color(config, "other", 0xF2F2F2));
         final Map<String, BlockData> blocks = blocks(config);
         event.setProvider((world, visualizeFrom, height) ->
-                new OutlineVisualization(plugin, world, visualizeFrom, height, offset, glow, colors, blocks));
+                new OutlineVisualization(plugin, world, visualizeFrom, height, offset, glow, colors, blocks,
+                        claim -> plugin.teams().enabled() && plugin.perks().teamOfTeamClaim(claim) != null));
     }
 
     /** The configured corner and side blocks, keyed like "CLAIM.corner"; anything missing or invalid uses the default */

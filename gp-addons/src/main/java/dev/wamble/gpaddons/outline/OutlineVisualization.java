@@ -4,6 +4,7 @@ import com.griefprevention.util.IntVector;
 import com.griefprevention.visualization.BlockBoundaryVisualization;
 import com.griefprevention.visualization.BlockElement;
 import com.griefprevention.visualization.Boundary;
+import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Tag;
@@ -24,6 +25,7 @@ import org.joml.Vector3f;
 
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * GriefPrevention's claim outline, drawn a set height above the ground, either as fake blocks (like
@@ -38,20 +40,23 @@ public final class OutlineVisualization extends BlockBoundaryVisualization {
     private final boolean waterTransparent;
     private final Map<String, Color> colors;
     private final Map<String, BlockData> blocks;
+    private final Predicate<Claim> teamClaim;
 
     /**
-     * @param colors glow colours by boundary type name (CLAIM, ADMIN_CLAIM, SUBDIVISION, CONFLICT_ZONE),
-     *               with OTHER for the rest
+     * @param colors    glow colours by boundary type name (CLAIM, ADMIN_CLAIM, SUBDIVISION, CONFLICT_ZONE),
+     *                  TEAM_CLAIM for team claims, and OTHER for the rest
+     * @param teamClaim whether a claim is a team's team claim
      */
     public OutlineVisualization(@NotNull Plugin plugin, @NotNull World world, @NotNull IntVector visualizeFrom,
                                 int height, int heightOffset, boolean glow, @NotNull Map<String, Color> colors,
-                                @NotNull Map<String, BlockData> blocks) {
+                                @NotNull Map<String, BlockData> blocks, @NotNull Predicate<Claim> teamClaim) {
         super(world, visualizeFrom, height);
         this.plugin = plugin;
         this.heightOffset = heightOffset;
         this.glow = glow;
         this.colors = colors;
         this.blocks = blocks;
+        this.teamClaim = teamClaim;
         this.waterTransparent = visualizeFrom.toBlock(world).getType() == Material.WATER;
     }
 
@@ -64,7 +69,7 @@ public final class OutlineVisualization extends BlockBoundaryVisualization {
             case "CONFLICT_ZONE" -> litRedstoneOre();
             default -> Material.GLOWSTONE.createBlockData();
         };
-        return addElement(data, glowColor(type));
+        return addElement(data, glowColor(boundary));
     }
 
     @Override
@@ -77,7 +82,7 @@ public final class OutlineVisualization extends BlockBoundaryVisualization {
             case "CONFLICT_ZONE" -> Material.NETHERRACK.createBlockData();
             default -> Material.GOLD_BLOCK.createBlockData();
         };
-        return addElement(data, glowColor(type));
+        return addElement(data, glowColor(boundary));
     }
 
     @NotNull
@@ -89,8 +94,14 @@ public final class OutlineVisualization extends BlockBoundaryVisualization {
         return data;
     }
 
+    /** Team claims glow in their own colour; everything else by the kind of outline */
     @NotNull
-    private Color glowColor(@NotNull String type) {
+    private Color glowColor(@NotNull Boundary boundary) {
+        final String type = boundary.type().name();
+        final Claim claim = boundary.claim();
+        if (type.equals("CLAIM") && claim != null && colors.containsKey("TEAM_CLAIM") && teamClaim.test(claim)) {
+            return colors.get("TEAM_CLAIM");
+        }
         final Color color = colors.get(type);
         if (color != null) {
             return color;

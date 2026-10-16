@@ -88,6 +88,15 @@ public final class GPAddons extends JavaPlugin {
         }
         new Commands(this).register();
         new TeamCommand(this).register();
+        // Checked here: the placeholder class can't be loaded at all without PlaceholderAPI
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            try {
+                new dev.wamble.gpaddons.hook.TeamPlaceholders(this).register();
+                getLogger().info("Registered %gpaddons_...% placeholders with PlaceholderAPI");
+            } catch (LinkageError | RuntimeException e) {
+                getLogger().log(Level.WARNING, "Couldn't register PlaceholderAPI placeholders", e);
+            }
+        }
 
         if (getConfig().getBoolean("griefprevention-messages.restyle", true)) {
             try {
@@ -130,8 +139,9 @@ public final class GPAddons extends JavaPlugin {
 
     /**
      * One-off changes to an existing config.yml. Version 2: hostile mobs no longer spawn in claims by default
-     * (owners unlock it with the Monster Lure team upgrade). Version 3: claims glow light blue instead of pink,
-     * and the Team Vault upgrade is now Team Storage.
+     * (owners unlock it with the Monster Lure team upgrade). Version 3: the Team Vault upgrade is now Team
+     * Storage, and the new-claim glow is off-white. Version 4: only team claims glow light blue (a 3.x build
+     * briefly made every claim blue), other claims are pink again.
      */
     private void migrateConfig() {
         final int version = getConfig().getInt("config-version", 1);
@@ -140,9 +150,6 @@ public final class GPAddons extends JavaPlugin {
         }
         if (version < 3) {
             // Only colours still at the old defaults; ones the owner picked stay
-            if ("#FFC8DD".equalsIgnoreCase(getConfig().getString("outline.glow-colors.claim", ""))) {
-                getConfig().set("outline.glow-colors.claim", "#A2D2FF");
-            }
             if ("#A2D2FF".equalsIgnoreCase(getConfig().getString("outline.glow-colors.other", ""))) {
                 getConfig().set("outline.glow-colors.other", "#F2F2F2");
             }
@@ -152,7 +159,10 @@ public final class GPAddons extends JavaPlugin {
                 getConfig().set("teams.upgrades.team_vault", null);
             }
         }
-        getConfig().set("config-version", 3);
+        if (version < 4 && "#A2D2FF".equalsIgnoreCase(getConfig().getString("outline.glow-colors.claim", ""))) {
+            getConfig().set("outline.glow-colors.claim", "#FFC8DD");
+        }
+        getConfig().set("config-version", 4);
         saveConfig();
     }
 

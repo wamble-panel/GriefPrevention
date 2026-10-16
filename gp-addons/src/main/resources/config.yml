@@ -1,4 +1,4 @@
-config-version: 3
+config-version: 4
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃  GPAddons: claim menus, flags, bans and an      ┃
@@ -37,9 +37,11 @@ outline:
     conflict:
       corner: redstone_ore[lit=true]
       side: netherrack
-  # Glow colours for each kind of outline (hex)
+  # Glow colours for each kind of outline (hex). team-claim is a team's chosen team claim; other is the
+  # marker while making a new claim
   glow-colors:
-    claim: '#A2D2FF'
+    claim: '#FFC8DD'
+    team-claim: '#A2D2FF'
     admin-claim: '#FFB5A7'
     subdivision: '#CDB4DB'
     conflict: '#FF9AA2'

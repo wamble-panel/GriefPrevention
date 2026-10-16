@@ -272,7 +272,7 @@ TEAM_PERMS = [
 ]
 
 # Raise this when existing lines change, and list them in Messages.UPDATED so servers get the new text
-MESSAGES_VERSION = 2
+MESSAGES_VERSION = 3
 
 TEAM_QUESTS = [
     ("gathering_the_crew", "Gathering the Crew", ["Have <goal> members in the team."]),
@@ -356,6 +356,10 @@ def team_messages():
         "home-set": ok("", hl("<player>"), " set the team home."),
         "no-home": err("your team has no home yet. set one with ", hl("/team sethome"), "."),
         "home-not-in-claim": err("the team home has to be in a claim owned by someone in your team."),
+        "home-needs-team-claim": err("your team leader has to pick a team claim first (", hl("/team setclaim"), ")."),
+        "home-not-team-claim": err("the team home has to be inside the team claim."),
+        "home-outside-team-claim": err("the team home isn't in the team claim anymore. set a new one with ", hl("/team sethome"), "."),
+        "home-cleared": c(GREY, "✘ ") + c(PEACH, sc("the old team home isn't in the new team claim, so it was removed. set a new one with ")) + hl("/team sethome") + c(PEACH, "."),
         "home-label": sc("team home"),
         "quest-complete": c(MINT, "✦ ") + header("quest complete!") + " " + "<quest>" + c(PEACH, sc(" — +"))
                           + c(LIGHT, "<points>") + c(PEACH, sc(" team point")),
@@ -410,7 +414,7 @@ def team_menu():
                             stat("your rank", "<rank>"), stat("team points", c(MINT, "<points>")),
                             stat("created", c(LIGHT, "<created>"))]},
         "home": {"name": name(sc("team home"), symbol="➜", symbol_color=SKY),
-                 "lore": desc("Where the team gathers.") + [blank, stat("set", "<state>")],
+                 "lore": desc("Where the team gathers.", "It has to be inside the", "team claim.") + [blank, stat("set", "<state>")],
                  "click": [blank, click("to teleport")],
                  "click-set": [click("to set it here", verb="shift-click")]},
         "quests": {"name": name(sc("quests")), "lore": desc("Team goals that earn", "team points."),

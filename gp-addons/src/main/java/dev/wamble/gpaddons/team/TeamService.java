@@ -97,17 +97,20 @@ public final class TeamService implements Listener {
 
     // ---- Team home ----
 
-    /** Set the team home where the player stands; it must be in a claim owned by someone in the team */
+    /** Set the team home where the player stands; it must be in the team claim */
     public boolean setHome(@NotNull Player player) {
         final Team team = requireTeam(player);
         if (team == null || !require(player, team, TeamPermission.SET_HOME)) {
             return false;
         }
+        if (teamClaim(team) == null) {
+            plugin.messages().send(player, "team.home-needs-team-claim");
+            return false;
+        }
         final org.bukkit.Location at = player.getLocation();
         final Claim claim = Gp.claimAt(at, null);
-        final UUID owner = claim == null ? null : Gp.top(claim).getOwnerID();
-        if (owner == null || !team.isMember(owner)) {
-            plugin.messages().send(player, "team.home-not-in-claim");
+        if (claim == null || plugin.perks().teamOfTeamClaim(claim) != team) {
+            plugin.messages().send(player, "team.home-not-team-claim");
             return false;
         }
         team.home(new dev.wamble.gpaddons.data.ClaimData.Home(at.getWorld().getName(), at.getX(), at.getY(), at.getZ(),
@@ -130,6 +133,10 @@ public final class TeamService implements Listener {
             plugin.messages().send(player, "team.no-home");
             return false;
         }
+        if (!homeInTeamClaim(team)) {
+            plugin.messages().send(player, "team.home-outside-team-claim");
+            return false;
+        }
         final int swift = Math.min(3, team.level(TeamUpgrade.SWIFT_RETURN));
         final int warmup = Math.max(0, plugin.getConfig().getInt("teams.home.warmup-seconds", 3) - swift);
         final int cooldown = Math.max(0, plugin.getConfig().getInt("teams.home.cooldown-seconds", 30))
@@ -137,6 +144,17 @@ public final class TeamService implements Listener {
         plugin.teleports().teleportTo(player, new org.bukkit.Location(world, home.x(), home.y(), home.z(), home.yaw(),
                 home.pitch()), plugin.messages().raw("team.home-label"), warmup, cooldown);
         return true;
+    }
+
+    /** Whether the team home is inside the team claim (it may not be after the team claim moved) */
+    public boolean homeInTeamClaim(@NotNull Team team) {
+        final dev.wamble.gpaddons.data.ClaimData.Home home = team.home();
+        final org.bukkit.World world = home == null ? null : plugin.getServer().getWorld(home.world());
+        if (world == null) {
+            return false;
+        }
+        final Claim claim = Gp.claimAt(new org.bukkit.Location(world, home.x(), home.y(), home.z()), null);
+        return claim != null && plugin.perks().teamOfTeamClaim(claim) == team;
     }
 
     // ---- Team claim ----
@@ -200,6 +218,11 @@ public final class TeamService implements Listener {
         plugin.perks().updateZones();
         broadcast(team, cost > 0 ? "team.claim-moved" : "team.claim-set", Messages.text("player", player.getName()),
                 Messages.text("claim", plugin.info().name(top)), Messages.text("cost", Integer.toString(cost)));
+        // The team home has to be in the team claim, so one left behind goes
+        if (team.home() != null && !homeInTeamClaim(team)) {
+            team.home(null);
+            broadcast(team, "team.home-cleared");
+        }
         return true;
     }
 
