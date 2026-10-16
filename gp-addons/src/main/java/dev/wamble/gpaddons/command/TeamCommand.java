@@ -33,7 +33,7 @@ import java.util.UUID;
 public final class TeamCommand implements TabExecutor {
 
     private static final List<String> SUBCOMMANDS = List.of("create", "invite", "add", "accept", "deny", "leave",
-            "kick", "promote", "demote", "transfer", "rename", "disband", "rank", "home", "sethome", "vault",
+            "kick", "promote", "demote", "transfer", "rename", "disband", "rank", "home", "sethome", "setclaim", "storage",
             "quests", "upgrades", "info", "list", "help");
     private static final List<String> RANK_SUBCOMMANDS = List.of("create", "delete", "rename", "perm", "set", "list");
 
@@ -146,7 +146,9 @@ public final class TeamCommand implements TabExecutor {
             case "rank", "ranks" -> rank(player, label, Arrays.copyOfRange(args, 1, args.length));
             case "home" -> teams().home(player);
             case "sethome" -> teams().setHome(player);
-            case "vault" -> plugin.vaults().open(player);
+            case "setclaim" -> teams().setTeamClaim(player, dev.wamble.gpaddons.util.Gp.claimHere(player),
+                    args.length > 1 && args[1].equalsIgnoreCase("confirm"));
+            case "storage", "vault", "chest" -> plugin.storage().open(player);
             case "quests", "upgrades" -> {
                 final Team team = teams().teamOf(player.getUniqueId());
                 if (team == null) {
@@ -359,6 +361,7 @@ public final class TeamCommand implements TabExecutor {
                     }
                 }
                 case "info" -> teams().teams().forEach(t -> options.add(teams().plainName(t)));
+                case "setclaim" -> options.add("confirm");
                 case "disband" -> {
                     if (sender.hasPermission("gpaddons.team.admin")) {
                         teams().teams().forEach(t -> options.add(teams().plainName(t)));

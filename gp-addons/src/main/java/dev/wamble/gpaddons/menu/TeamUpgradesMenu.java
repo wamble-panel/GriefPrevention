@@ -20,7 +20,7 @@ import java.util.List;
  */
 public final class TeamUpgradesMenu extends Menu {
 
-    private static final int[] SLOTS = {19, 20, 21, 22, 23, 24, 25, 31};
+    private static final int[] SLOTS = {19, 20, 21, 22, 23, 24, 25, 30, 32};
 
     private final Team team;
 

@@ -120,19 +120,26 @@ public final class TeamStore {
         }
         final ConfigurationSection upgrades = t.getConfigurationSection("upgrades");
         if (upgrades != null) {
-            upgrades.getKeys(false).forEach(key -> team.upgrades().put(key, upgrades.getInt(key)));
+            // The Team Vault upgrade is now Team Storage
+            upgrades.getKeys(false).forEach(key -> team.upgrades().put(key.equals("team_vault") ? "team_storage" : key,
+                    upgrades.getInt(key)));
         }
-        final ConfigurationSection vault = t.getConfigurationSection("vault");
-        if (vault != null) {
-            for (String slot : vault.getKeys(false)) {
+        if (t.isLong("claim") || t.isInt("claim")) {
+            team.teamClaim(t.getLong("claim"));
+        }
+        // Saved as "vault" before it was renamed
+        final ConfigurationSection storage = t.isConfigurationSection("storage") ? t.getConfigurationSection("storage")
+                : t.getConfigurationSection("vault");
+        if (storage != null) {
+            for (String slot : storage.getKeys(false)) {
                 try {
                     final int index = Integer.parseInt(slot);
-                    final String data = vault.getString(slot);
-                    if (index >= 0 && index < team.vault().length && data != null) {
-                        team.vault()[index] = ItemStack.deserializeBytes(Base64.getDecoder().decode(data));
+                    final String data = storage.getString(slot);
+                    if (index >= 0 && index < team.storage().length && data != null) {
+                        team.storage()[index] = ItemStack.deserializeBytes(Base64.getDecoder().decode(data));
                     }
                 } catch (RuntimeException e) {
-                    // One unreadable item shouldn't lose the rest of the vault
+                    // One unreadable item shouldn't lose the rest of the storage
                 }
             }
         }
@@ -185,10 +192,13 @@ public final class TeamStore {
             yaml.set(path + ".quests.completed", new ArrayList<>(team.completed()));
             team.progress().forEach((quest, value) -> yaml.set(path + ".quests.progress." + quest, value));
             team.upgrades().forEach((upgrade, level) -> yaml.set(path + ".upgrades." + upgrade, level));
-            for (int i = 0; i < team.vault().length; i++) {
-                final ItemStack item = team.vault()[i];
+            if (team.teamClaim() != null) {
+                yaml.set(path + ".claim", team.teamClaim());
+            }
+            for (int i = 0; i < team.storage().length; i++) {
+                final ItemStack item = team.storage()[i];
                 if (item != null && !item.getType().isAir()) {
-                    yaml.set(path + ".vault." + i, Base64.getEncoder().encodeToString(item.serializeAsBytes()));
+                    yaml.set(path + ".storage." + i, Base64.getEncoder().encodeToString(item.serializeAsBytes()));
                 }
             }
         }

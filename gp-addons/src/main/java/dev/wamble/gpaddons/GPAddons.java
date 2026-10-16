@@ -22,7 +22,7 @@ import dev.wamble.gpaddons.protect.RegionClaimGuard;
 import dev.wamble.gpaddons.protect.SpongeListener;
 import dev.wamble.gpaddons.team.TeamPerks;
 import dev.wamble.gpaddons.team.TeamService;
-import dev.wamble.gpaddons.team.TeamVaults;
+import dev.wamble.gpaddons.team.TeamStorage;
 import dev.wamble.gpaddons.text.GpMessages;
 import dev.wamble.gpaddons.text.Messages;
 import org.bukkit.entity.Player;
@@ -49,7 +49,7 @@ public final class GPAddons extends JavaPlugin {
     private final ClaimTeleports teleports = new ClaimTeleports(this);
     private final TeamService teams = new TeamService(this);
     private final TeamPerks perks = new TeamPerks(this);
-    private final TeamVaults vaults = new TeamVaults(this);
+    private final TeamStorage storage = new TeamStorage(this);
 
     @Override
     public void onEnable() {
@@ -72,7 +72,7 @@ public final class GPAddons extends JavaPlugin {
         plugins.registerEvents(teleports, this);
         plugins.registerEvents(teams, this);
         plugins.registerEvents(perks, this);
-        plugins.registerEvents(vaults, this);
+        plugins.registerEvents(storage, this);
         perks.start();
         teams.refreshAll();
         plugins.registerEvents(new SpongeListener(this), this);
@@ -112,7 +112,7 @@ public final class GPAddons extends JavaPlugin {
                 player.closeInventory();
             }
         }
-        vaults.closeAll();
+        storage.closeAll();
         store.saveNow();
         teams.clearAll();
         teams.saveNow();
@@ -125,18 +125,34 @@ public final class GPAddons extends JavaPlugin {
         flags.reload();
         flags.applyAllExplosions();
         teams.refreshAll();
+        perks.updateZones();
     }
 
     /**
      * One-off changes to an existing config.yml. Version 2: hostile mobs no longer spawn in claims by default
-     * (owners unlock it with the Monster Lure team upgrade).
+     * (owners unlock it with the Monster Lure team upgrade). Version 3: claims glow light blue instead of pink,
+     * and the Team Vault upgrade is now Team Storage.
      */
     private void migrateConfig() {
         final int version = getConfig().getInt("config-version", 1);
         if (version < 2) {
             getConfig().set("flags.defaults.monster_spawn", false);
         }
-        getConfig().set("config-version", 2);
+        if (version < 3) {
+            // Only colours still at the old defaults; ones the owner picked stay
+            if ("#FFC8DD".equalsIgnoreCase(getConfig().getString("outline.glow-colors.claim", ""))) {
+                getConfig().set("outline.glow-colors.claim", "#A2D2FF");
+            }
+            if ("#A2D2FF".equalsIgnoreCase(getConfig().getString("outline.glow-colors.other", ""))) {
+                getConfig().set("outline.glow-colors.other", "#F2F2F2");
+            }
+            if (getConfig().isConfigurationSection("teams.upgrades.team_vault")) {
+                getConfig().set("teams.upgrades.team_storage.costs",
+                        getConfig().getIntegerList("teams.upgrades.team_vault.costs"));
+                getConfig().set("teams.upgrades.team_vault", null);
+            }
+        }
+        getConfig().set("config-version", 3);
         saveConfig();
     }
 
@@ -190,8 +206,8 @@ public final class GPAddons extends JavaPlugin {
     }
 
     @NotNull
-    public TeamVaults vaults() {
-        return vaults;
+    public TeamStorage storage() {
+        return storage;
     }
 
     @NotNull

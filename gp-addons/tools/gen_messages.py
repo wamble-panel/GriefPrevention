@@ -108,6 +108,7 @@ FLAGS = [
 
 def messages():
     m = {
+        "messages-version": MESSAGES_VERSION,
         "prefix": header("✦ claims") + " " + c(GREY, "• "),
         "general": {
             "no-permission": err("you don't have permission to do that."),
@@ -270,6 +271,9 @@ TEAM_PERMS = [
     ("spend_points", "Spend Points", ["May spend team points", "on upgrades."]),
 ]
 
+# Raise this when existing lines change, and list them in Messages.UPDATED so servers get the new text
+MESSAGES_VERSION = 2
+
 TEAM_QUESTS = [
     ("gathering_the_crew", "Gathering the Crew", ["Have <goal> members in the team."]),
     ("a_place_to_call_home", "A Place to Call Home", ["Set a team home with", "/team sethome."]),
@@ -284,14 +288,15 @@ TEAM_QUESTS = [
 ]
 
 TEAM_UPGRADES = [
-    ("bountiful_harvest", "Bountiful Harvest", ["Crops in the team's claims", "grow faster."], ["+25% crop growth", "+50% crop growth", "+100% crop growth"]),
-    ("animal_husbandry", "Animal Husbandry", ["Baby animals bred in the team's", "claims grow up faster."], ["+25% faster", "+50% faster", "+75% faster"]),
-    ("team_vault", "Team Vault", ["A shared chest for the team:", "/team vault."], ["1 row", "2 rows", "3 rows"]),
+    ("bountiful_harvest", "Bountiful Harvest", ["Crops in the team claim", "grow faster."], ["+25% crop growth", "+50% crop growth", "+100% crop growth"]),
+    ("animal_husbandry", "Animal Husbandry", ["Baby animals bred in the team", "claim grow up faster."], ["+25% faster", "+50% faster", "+75% faster"]),
+    ("team_storage", "Team Storage", ["A shared chest for the team:", "/team storage."], ["1 row", "2 rows", "3 rows"]),
     ("bigger_team", "Bigger Team", ["More room for members (when", "the server has a member limit)."], ["+2 members", "+4 members", "+6 members"]),
     ("land_grant", "Land Grant", ["Members earn claim blocks", "faster."], ["+15% claim blocks", "+30% claim blocks", "+50% claim blocks"]),
     ("wisdom", "Wisdom", ["More XP while a teammate", "is close by."], ["+10% XP", "+20% XP", "+30% XP"]),
     ("swift_return", "Swift Return", ["A quicker /team home."], ["2s wait, 20s cooldown", "1s wait, 10s cooldown", "instant, 5s cooldown"]),
-    ("monster_lure", "Monster Lure", ["Lets the team's claims turn on", "hostile mob spawning (flag)."], ["Monster Spawning flag unlocked"]),
+    ("peaceful_grounds", "Peaceful Grounds", ["Fewer hostile mobs spawn", "naturally in and around the", "team claim. Spawners and farms", "further away still work."], ["-25% hostile spawns", "-50% hostile spawns", "-75% hostile spawns"]),
+    ("monster_lure", "Monster Lure", ["Lets the team claim turn on", "hostile mob spawning (flag)."], ["Monster Spawning flag unlocked"]),
 ]
 
 
@@ -358,9 +363,19 @@ def team_messages():
                           + c(PEACH, sc(" to level ")) + c(LIGHT, "<level>") + c(PEACH, "!"),
         "upgrade-maxed": err("that upgrade is already at its highest level."),
         "not-enough-points": err("that costs <cost> team points; your team has <points>."),
-        "vault-locked": err("unlock the team vault with the ", hl("Team Vault"), " upgrade first."),
-        "vault-in-use": err("", hl("<player>"), " is using the team vault right now."),
-        "vault-title": header("✦ team vault") + " " + "<team>",
+        "storage-locked": err("unlock team storage with the ", hl("Team Storage"), " upgrade first."),
+        "storage-in-use": err("", hl("<player>"), " is using the team storage right now."),
+        "storage-title": header("✦ team storage") + " " + "<team>",
+        "claim-none-here": err("stand in the claim you want as the team claim."),
+        "claim-not-yours": err("the team claim has to be one of your own claims."),
+        "claim-already": err("that's already the team claim."),
+        "claim-confirm": c(LILAC, "✎ ") + c(PEACH, sc("moving the team claim costs ")) + c(LIGHT, "<cost>")
+                         + c(PEACH, sc(" team points. ")) + "<click:run_command:'/team setclaim confirm'><hover:show_text:'"
+                         + c(MINT, sc("spend the points")) + "'>" + c(MINT, "<b>" + sc("[✔ confirm]") + "</b>") + "</hover></click>",
+        "claim-set": c(LILAC, "✦ ") + hl("<player>") + c(PEACH, sc(" made ")) + hl("<claim>")
+                     + c(PEACH, sc(" the team claim. team upgrades now work there!")),
+        "claim-moved": c(LILAC, "✦ ") + hl("<player>") + c(PEACH, sc(" moved the team claim to ")) + hl("<claim>")
+                       + c(PEACH, sc(" for ")) + c(LIGHT, "<cost>") + c(PEACH, sc(" team points.")),
         "info-header": c(GREY, "<st>━━━</st> ") + "<team>" + c(GREY, " <st>━━━</st>"),
         "info-line": c(GREY, "• ") + c(WHITE, "<label>  ") + "<value>",
         "list-header": c(GREY, "<st>━━━</st> ") + header("✦ teams") + c(GREY, " <st>━━━</st>"),
@@ -377,7 +392,8 @@ def team_messages():
             hl("/team kick|transfer <player>") + c(GREY, " — ") + c(PEACH, sc("kick or hand over the team")),
             hl("/team leave") + c(GREY, " / ") + hl("disband") + c(GREY, " — ") + c(PEACH, sc("leave or end the team")),
             hl("/team home") + c(GREY, " / ") + hl("sethome") + c(GREY, " — ") + c(PEACH, sc("go to or move the team home")),
-            hl("/team quests") + c(GREY, " / ") + hl("upgrades") + c(GREY, " / ") + hl("vault") + c(GREY, " — ") + c(PEACH, sc("earn and spend team points")),
+            hl("/team setclaim") + c(GREY, " — ") + c(PEACH, sc("make the claim you're in the team claim")),
+            hl("/team quests") + c(GREY, " / ") + hl("upgrades") + c(GREY, " / ") + hl("storage") + c(GREY, " — ") + c(PEACH, sc("earn and spend team points")),
             hl("/team info [team]") + c(GREY, " / ") + hl("list") + c(GREY, " — ") + c(PEACH, sc("look up teams")),
         ],
         "labels": {"leader": sc("leader"), "members": sc("members"), "your-rank": sc("your rank"),
@@ -401,8 +417,25 @@ def team_menu():
                    "click": [blank, click("to view")]},
         "upgrades": {"name": name(sc("upgrades"), symbol="✦", symbol_color=CORAL), "lore": desc("Spend team points on", "upgrades for the team."),
                      "click": [blank, click("to view")]},
-        "vault": {"name": name(sc("team vault")), "lore": desc("A shared chest for the team.", "Unlock it with the Team Vault upgrade."),
-                  "click": [blank, click("to open")]},
+        "storage": {"name": name(sc("team storage")), "lore": desc("A shared chest for the team.", "Unlock it with the Team Storage upgrade."),
+                    "click": [blank, click("to open")]},
+        "team-claim": {"name": name(sc("team claim"), symbol="✦", symbol_color=LILAC),
+                       "lore": desc("The leader's claim where", "team upgrades work: crops,", "animals, peaceful grounds", "and the monster lure."),
+                       "set": [stat("claim", hl("<name>")), stat("where", c(LIGHT, "<world> <x>, <z>"))],
+                       "none": [c(GREY, sc("✘ not chosen yet"))],
+                       "gone": [c(RED, sc("✘ the claim is gone or no longer the team's"))],
+                       "click": [blank, click("to choose (free)")],
+                       "click-cost": [blank, click("to move it"), c(GREY, sc("moving it costs ")) + c(LIGHT, "<cost>") + c(GREY, sc(" team points"))],
+                       "leader-only": [blank, c(GREY, sc("✦ the team leader picks this"))]},
+        "pick-claim-title": header("✦ choose the team claim"),
+        "pick-claim": {"click": [blank, click("to make this the team claim")],
+                       "click-cost": [blank, click("to move the team claim here"), c(GREY, sc("costs ")) + c(LIGHT, "<cost>") + c(GREY, sc(" team points"))],
+                       "current": [blank, c(MINT, sc("✔ this is the team claim"))],
+                       "confirm-title": header("✦ move team claim") + " " + c(GREY, "→ <name>?"),
+                       "confirm": {"name": name(sc("move the team claim to") + " <name>", symbol="✦", symbol_color=LILAC),
+                                   "lore": desc("Team upgrades will work here", "instead.") + [blank, stat("cost", c(LIGHT, "<cost> " + sc("team points"))), stat("team points", c(MINT, "<points>"))]},
+                       "empty": {"name": name(sc("no claims yet"), symbol="✘", symbol_color=RED),
+                                 "lore": desc("Make a claim with a golden", "shovel first.")}},
         "quests-title": header("✦ quests") + " " + "<team>",
         "upgrades-title": header("✦ upgrades") + " " + "<team>",
         "points": {"name": c(MINT, "✦ ") + c(WHITE, "<points> ") + c(WHITE, sc("team points")),
@@ -498,6 +531,7 @@ def menu():
                 "teleport": [click("to teleport", verb="right-click")],
             },
             "owner-you": c(PEACH, "One of your claims."),
+            "team-claim": c(LILAC, "✦ ") + c(PEACH, sc("team claim of ")) + "<team>",
             "owner-other": c(PEACH, "Owned by ") + hl("<owner>") + c(PEACH, "."),
             "owner-admin": c(PEACH, "An admin claim."),
             "info": {
@@ -616,7 +650,7 @@ def menu():
             "category": {"player": c(GREY, sc("for untrusted players")),
                          "environment": c(GREY, sc("environment"))},
             "status": c(LILAC, "✦ ") + c(WHITE, sc("status  ")) + "<state>",
-            "lure-locked": ["", c(RED, sc("✘ unlock with the ")) + c(CORAL, sc("monster lure")) + c(RED, sc(" team upgrade"))],
+            "lure-locked": ["", c(RED, sc("✘ only in a team claim with the")), c(CORAL, sc("monster lure")) + c(RED, sc(" team upgrade"))],
             "source": {"claim": c(GREY, sc("set in this claim")),
                        "main_claim": c(GREY, sc("from the main claim")),
                        "default": c(GREY, sc("default"))},

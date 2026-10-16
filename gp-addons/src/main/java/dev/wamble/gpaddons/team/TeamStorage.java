@@ -19,12 +19,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The Team Vault upgrade: a shared chest of one to three rows. Only one member can have it open at a time,
+ * The Team Storage upgrade: a shared chest of one to three rows. Only one member can have it open at a time,
  * so items can't be duplicated, and it's saved with the team when closed.
  */
-public final class TeamVaults implements Listener {
+public final class TeamStorage implements Listener {
 
-    /** Marks a vault inventory and remembers whose it is */
+    /** Marks a storage inventory and remembers whose it is */
     private static final class Holder implements InventoryHolder {
 
         private final Team team;
@@ -42,10 +42,10 @@ public final class TeamVaults implements Listener {
     }
 
     private final GPAddons plugin;
-    /** Open vaults by team ID */
+    /** Open storage by team ID */
     private final Map<String, Inventory> open = new HashMap<>();
 
-    public TeamVaults(@NotNull GPAddons plugin) {
+    public TeamStorage(@NotNull GPAddons plugin) {
         this.plugin = plugin;
     }
 
@@ -56,23 +56,23 @@ public final class TeamVaults implements Listener {
             plugin.messages().send(player, teams.enabled() ? "team.no-team" : "team.disabled");
             return;
         }
-        final int rows = Math.min(3, team.level(TeamUpgrade.TEAM_VAULT));
+        final int rows = Math.min(3, team.level(TeamUpgrade.TEAM_STORAGE));
         if (rows == 0) {
-            plugin.messages().send(player, "team.vault-locked");
+            plugin.messages().send(player, "team.storage-locked");
             return;
         }
         final Inventory already = open.get(team.id());
         if (already != null && !already.getViewers().isEmpty()) {
-            plugin.messages().send(player, "team.vault-in-use",
+            plugin.messages().send(player, "team.storage-in-use",
                     Messages.text("player", already.getViewers().get(0).getName()));
             return;
         }
         final Holder holder = new Holder(team);
-        final Component title = plugin.messages().get("team.vault-title", Messages.component("team", teams.display(team)));
+        final Component title = plugin.messages().get("team.storage-title", Messages.component("team", teams.display(team)));
         final Inventory inventory = plugin.getServer().createInventory(holder, rows * 9, title);
         holder.inventory = inventory;
         for (int i = 0; i < rows * 9; i++) {
-            inventory.setItem(i, team.vault()[i]);
+            inventory.setItem(i, team.storage()[i]);
         }
         open.put(team.id(), inventory);
         player.openInventory(inventory);
@@ -87,14 +87,14 @@ public final class TeamVaults implements Listener {
     }
 
     private void save(@NotNull Team team, @NotNull Inventory inventory) {
-        for (int i = 0; i < inventory.getSize() && i < team.vault().length; i++) {
+        for (int i = 0; i < inventory.getSize() && i < team.storage().length; i++) {
             final ItemStack item = inventory.getItem(i);
-            team.vault()[i] = item == null || item.getType().isAir() ? null : item.clone();
+            team.storage()[i] = item == null || item.getType().isAir() ? null : item.clone();
         }
         plugin.teams().changed();
     }
 
-    /** Close (and save) a team's vault, e.g. before the team is disbanded */
+    /** Close (and save) a team's storage, e.g. before the team is disbanded */
     public void close(@NotNull Team team) {
         final Inventory inventory = open.get(team.id());
         if (inventory != null) {
@@ -106,7 +106,7 @@ public final class TeamVaults implements Listener {
         }
     }
 
-    /** Close the vault for a player who is leaving the team */
+    /** Close the storage for a player who is leaving the team */
     public void closeFor(@NotNull Player player, @NotNull Team team) {
         final Inventory inventory = open.get(team.id());
         if (inventory != null && inventory.getViewers().contains(player)) {
@@ -114,7 +114,7 @@ public final class TeamVaults implements Listener {
         }
     }
 
-    /** Close and save every open vault (when the server stops) */
+    /** Close and save every open storage (when the server stops) */
     public void closeAll() {
         final List<String> ids = new ArrayList<>(open.keySet());
         for (String id : ids) {

@@ -98,6 +98,12 @@ public final class ClaimInfo {
                 Messages.text("bans", Integer.toString(data == null ? 0 : data.bans().size())),
                 Messages.component("whitelist", messages().get(plugin.entry().isWhitelistOn(claim)
                         ? "menu.claims.on" : "menu.claims.off"))));
+        final dev.wamble.gpaddons.team.Team team = claim.parent == null && plugin.teams().enabled()
+                ? plugin.perks().teamOfTeamClaim(claim) : null;
+        if (team != null) {
+            lore.add(Messages.plain(messages().get("menu.claims.team-claim",
+                    Messages.component("team", plugin.teams().display(team)))));
+        }
         if (clickable) {
             lore.addAll(messages().lore("menu.claims.item.click"));
             if (plugin.teleports().canTeleport(viewer, claim)) {

@@ -139,6 +139,70 @@ public final class TeamService implements Listener {
         return true;
     }
 
+    // ---- Team claim ----
+
+    /** What changing the team claim costs; picking the first one is free */
+    public int claimChangeCost(@NotNull Team team) {
+        return team.teamClaim() == null ? 0 : Math.max(0, plugin.getConfig().getInt("teams.team-claim.change-cost", 2));
+    }
+
+    /** The team claim, if it still exists and still belongs to someone in the team */
+    @Nullable
+    public Claim teamClaim(@NotNull Team team) {
+        final Long id = team.teamClaim();
+        final Claim claim = id == null ? null : Gp.data().getClaim(id);
+        final UUID owner = claim == null ? null : claim.getOwnerID();
+        return claim != null && claim.inDataStore && claim.parent == null && owner != null && team.isMember(owner)
+                ? claim : null;
+    }
+
+    /**
+     * Make one of the leader's own claims the team claim, where the team's upgrades work. Picking the first one
+     * is free; moving it to another claim costs team points, so changing it needs {@code confirmed}.
+     */
+    public boolean setTeamClaim(@NotNull Player player, @Nullable Claim claim, boolean confirmed) {
+        final Team team = requireTeam(player);
+        if (team == null) {
+            return false;
+        }
+        if (!team.leader().equals(player.getUniqueId())) {
+            plugin.messages().send(player, "team.leader-only");
+            return false;
+        }
+        if (claim == null) {
+            plugin.messages().send(player, "team.claim-none-here");
+            return false;
+        }
+        final Claim top = Gp.top(claim);
+        if (top.isAdminClaim() || !player.getUniqueId().equals(top.getOwnerID())) {
+            plugin.messages().send(player, "team.claim-not-yours");
+            return false;
+        }
+        if (top.getID().equals(team.teamClaim())) {
+            plugin.messages().send(player, "team.claim-already");
+            return false;
+        }
+        final int cost = claimChangeCost(team);
+        if (cost > 0) {
+            if (team.points() < cost) {
+                plugin.messages().send(player, "team.not-enough-points", Messages.text("cost", Integer.toString(cost)),
+                        Messages.text("points", Integer.toString(team.points())));
+                return false;
+            }
+            if (!confirmed) {
+                plugin.messages().send(player, "team.claim-confirm", Messages.text("cost", Integer.toString(cost)));
+                return false;
+            }
+            team.points(team.points() - cost);
+        }
+        team.teamClaim(top.getID());
+        store.changed();
+        plugin.perks().updateZones();
+        broadcast(team, cost > 0 ? "team.claim-moved" : "team.claim-set", Messages.text("player", player.getName()),
+                Messages.text("claim", plugin.info().name(top)), Messages.text("cost", Integer.toString(cost)));
+        return true;
+    }
+
     @Nullable
     public Team teamOf(@NotNull UUID uuid) {
         return byMember.get(uuid);
@@ -338,14 +402,14 @@ public final class TeamService implements Listener {
             return false;
         }
         broadcast(team, "team.disbanded", teamTag(team));
-        plugin.vaults().close(team);
-        // The vault's items go to whoever disbands the team, so nothing is lost
-        for (int i = 0; i < team.vault().length; i++) {
-            final org.bukkit.inventory.ItemStack item = team.vault()[i];
+        plugin.storage().close(team);
+        // The storage's items go to whoever disbands the team, so nothing is lost
+        for (int i = 0; i < team.storage().length; i++) {
+            final org.bukkit.inventory.ItemStack item = team.storage()[i];
             if (item != null && !item.getType().isAir()) {
                 actor.getInventory().addItem(item).values()
                         .forEach(left -> actor.getWorld().dropItemNaturally(actor.getLocation(), left));
-                team.vault()[i] = null;
+                team.storage()[i] = null;
             }
         }
         if (!team.isMember(actor.getUniqueId())) {
@@ -529,7 +593,7 @@ public final class TeamService implements Listener {
     private void removeMember(@NotNull Team team, @NotNull UUID member) {
         final Player online = plugin.getServer().getPlayer(member);
         if (online != null) {
-            plugin.vaults().closeFor(online, team);
+            plugin.storage().closeFor(online, team);
         }
         team.members().remove(member);
         byMember.remove(member);

@@ -22,6 +22,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityBreedEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerExpChangeEvent;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -39,9 +41,20 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Team quests and upgrades: counting progress from what players already do, and the upgrades' effects.
  * Everything here is a quick check on an event that happens anyway, plus one light check every 10 seconds
- * for the "be somewhere together" quests.
+ * for the "be somewhere together" quests and the Peaceful Grounds areas.
  */
 public final class TeamPerks implements Listener {
+
+    /** Where a team's Peaceful Grounds turns away hostile mobs: the team claim and the land around it */
+    private record Zone(@NotNull UUID world, int minX, int maxX, int minZ, int maxZ, double chance) {
+
+        boolean contains(@NotNull UUID world, int x, int z) {
+            return x >= minX && x <= maxX && z >= minZ && z <= maxZ && this.world.equals(world);
+        }
+
+    }
+
+    private static final int[] PEACEFUL_PERCENT = {25, 50, 75};
 
     private static final Set<String> CROPS = Set.of("WHEAT", "CARROTS", "POTATOES", "BEETROOTS", "NETHER_WART",
             "COCOA", "TORCHFLOWER_CROP", "PITCHER_CROP");
@@ -61,6 +74,8 @@ public final class TeamPerks implements Listener {
         }
     };
 
+    private List<Zone> zones = List.of();
+
     public TeamPerks(@NotNull GPAddons plugin) {
         this.plugin = plugin;
     }
@@ -70,7 +85,11 @@ public final class TeamPerks implements Listener {
     }
 
     public void start() {
-        plugin.getServer().getScheduler().runTaskTimer(plugin, this::checkGatherings, 200L, 200L);
+        updateZones();
+        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+            updateZones();
+            checkGatherings();
+        }, 200L, 200L);
     }
 
     // ---- Quests ----
@@ -160,6 +179,7 @@ public final class TeamPerks implements Listener {
         team.points(team.points() - cost);
         team.upgrades().put(upgrade.id(), level + 1);
         teams().changed();
+        updateZones();
         teams().broadcast(team, "team.upgrade-bought", Messages.text("player", player.getName()),
                 plugin.messages().formatted("upgrade", "team-upgrades." + upgrade.id() + ".name"),
                 Messages.text("level", Integer.toString(level + 1)));
@@ -178,6 +198,25 @@ public final class TeamPerks implements Listener {
         }
         final UUID owner = Gp.top(claim).getOwnerID();
         return owner == null ? null : teams().teamOf(owner);
+    }
+
+    /** The team whose team claim this is (or is part of), if any */
+    @Nullable
+    public Team teamOfTeamClaim(@NotNull Claim claim) {
+        final Claim top = Gp.top(claim);
+        final UUID owner = top.getOwnerID();
+        if (top.isAdminClaim() || owner == null) {
+            return null;
+        }
+        final Team team = teams().teamOf(owner);
+        return team != null && Objects.equals(team.teamClaim(), top.getID()) ? team : null;
+    }
+
+    /** The team whose team claim is here, if any: where upgrades like Bountiful Harvest work */
+    @Nullable
+    private Team teamClaimAt(@NotNull Location location) {
+        final Claim claim = Gp.claimAt(location, null);
+        return claim == null ? null : teamOfTeamClaim(claim);
     }
 
     /** The player's team, if they're in one of its claims */
@@ -326,14 +365,14 @@ public final class TeamPerks implements Listener {
 
     // ---- Upgrade effects ----
 
-    // Bountiful Harvest: a chance for crops in team claims to grow an extra stage
+    // Bountiful Harvest: a chance for crops in the team claim to grow an extra stage
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onGrow(@NotNull BlockGrowEvent event) {
         final BlockData grown = event.getNewState().getBlockData();
         if (!(grown instanceof Ageable crop) || crop.getAge() >= crop.getMaximumAge() || !teams().enabled()) {
             return;
         }
-        final Team team = claimTeam(event.getBlock().getLocation());
+        final Team team = teamClaimAt(event.getBlock().getLocation());
         final int level = team == null ? 0 : team.level(TeamUpgrade.BOUNTIFUL_HARVEST);
         if (level == 0 || ThreadLocalRandom.current().nextDouble() >= new double[]{0.25, 0.5, 1.0}[Math.min(level, 3) - 1]) {
             return;
@@ -348,13 +387,13 @@ public final class TeamPerks implements Listener {
         });
     }
 
-    // Animal Husbandry: babies bred in team claims grow up sooner
+    // Animal Husbandry: babies bred in the team claim grow up sooner
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onBreed(@NotNull EntityBreedEvent event) {
         if (!teams().enabled() || !(event.getEntity() instanceof org.bukkit.entity.Ageable baby)) {
             return;
         }
-        final Team team = claimTeam(baby.getLocation());
+        final Team team = teamClaimAt(baby.getLocation());
         final int level = team == null ? 0 : team.level(TeamUpgrade.ANIMAL_HUSBANDRY);
         if (level > 0 && baby.getAge() < 0) {
             baby.setAge((int) (baby.getAge() * (1 - new double[]{0.25, 0.5, 0.75}[Math.min(level, 3) - 1])));
@@ -387,7 +426,7 @@ public final class TeamPerks implements Listener {
         }
     }
 
-    /** Whether hostile mobs may be allowed to spawn in this claim: its owner's team needs the Monster Lure */
+    /** Whether hostile mobs may be allowed to spawn in this claim: only a team claim with the Monster Lure */
     public boolean monsterSpawningUnlocked(@NotNull Claim claim) {
         if (!teams().enabled() || !plugin.getConfig().getBoolean("teams.upgrades.monster_lure.required", true)) {
             return true;
@@ -396,8 +435,64 @@ public final class TeamPerks implements Listener {
         if (top.isAdminClaim() || top.getOwnerID() == null) {
             return true;
         }
-        final Team team = teams().teamOf(top.getOwnerID());
+        final Team team = teamOfTeamClaim(top);
         return team != null && team.level(TeamUpgrade.MONSTER_LURE) > 0;
+    }
+
+    // ---- Peaceful Grounds ----
+
+    /** How much of the natural hostile spawning a level of Peaceful Grounds turns away, in percent */
+    public int peacefulPercent(int level) {
+        final List<Integer> percents = plugin.getConfig().getIntegerList("teams.upgrades.peaceful_grounds.reduction-percent");
+        final int index = Math.min(level, PEACEFUL_PERCENT.length) - 1;
+        if (index < 0) {
+            return 0;
+        }
+        return Math.max(0, Math.min(100, percents.size() > index ? percents.get(index) : PEACEFUL_PERCENT[index]));
+    }
+
+    /** Work out the Peaceful Grounds areas again (every 10 seconds, and when a team claim or upgrade changes) */
+    public void updateZones() {
+        if (!teams().enabled()) {
+            zones = List.of();
+            return;
+        }
+        final int radius = Math.max(0, plugin.getConfig().getInt("teams.upgrades.peaceful_grounds.radius", 48));
+        final List<Zone> found = new ArrayList<>();
+        for (Team team : teams().teams()) {
+            final int level = team.level(TeamUpgrade.PEACEFUL_GROUNDS);
+            final Claim claim = level > 0 ? teams().teamClaim(team) : null;
+            if (claim == null) {
+                continue;
+            }
+            final Location lesser = claim.getLesserBoundaryCorner();
+            final Location greater = claim.getGreaterBoundaryCorner();
+            final World world = lesser.getWorld();
+            if (world != null) {
+                found.add(new Zone(world.getUID(), lesser.getBlockX() - radius, greater.getBlockX() + radius,
+                        lesser.getBlockZ() - radius, greater.getBlockZ() + radius, peacefulPercent(level) / 100.0));
+            }
+        }
+        zones = found;
+    }
+
+    // Only natural spawns: spawners, eggs and mob farms outside the area are left alone
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    public void onSpawn(@NotNull CreatureSpawnEvent event) {
+        if (zones.isEmpty() || event.getSpawnReason() != CreatureSpawnEvent.SpawnReason.NATURAL
+                || !(event.getEntity() instanceof Enemy)) {
+            return;
+        }
+        final Location at = event.getLocation();
+        final UUID world = at.getWorld().getUID();
+        for (Zone zone : zones) {
+            if (zone.contains(world, at.getBlockX(), at.getBlockZ())) {
+                if (ThreadLocalRandom.current().nextDouble() < zone.chance()) {
+                    event.setCancelled(true);
+                }
+                return;
+            }
+        }
     }
 
 }

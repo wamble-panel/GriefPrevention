@@ -32,8 +32,11 @@ public final class Team {
     private final Set<String> completed = new LinkedHashSet<>();
     private final Map<String, Long> progress = new HashMap<>();
     private final Map<String, Integer> upgrades = new HashMap<>();
-    /** The shared vault's slots (up to three rows) */
-    private final ItemStack[] vault = new ItemStack[27];
+    /** The ID of the leader's claim that gets the team's upgrades; kept once chosen, even if the claim is gone */
+    @Nullable
+    private Long teamClaim;
+    /** The team storage's slots (up to three rows) */
+    private final ItemStack[] storage = new ItemStack[27];
 
     public Team(@NotNull String id, @NotNull String name, @NotNull UUID leader, long created) {
         this.id = id;
@@ -129,9 +132,19 @@ public final class Team {
         return upgrades.getOrDefault(upgrade.id(), 0);
     }
 
+    /** The team claim's ID, or null if the leader hasn't chosen one yet */
+    @Nullable
+    public Long teamClaim() {
+        return teamClaim;
+    }
+
+    public void teamClaim(@Nullable Long teamClaim) {
+        this.teamClaim = teamClaim;
+    }
+
     @NotNull
-    public ItemStack[] vault() {
-        return vault;
+    public ItemStack[] storage() {
+        return storage;
     }
 
     @Nullable

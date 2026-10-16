@@ -10,6 +10,7 @@ import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
@@ -20,15 +21,22 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 /**
  * Everything players see, read from messages.yml (MiniMessage format). Keys missing from the server's copy
- * fall back to the default file inside the jar, so new messages show up after an update.
+ * fall back to the default file inside the jar, so new messages show up after an update. Lines whose meaning
+ * changed in an update are replaced in the server's copy once (see {@link #UPDATED}).
  */
 public final class Messages {
 
     private static final MiniMessage MINI = MiniMessage.miniMessage();
+
+    /** Keys whose text changed, by the messages-version that changed them */
+    private static final Map<Integer, List<String>> UPDATED = Map.of(
+            2, List.of("team.help", "menu.flags.lure-locked", "team-upgrades.bountiful_harvest.description",
+                    "team-upgrades.animal_husbandry.description", "team-upgrades.monster_lure.description"));
 
     private final GPAddons plugin;
     private YamlConfiguration config = new YamlConfiguration();
@@ -49,6 +57,28 @@ public final class Messages {
             }
         } catch (IOException e) {
             plugin.getLogger().log(Level.WARNING, "Couldn't read the default messages", e);
+        }
+        update(file);
+    }
+
+    /** Bring changed lines in an older messages.yml up to date */
+    private void update(@NotNull File file) {
+        final Configuration defaults = config.getDefaults();
+        final int version = config.isSet("messages-version") ? config.getInt("messages-version") : 1;
+        final int latest = defaults == null ? version : defaults.getInt("messages-version", version);
+        if (defaults == null || version >= latest) {
+            return;
+        }
+        UPDATED.forEach((changedIn, keys) -> {
+            if (changedIn > version && changedIn <= latest) {
+                keys.stream().filter(defaults::contains).forEach(key -> config.set(key, defaults.get(key)));
+            }
+        });
+        config.set("messages-version", latest);
+        try {
+            config.save(file);
+        } catch (IOException e) {
+            plugin.getLogger().log(Level.WARNING, "Couldn't update messages.yml", e);
         }
     }
 

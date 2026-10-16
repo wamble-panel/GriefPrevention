@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A chest menu: a pink border along the top and bottom rows, content in between, and a back button in the
+ * A chest menu: a black border along the top and bottom rows, content in between, and a back button in the
  * bottom-left corner when there's a menu to go back to. Every click is cancelled; buttons run actions.
  */
 public abstract class Menu implements InventoryHolder {
@@ -31,7 +31,7 @@ public abstract class Menu implements InventoryHolder {
     protected static final int NEXT = 5;
     protected static final int CORNER = 8;
 
-    private static final String BORDER = "pink_stained_glass_pane";
+    private static final String BORDER = "black_stained_glass_pane";
 
     /** What a button does when clicked */
     @FunctionalInterface

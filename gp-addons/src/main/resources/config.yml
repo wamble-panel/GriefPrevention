@@ -1,4 +1,4 @@
-config-version: 2
+config-version: 3
 
 # ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 # ┃  GPAddons: claim menus, flags, bans and an      ┃
@@ -39,11 +39,11 @@ outline:
       side: netherrack
   # Glow colours for each kind of outline (hex)
   glow-colors:
-    claim: '#FFC8DD'
+    claim: '#A2D2FF'
     admin-claim: '#FFB5A7'
     subdivision: '#CDB4DB'
     conflict: '#FF9AA2'
-    other: '#A2D2FF'
+    other: '#F2F2F2'
 
 worldguard:
   # Stop players claiming land that overlaps a WorldGuard region (spawn, safe zones...), and resizing into one.
@@ -69,6 +69,11 @@ teams:
   home:
     warmup-seconds: 3
     cooldown-seconds: 30
+  # The leader picks one of their own claims as the team claim (/team setclaim, or the team menu). Upgrades
+  # that change the land (Bountiful Harvest, Animal Husbandry, Peaceful Grounds, Monster Lure) only work there.
+  # Picking the first one is free; moving it to another claim costs this many team points.
+  team-claim:
+    change-cost: 2
   # Quest goals and the team points each quest gives
   quests:
     gathering_the_crew: {goal: 3, points: 1}
@@ -85,12 +90,15 @@ teams:
   upgrades:
     bountiful_harvest: {costs: [1, 2, 3]}
     animal_husbandry: {costs: [1, 2, 3]}
-    team_vault: {costs: [1, 2, 3]}
+    team_storage: {costs: [1, 2, 3]}
     bigger_team: {costs: [1, 2, 3]}
     land_grant: {costs: [1, 2, 3]}
     wisdom: {costs: [1, 2, 3]}
     swift_return: {costs: [1, 2, 3]}
-    # Lets a team's claims have hostile mobs spawning (the Monster Spawning flag). Set required: false to let
+    # Fewer hostile mobs spawn naturally in and around the team claim (radius = blocks out from its edges).
+    # Spawners, eggs and mob farms further away aren't affected.
+    peaceful_grounds: {costs: [1, 2, 3], reduction-percent: [25, 50, 75], radius: 48}
+    # Lets the team claim have hostile mobs spawning (the Monster Spawning flag). Set required: false to let
     # every claim owner turn it on without the upgrade
     monster_lure: {costs: [2], required: true}
 

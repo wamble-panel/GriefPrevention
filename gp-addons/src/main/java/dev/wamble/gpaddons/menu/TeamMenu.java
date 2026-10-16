@@ -7,6 +7,7 @@ import dev.wamble.gpaddons.team.TeamService;
 import dev.wamble.gpaddons.text.Messages;
 import dev.wamble.gpaddons.util.Gp;
 import dev.wamble.gpaddons.util.Items;
+import me.ryanhamshire.GriefPrevention.Claim;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -52,6 +53,33 @@ public final class TeamMenu extends Menu {
     @NotNull
     private ItemStack button(@NotNull String material, @NotNull String key, boolean usable) {
         return Items.item(material, messages().itemName("menu.team." + key + ".name"), lore(key, usable));
+    }
+
+    /** The team claim: where it is, and for the leader, choosing it */
+    @NotNull
+    private ItemStack teamClaimItem(boolean leader) {
+        final Claim claim = teams().teamClaim(team);
+        final List<Component> lore = new ArrayList<>(messages().lore("menu.team.team-claim.lore"));
+        lore.add(Component.empty());
+        if (claim != null) {
+            final org.bukkit.Location center = Gp.center(claim);
+            lore.addAll(messages().lore("menu.team.team-claim.set",
+                    Messages.text("name", plugin.info().name(claim)),
+                    Messages.text("world", center.getWorld() == null ? "?" : center.getWorld().getName()),
+                    Messages.text("x", Integer.toString(center.getBlockX())),
+                    Messages.text("z", Integer.toString(center.getBlockZ()))));
+        } else {
+            lore.addAll(messages().lore(team.teamClaim() == null ? "menu.team.team-claim.none" : "menu.team.team-claim.gone"));
+        }
+        if (leader) {
+            final int cost = teams().claimChangeCost(team);
+            lore.addAll(messages().lore(cost > 0 ? "menu.team.team-claim.click-cost" : "menu.team.team-claim.click",
+                    Messages.text("cost", Integer.toString(cost))));
+        } else {
+            lore.addAll(messages().lore("menu.team.team-claim.leader-only"));
+        }
+        final ItemStack item = Items.item("lily_of_the_valley", messages().itemName("menu.team.team-claim.name"), lore);
+        return claim != null ? Items.glint(item) : item;
     }
 
     @Override
@@ -106,10 +134,11 @@ public final class TeamMenu extends Menu {
                 teams().home(viewer);
             }
         });
-        set(30, button("writable_book", "quests", true), click -> new TeamQuestsMenu(plugin, viewer, team, this).open());
-        set(32, button("nether_star", "upgrades", true), click -> new TeamUpgradesMenu(plugin, viewer, team, this).open());
-        final boolean vault = team.level(dev.wamble.gpaddons.team.TeamUpgrade.TEAM_VAULT) > 0;
-        set(34, button("ender_chest", "vault", vault), vault ? click -> plugin.vaults().open(viewer) : null);
+        set(30, teamClaimItem(leader), leader ? click -> new TeamClaimPickerMenu(plugin, viewer, team, this).open() : null);
+        set(32, button("writable_book", "quests", true), click -> new TeamQuestsMenu(plugin, viewer, team, this).open());
+        set(34, button("nether_star", "upgrades", true), click -> new TeamUpgradesMenu(plugin, viewer, team, this).open());
+        final boolean storage = team.level(dev.wamble.gpaddons.team.TeamUpgrade.TEAM_STORAGE) > 0;
+        set(40, button("ender_chest", "storage", storage), storage ? click -> plugin.storage().open(viewer) : null);
 
         if (leader) {
             set(bottom(CORNER), button("tnt", "disband", true), click -> new ConfirmMenu(plugin, viewer, this,
